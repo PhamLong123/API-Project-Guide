@@ -1,0 +1,234 @@
+﻿@model CRMManager.Models.ENoteViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">ĐỊNH NGHĨA MÃ KHUYẾN MÃI</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Loại ENote</label>
+                                    <select id="drpEmpList" class="form-select" style="height:35px!important">
+                                        <option value="">Voucher</option>
+                                        <option value="">Coupon</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Đơn vị phát hành</label>
+                                    <input class="form-control" />
+                                    @*<input asp-for="Publisher" class="form-control" />
+                                    <span asp-validation-for="Publisher" class="text-danger"></span>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Mã</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Từ ngày</label>
+                            <input asp-for="DistributedDate" class="form-control" />
+                            <span asp-validation-for="DistributedDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Tên</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Đến ngày</label>
+                            <input asp-for="CreatedDate" class="form-control" />
+                            <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Nội dung</label>
+                            <textarea asp-for="TC" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="TC" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12  col-md-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Mã giảm giá bên ngoài
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="generate" style="margin-top: 15px !important" checked>
+                                <label class="form-check-label" style="margin-top: 15px !important">
+                                    Tạo mã:
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <fieldset id="generatefield">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group mt-2">
+                                                <label class="control-label">Số lượng</label>
+                                                <input class="form-control" />
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <a asp-area="" asp-controller="PromotionCode" asp-action="AddNewCode" class="btn btn-success m-1" style="margin-top: 33px !important"><i class="far fa-plus-square"></i> Sinh mã quà</a>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="import" style="margin-top: 15px !important">
+                                <label class="form-check-label" style="margin-top: 15px !important">
+                                    Nhập mã:
+                                </label>
+                            </div>
+                            <div class="col-12">
+                                <fieldset id="importfield" style="margin-top:25px;" disabled>
+                                    <input asp-for="FileUpload.FormFile" type="file">
+                                    <button type="submit" asp-area="" asp-controller="PromotionCode" asp-action="ImportFromExcel" asp-route-id=@Model class="btn btn-success m-1"><i class="far fa-file-excel"></i> Nhập dữ liệu từ Excel</button>
+                                    <button type="submit" asp-area="" asp-controller="PromotionCode" asp-action="ImportFromExcel" class="btn btn-success m-1" style="margin-left: 11px !important;"><i class="fas fa-file-download"></i> Tải file mẫu</button>
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                            <!--<table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                                <thead>
+                                    <tr class="bg-primary" style="color: White;">
+                                        <td style="width:25%;"><b>ID</b></td>
+                                        <td style="width:25%;"><b>Mã</b></td>
+                                        <td style="width:25%;"><b>Từ ngày</b></td>
+                                        <td style="width:25%;"><b>Đến ngày</b></td>
+                                    </tr>
+                                </thead>
+                                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        </div>
+                                    </td>
+                                </tr>-->
+                                @*@foreach (var item in ViewBag.PGD)
+                            {
+                                if (item.GroupID == Model.ID)
+                                {
+                                    <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                                @item.ItemNumber
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                                @item.GroupID
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" style=" margin-left: 29%">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            }*@
+                            <!--</table>-->
+                            <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                                <thead>
+                                    <tr class="bg-primary" style="color: White;">
+                                        <td style="width:35%;"><b>Mã</b></td>
+                                        <td style="width:35%;"><b>ReceivedDate</b></td>
+                                        <td style="width:30%;"><b>Receiver</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.EnotesDetailList.Count; i++)
+                                    {   
+                                        <tr>
+                                            <td>
+                                                <input asp-for="@Model.EnotesDetailList[i].Number" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@Model.EnotesDetailList[i].ReceivedDate" class="form-control" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@Model.EnotesDetailList[i].Receiver" class="form-control" />
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-8">
+
+                                </div>
+                                <div class="col-4">
+                                    <div class="float-right mt-2">
+                                        <a asp-area="" asp-controller="PromotionCode" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                        <button type="submit" asp-area="" asp-controller="PromotionCode" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                                        @*<a asp-area="" asp-controller="PromotionCode" asp-action="SendCode" class="btn btn-success float-right m-1"><i class="fas fa-paper-plane"></i> Gửi mã</a>*@
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+</div>

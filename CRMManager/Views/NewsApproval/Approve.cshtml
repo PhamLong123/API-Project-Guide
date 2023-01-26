@@ -1,0 +1,608 @@
+﻿@model CRMManager.Models.PromotionNewsViewModel
+@using MSAServices.ContentService
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* .img-box {
+        width: 100%;
+        height: 300px;
+    }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+        }*/
+
+
+    .thumbImg img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .detailImg img {
+        width: 362px;
+        height: 120px;
+    }
+
+    .img1-3 img {
+        width: 160px;
+        height: 120px;
+    }
+
+    .img1 img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .img2 img {
+        width: 240px;
+        height: 120px;
+    }
+
+    .img1-6 img {
+        width: 200px;
+        height: 120px;
+    }
+
+    .img0-6 img {
+        width: 80px;
+        height: 120px;
+    }
+
+    .img3 img {
+        width: 360px;
+        height: 120px;
+    }
+
+    .img1-5 img {
+        width: 180px;
+        height: 120px;
+    }
+
+    .border-img-none img {
+        display: none;
+        margin-top: 10px;
+    }
+
+
+        .border-img-none img[src] {
+            display: block;
+        }
+
+    /* On screens that are 992px or less, set the background color to blue */
+    @@media screen and (max-width: 992px) {
+    }
+
+    /* On screens that are 600px or less, set the background color to olive */
+    @@media screen and (max-width: 600px) {
+    }
+</style>
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form asp-controller="NewsApproval" enctype="multipart/form-data" method="post">
+    <div class="crud-button align-end">
+        <button onclick="SelectUtility()" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#previewModal">
+            Xem trước tin
+        </button>
+    </div>
+    <div class="content-box" style="min-height:800px;">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-general" data-bs-toggle="pill" data-bs-target="#pills-general" type="button" role="tab" aria-controls="pills-general" aria-selected="true">Thông tin chung</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-content" data-bs-toggle="pill" data-bs-target="#pills-content" type="button" role="tab" aria-controls="pills-home" aria-selected="false">Tiếng Việt</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-content-en" data-bs-toggle="pill" data-bs-target="#pills-content-en" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Tiếng Anh</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-image" data-bs-toggle="pill" data-bs-target="#pills-image" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Hình ảnh</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-video" data-bs-toggle="pill" data-bs-target="#pills-video" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false">Video</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-approve" data-bs-toggle="pill" data-bs-target="#pills-approve" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false">Phê duyệt</button>
+            </li>
+        </ul>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="tab-content" id="pills-tabContent">
+            @Html.ValidationMessage("DisplayError", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.DataState)
+            @Html.HiddenFor(m => m.CreatedOn)
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.ModifiedOn)
+            @Html.HiddenFor(m => m.ModifiedBy)
+            @Html.HiddenFor(m => m.Number)
+            @*@Html.HiddenFor(m => m.Approved)*@
+            @Html.HiddenFor(m => m.Name)
+            @Html.HiddenFor(m => m.Images)
+            @Html.HiddenFor(m => m.ID)
+
+            <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="pills-home-general" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label class="control-label fw-bold">Loại tin</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <select name="SelectedNewsCat"
+                                                    asp-for="SelectedNewsCat"
+                                                    asp-items="@Html.GetEnumSelectList<EPromotionNewsCat>()"
+                                                    class="custom-dropdown"
+                                                    style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">
+                                                @*<option value="-1">Tất cả </option>*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="Priority" class="control-label fw-bold">Vị trí ưu tiên</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <input asp-for="Priority" type="number" class="form-control w-50" readonly />
+                                            <span asp-validation-for="Priority" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="OutletSelectList" class="control-label fw-bold">Cửa hàng</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <select class="form-select" asp-for="SelectedOutletID" asp-items="@ViewBag.OutletList" name="SelectedOutletID" aria-label="Default select example">
+                                                <option value="-1">Thiso Mall</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="Lot" class="control-label fw-bold">Vị trí cửa hàng</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <input asp-for="Lot" type="text" class="form-control w-50" readonly />
+                                            <span asp-validation-for="Lot" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="FromDate" class="control-label fw-bold">Từ ngày</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <input asp-for="FromDate" type="date" class="form-control" readonly />
+                                            <span asp-validation-for="FromDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="ToDate" class="control-label fw-bold">Đến ngày</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <input asp-for="ToDate" type="date" class="form-control" readonly />
+                                            <span asp-validation-for="ToDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="Tel" class="control-label fw-bold">Số điện thoại</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <input asp-for="Tel" class="form-control" readonly />
+                                            <span asp-validation-for="Tel" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                            <label asp-for="Website" class="control-label fw-bold">Website</label>
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <input asp-for="Website" class="form-control" readonly />
+                                            <span asp-validation-for="Website" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-2 col-md-3 col-4">
+                                            <label asp-for="Tag" class="control-label fw-bold">Từ khóa</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-9 col-8">
+                                            <input asp-for="Tag" type="text" class="form-control" readonly />
+                                            <span asp-validation-for="Tag" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <!-- Default checkbox -->
+                                                    <div class="form-check d-inline-block">
+                                                        <label class="form-check-label fw-bold" for="flexCheckDefault">Hiển thị banner</label>
+                                                        <input asp-for="ShowBanner" name="ShowBanner" class="form-check-input" type="checkbox" id="flexCheckDefault" onclick="return false" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 col-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-3 col-4">
+
+                                        </div>
+                                        <div class="col-lg-8 col-md-9 col-8">
+                                            <div class="row mb-3">
+                                                <div class="form-group">
+                                                    <!-- Checked checkbox -->
+                                                    <div class="form-check d-inline-block">
+                                                        <label class="form-check-label fw-bold" for="flexCheckChecked">Hiển thị trang chủ</label>
+                                                        <input asp-for="ShowHome" name="ShowHome" class="form-check-input" type="checkbox" id="flexCheckChecked" onclick="return false" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-12">
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-home-content" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-md-4 col-4">
+                                    <label asp-for="VNNews.Subject" class="control-label fw-bold">Chủ đề <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-xl-10 col-lg-9 col-md-8 col-8">
+                                    <input asp-for="VNNews.Subject" class="form-control" readonly />
+                                    <span asp-validation-for="VNNews.Subject" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="VNNews.Description" class="control-label fw-bold">Mô tả <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <textarea asp-for="VNNews.Description" class="form-control" rows="3" readonly></textarea>
+                                    <span asp-validation-for="VNNews.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="form-group" id="ck-edit-newsVN">
+                        <label asp-for="VNNews.NewsContent" class="control-label fw-bold">Nội dung <span style="color: #DC2828">*</span></label>
+                        @*<textarea rows="10" asp-for="VNNews.NewsContent" class="form-control ck-editor__editable ck-editor__editable_inline" id="editor"></textarea>
+                            <span asp-validation-for="VNNews.NewsContent" class="text-danger"></span>*@
+                        <div id="ck-edit-newsVN">
+                            <div class="ck-content">
+                                @Html.Raw(Model.VNNews.NewsContent)
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-content-en" role="tabpanel" aria-labelledby="pills-home-content-en" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="ENNews.Subject" class="control-label fw-bold">Chủ đề <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <input asp-for="ENNews.Subject" class="form-control" />
+                                    <span asp-validation-for="ENNews.Subject" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="ENNews.Description" class="control-label fw-bold">Mô tả <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <textarea asp-for="ENNews.Description" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="ENNews.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="ck-edit-newsEN">
+                        <label asp-for="ENNews.NewsContent" class="control-label fw-bold">Nội dung <span style="color: #DC2828">*</span></label>
+                        @*<textarea rows="10" asp-for="ENNews.NewsContent" class="form-control ck-editor__editable ck-editor__editable_inline" id="editor-En"></textarea>
+                            <span asp-validation-for="ENNews.NewsContent" class="text-danger"></span>*@
+                        <div id="ck-edit-newsEN">
+                            <div class="ck-content">
+                                @Html.Raw(Model.ENNews.NewsContent)
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-image" role="tabpanel" aria-labelledby="pills-home-image" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group input-group-sm">
+                            <label asp-for="ThumbImage_120_120" class="form-label fw-bold">Hình Thumb (120x120)</label>
+                            <div class="img-box img1">
+                                @if (!string.IsNullOrEmpty(Model.ThumbImageSrc))
+                                {
+                                    <img id="img-120x120" src="@Model.ThumbImageSrc" />
+                                }
+                                else
+                                {
+                                    <img id="img-120x120" src="" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group input-group-sm">
+                            <label for="formFile" asp-for="ImageLayout_400_400" class="form-label fw-bold">@(Model.SelectedNewsCat ==0 ? "Promotion Card 1" : "Event Banner 1") (365x365)</label>
+                            <div class="img-box img1">
+                                @if (!string.IsNullOrEmpty(Model.Image_400_400_Src))
+                                {
+                                    <img id="img-365x365" src="@Model.Image_400_400_Src" />
+                                }
+                                else
+                                {
+                                    <img id="img-365x365" src="" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group input-group-sm">
+                            <label asp-for="ImageLayout_800_400" class="form-label fw-bold">@(Model.SelectedNewsCat == 0 ? "Promotion Card 2": "Event banner 2")  (766x365)</label>
+                            <div class="img-box img2">
+                                @if (!string.IsNullOrEmpty(Model.Image_800_400_Src))
+                                {
+                                    <img id="img-766x365" src="@Model.Image_800_400_Src" />
+                                }
+                                else
+                                {
+                                    <img id="img-766x365" src="" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @*image layout for promotion*@
+                    @if (Model.SelectedNewsCat == 0)
+                    {
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label asp-for="ImageLayout_300_300" class="form-label fw-bold">Promotion Banner 1 (320x320)</label>
+                                <div class="img-box img1">
+                                    @if (!string.IsNullOrEmpty(Model.Image_300_300_Src))
+                                    {
+                                        <img id="img-320x320" src="@Model.Image_300_300_Src" />
+                                    }
+                                    else
+                                    {
+                                        <img id="img-320x320" src="" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label asp-for="ImageLayout_500_300" class="form-label fw-bold">Promotion Banner 2 (480x320)</label>
+                                <div class="img-box img1-6">
+                                    @if (!string.IsNullOrEmpty(Model.Image_500_300_Src))
+                                    {
+                                        <img id="img-480x320" src="@Model.Image_500_300_Src" />
+                                    }
+                                    else
+                                    {
+                                        <img id="img-480x320" src="" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label for="formFile" asp-for="ImageLayout_600_400" class="form-label fw-bold">Promotion Cover (580x386)</label>
+                                <div class="img-box img1-5">
+                                    @if (!string.IsNullOrEmpty(Model.Image_600_400_Src))
+                                    {
+                                        <img id="img-580x386" src="@Model.Image_600_400_Src" />
+                                    }
+                                    else
+                                    {
+                                        <img id="img-580x386" src="" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (Model.SelectedNewsCat == 1)
+                    {
+                        @*image layout for event*@
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label for="formFile" asp-for="ImageLayout_1200_400" class="form-label fw-bold">Event Banner 3 (1160x365)</label>
+                                <div class="img-box img3">
+                                    <img id="img-1160x365" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label for="formFile" asp-for="ImageLayout_400_600" class="form-label fw-bold">Event Banner 4 (365x548)</label>
+                                <div class="img-box img0-6">
+                                    <img id="img-365x548" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label for="formFile" asp-for="ImageLayout_800_600" class="form-label fw-bold">Event Banner 5 (763x548)</label>
+                                <div class="img-box img1-3">
+                                    <img id="img-763x548" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group input-group-sm">
+                            <label asp-for="DetailImage_1200_400" class="form-label fw-bold">Hình chi tiết (1160x386)</label>
+                            <div class="img-box img3">
+                                @if (!string.IsNullOrEmpty(Model.DetailImageSrc))
+                                {
+                                    <img id="img-1160x386" src="@Model.DetailImageSrc" />
+                                }
+                                else
+                                {
+                                    <img id="img-1160x386" src="" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-home-video" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label for="formFile" asp-for="VideosFile" class="form-label fw-bold"></label>
+                            <input id="video-input" type="file" value="@Model.VideosFile" asp-for="VideosFile" class="form-control" accept="video/mp4,video/x-m4v,video/*" />
+                            <span asp-validation-for="VideosFile" class="text-danger"></span>
+                            @*<img src="~/img/News/@Model.DetailImage" />*@
+                            <div class="img-box">
+                                <img id="video-preview" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-approve" role="tabpanel" aria-labelledby="pills-home-approve" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-md-4 col-4">
+                                    <label asp-for="VNNews.Subject" class="control-label fw-bold">Phê duyệt <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-xl-10 col-lg-9 col-md-8 col-8">
+                                    @foreach (var e in System.Enum.GetValues(typeof(ENewsApproveSatus)))
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" asp-for="Approved" value="@((int)e)" id="radio-@e" />
+                                            <label class="form-check-label">@e</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="ApprovalNotes" class="control-label fw-bold">Nội dung <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <textarea asp-for="ApprovalNotes" class="form-control" rows="3" required></textarea>
+                                    <span asp-validation-for="ApprovalNotes" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group d-flex justify-content-end crud-button ">
+            <input type="submit" asp-action="Approve" value="Lưu" class="btn btn-success" />
+            @*<input type="button" value="Hủy" class="btn btn-danger" />*@
+            <a asp-action="Cancel" asp-controller="NewsApproval" class="btn btn-danger">Hủy</a>
+        </div>
+
+    </div>
+
+
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@Html.Partial("~/Views/Shared/Partial/_PreviewNewsContent.cshtml")
+<script src="~/js/CKEditor.js"></script>
+<script src="~/js/CKEditorEn.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="~/js/NewsContent.js"></script>
+<script>
+    document.getElementById("SelectedNewsCat").disabled = true;
+    document.getElementById("SelectedOutletID").disabled = true;
+</script>

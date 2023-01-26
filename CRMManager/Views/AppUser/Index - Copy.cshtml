@@ -1,0 +1,161 @@
+﻿@*@model CRMManager.Models.AppUsersViewModel
+
+    @{
+        ViewData["Title"] = Model.PageTitle;
+    }*@
+
+<!--<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="crud-button mb-3">
+    <button class="btn btn-success" onclick="location.href = '@Url.Action("Index", "AppUser")'">Thêm</button>
+    <button class="btn btn-success" onclick="location.href = '@Url.Action("", "AppUser")'">Sửa</button>
+    <button class="btn btn-danger">Xóa</button>
+</div>
+<div class="form-group w-25 mb-3">
+    <label asp-for="AppLists" class="control-label"></label>-->
+@*<select class="form-select" aria-label="Default select example">
+        @if (Model.AppLists != null)
+        {
+            @foreach (var item in Model.AppLists)
+            {
+                <option value=@item.Number>@item.Name</option>
+            }
+        }
+
+    </select>*@
+@* <select id="ddlAppList" class="form-select" asp-items="@(new SelectList(ViewBag.AppList,"Value","Text"))"></select>*@
+
+<!--</div>
+<div class="row">
+    <div class="col-md-6 border-end">
+        <table id="table-data" class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Mô tả</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AppUserList != null)
+                {
+                    @foreach (var item in Model.AppUserList)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("Detail", "AppUser", new { Number = item.Number })'">
+                            <th scope="row">@item.Number</th>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="AppRole" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="AppRoleList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.AppRoleList != null)
+                            {
+                                @foreach (var item in Model.AppRoleList)
+                                {
+                                    <option value=@item.Number>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Number" class="control-label"></label> <span class="text-danger">(*)</span>
+                        <input asp-for="Number" class="form-control" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Pwd" class="control-label"></label>
+                        <input asp-for="Pwd" type="password" autocomplete="Pwd" class="form-control" />
+                        <span asp-validation-for="Pwd" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-end crud-button ">
+                <input type="submit" value="Lưu" asp-action="Save" class="btn btn-success" />
+                <input type="button" value="Hủy" class="btn btn-danger" />
+            </div>
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                    <tr>
+                        <th width="30%">Role</th>
+                        <th width="50%">Description</th>
+                        <th width="20%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger">Xóa</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+
+    $(function () {
+        $("#ddlAppList").change(function () {
+            $.getJSON("/AppUser/GetAppList", { number: $("#ddlAppList").val() }, function (d) {
+                //var row = "";
+                //$("#ddlstate").empty();
+                //$.each(d, function (i, v) {
+                //    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                //});
+                //$("#ddlstate").html(row);
+            })
+        })
+    })
+</script>
+
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    #table-data_filter {
+        display: none;
+    }
+</style>-->

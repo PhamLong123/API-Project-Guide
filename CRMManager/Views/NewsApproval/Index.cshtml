@@ -1,0 +1,201 @@
+﻿@model CRMManager.Models.PromotionNewsListViewModel
+@using MSAServices.RetailService
+@using MSAServices.ContentService
+@{
+
+    ViewData["Title"] = Model.PageTitle;
+    int prevPage = @Model.PageInfo.PageIndex - 1;
+    int nextPage = @Model.PageInfo.PageIndex + 1;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form asp-controller="NewsApproval" method="post">
+    @Html.HiddenFor(m => m.PageInfo.PageIndex, new { @id = "pageIndex" })
+    <div class="filter-box">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4 text-vertical-center">
+
+                        </div>
+                        <div class="col-8">
+
+                        </div>
+                    </div>
+                    <label class="control-label fw-bold">Cửa hàng</label>
+                    <select name="SelectedOutletID"
+                            asp-for="SelectedOutletID"
+                            asp-items="@ViewBag.OutletList"
+                            class="custom-dropdown" `
+                            style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">
+                        <option value="0">Tất cả </option>
+                        <option value="-1">Thiso Mall </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4 text-vertical-center">
+
+                        </div>
+                        <div class="col-8">
+
+                        </div>
+                    </div>
+                    <label class="control-label fw-bold">Loại tin</label>
+                    <select name="SelectedNewsCat"
+                            asp-for="SelectedNewsCat"
+                            asp-items="@Html.GetEnumSelectList<EPromotionNewsCat>()"
+                            class="custom-dropdown" `
+                            style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">
+                        <option value="-1">Tất cả </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-6 d-flex align-items-center">
+                <div class="crud-button" style="margin-top: 7px;">
+                    <button class="btn btn-outline-primary" type="button" id="btn-filter">Lọc</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-box">
+
+        <div class="row">
+            <div class="col-12">
+                <h4 class="pt-2 pb-2">
+                    <label class="control-label fw-bold">Danh sách tin</label>
+                </h4>
+                @if (Model.PromotionNewsList != null && Model.PromotionNewsList.Count > 0)
+                {
+                    <table class="w-100 table table-striped">
+                        <thead class="table">
+                            <tr>
+                                <th scope="col" width="60%">Chủ đề</th>
+                                <th scope="col" width="10%">Loại tin</th>
+                                <th scope="col" width="20%"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+
+                            @foreach (var item in Model.PromotionNewsList)
+                            {
+                                <tr id="controlRow">
+                                    <td>
+                                        @item.Name
+                                    </td>
+
+                                    <td>@item.CatNumber</td>
+                                    <td>
+                                        <div class="crud-button align-center mb-3">
+                                            <a class="btn btn-success" asp-action="Approve" asp-controller="NewsApproval" asp-route-number="@item.Number">Phê duyệt</a>
+                                            <button class="btn btn-danger">Xóa</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (Model.PageInfo.TotalPages > 1)
+                    {
+                        <div id="paging">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @{
+
+                                        string pageActive = "";
+                                        @for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
+                                        {
+
+                                            if (i == Model.PageInde)
+                                            {
+                                                pageActive = "page-active";
+                                            }
+                                            else
+                                            {
+                                                pageActive = "";
+                                            }
+                                            <li class="page-item">
+                                                <a class="page-link change-paging @pageActive" href="javascript:void(0)">@i</a>
+                                                @*<input class="page-link" type="submit" asp-for="PageInfo.PageIndex" asp-action="Filter" value="@i" />*@
+
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    }
+
+
+                }
+                else
+                {
+                    <p>Không có dữ liệu</p>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+<script src="~/js/NewsContent.js"></script>
+<script>
+     $('#btn-filter').click(function () {
+            var baseUrl = '@Url.Action("PagingAndFilter", "NewsApproval")';
+            location.href = baseUrl + '/?pageIndex=1'
+                + '&selectedOutlet=' + $('#SelectedOutletID').val()
+                + '&selectedNewsCat=' + $('#SelectedNewsCat').val();
+
+     })
+
+    let changePaging = $(".change-paging");
+    changePaging.each(function () {
+        $(this).click(function () {
+            ChangePaging(this)
+        })
+    })
+
+    function ChangePaging(input) {
+        console.log(input.text);
+        let selectedPage = input.text;
+        var baseUrl = '@Url.Action("PagingAndFilter", "NewsApproval")';
+        location.href = baseUrl + '/?pageIndex=' + selectedPage
+            + '&selectedOutlet=' + $('#SelectedOutletID').val()
+            + '&selectedNewsCat=' + $('#SelectedNewsCat').val();
+    }
+</script>
+
+<style>
+    .page-active {
+        background-color: #e9ecef;
+    }
+
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+                display: none;
+            }*/
+
+    div.dataTables_scrollBody {
+        border-left: none !important;
+        max-height: 100% !important;
+    }
+
+    .text-vertical-center {
+        display: flex;
+        align-items: center;
+    }
+</style>

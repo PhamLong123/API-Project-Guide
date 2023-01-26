@@ -1,0 +1,362 @@
+﻿<header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-3 menu-fixed">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Toggle button -->
+            <a class="navbar-brand mt-2 mt-lg-0" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="fas fa-home"></i>
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <!-- Left links -->
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hệ thống</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @*<li><a class="dropdown-item" asp-action="Index" asp-controller="MyAccount">Tài khoản của tôi</a></li>*@
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">
+                                    Quản trị người dùng
+                                </a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="AppUser">Danh sách Chức năng Ứng dụng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="AppRole">Quản trị vai trò người dùng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="AppUser">Quản trị người dùng</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            @*<li>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="ContentTemplate">Quản trị mẫu thư & nội dung thư</a>
+                                </li>*@
+                            @*<li>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="AppSetting">Quản trị cấu hình ứng dụng</a>
+                                </li>*@
+                            <li>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="ApplicationContent">Quản trị nội dung ứng dụng</a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            @*<li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" href="#">Quản trị dịch</a>
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li>
+                                            <a class="dropdown-item" asp-action="" asp-controller="ErrorMessage">Dịch thông báo</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-action="" asp-controller="DataMessage">Dịch dữ liệu</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-action="" asp-controller="UIMessage">Dịch giao diện</a>
+                                        </li>
+                                    </ul>
+                                </li>*@
+                            @*<li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" asp-action="Index" asp-controller="JobSchedule">Lập lịch tự động</a></li>
+                                <li><hr class="dropdown-divider"></li>*@
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Login">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Danh mục
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">
+                                    Cấu trúc bán lẻ
+                                </a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Company" asp-action="Index">Công ty</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Branch" asp-action="Index">Trung tâm thương mại</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="BusinessCategory" asp-action="Index">Ngành hàng</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Floor" asp-action="Index">Tầng</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Brand" asp-action="Index">Doanh nghiệp</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Outlet" asp-action="Index">Cửa hàng</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="MallUtil" asp-action="Index">Tiện ích</a></li>
+                                </ul>
+                            </li>
+                            <!--<li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">
+                                    Quản trị quà & Mã giảm giá
+                                </a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="RedemptionGroup" asp-action="Index">Nhóm quà</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="RedemptionItem" asp-action="Index">Danh sách quà</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="InternalCoupon" asp-action="Index">Các mã giảm giá mội bộ</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="" asp-controller="ExternalCoupon" asp-action="Index">Các mã giảm giá liên kết</a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>-->
+                            @*<li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Thêm quà</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Redemption" asp-action="RedeemItemAddjust">Điều chỉnh quà</a>
+                                </li>*@
+                            <!--</ul>
+                            </li>-->
+                            @*<li class="dropend">
+                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                        Kho quà
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="StockMaster" asp-action="Index">Danh mục quà</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="RedemptionItem" asp-action="Index">Điều chỉnh quà</a>
+                                        </li>
+                                    </ul>
+                                </li>*@
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Chính sách thành viên
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="MemberClass" asp-action="Index">Định nghĩa hạng thẻ (nhóm thành viên)</a></li>
+                            @*<li><a class="dropdown-item" asp-area="" asp-controller="JoinPolicy" asp-action="Index">Chính sách gia nhập</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="ConsumerPolicy" asp-action="Index">Chính sách tiêu dùng</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="RankUpPolicy" asp-action="Index">Chính sách lên hạng</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="ExchangeGiftPolicy" asp-action="Index">Chính sách đổi quà</a></li>
+                                <li><hr class="dropdown-divider"></li>*@
+                            <li>
+                                <a class="dropdown-item" asp-controller="NonMemberClass" asp-action="Index">Định nghĩa nhóm không thành viên</a>
+                            </li>
+                            @*<li>
+                                    <a class="dropdown-item" asp-controller="NonMemberManagement" asp-action="Index">Chính sách nhóm khách hàng không thành viên</a>
+                                </li>*@
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Nghiệp vụ marketing
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">Quản trị khách hàng</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li><a class="dropdown-item" asp-action="Index" asp-controller="MemberManagement">Quản trị thành viên</a></li>
+                                    @*<li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Phát thẻ</a></li>
+                                        <li><a class="dropdown-item" href="#">Gộp thẻ</a></li>
+                                        <li><hr class="dropdown-divider"></li>*@
+                                    <li><a class="dropdown-item" asp-action="Index" asp-controller="CardTransaction">Giao dịch thẻ</a></li>
+                                    <li> <a class="dropdown-item" asp-action="Index" asp-controller="DistributeGift">Phát/ sử dụng quà</a> </li>
+                                    @*<li><a class="dropdown-item" asp-action="Index" asp-controller="NonMemberManagement">Quản trị KH nhóm ngoài thành viên</a></li>*@
+                                </ul>
+                            </li>
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">Chăm sóc khách hàng</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li><a class="dropdown-item" asp-action="Index" asp-controller="CardTransaction">Giao dịch thẻ</a></li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="Index" asp-controller="DistributeGift">Phát/ sử dụng quà</a>
+                                    </li>
+                                    <li><a class="dropdown-item" asp-action="Index" asp-controller="CustomerInformation">Kiểm tra thông tin khách hàng</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Quản trị khuyến mãi
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="PromotionNews">Soạn tin tức</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="NewsApproval">Phê duyệt tin tức</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="PromotionGroup" asp-action="Index">Chương trình tặng quà</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Lottery" asp-action="Index">Chương trình quay số</a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Khuyến mãi gia nhập</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Khuyến mãi tiêu dùng</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Khuyến mãi lên hạng</a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" asp-action="Index" asp-controller="DistributeGift">Marketing Automation</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Tạo danh sách trích lọc khách hàng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gán chương trình khuyến mãi</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gán lịch vào danh sách trích lọc</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Báo cáo
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">Thống kê tổng quát</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên gia nhập</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên theo độ tuổi</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo năm</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo tháng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo độ tuổi</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo giới tính</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đổi quà tổng hợp</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đổi quà theo độ tuổi</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đổi quà theo giới tính</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gửi tặng điểm</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gửi tặng quà</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gửi tặng voucher</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gửi tặng coupon</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">Thống kê chi tiết</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên gian lận</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo món yêu thích</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Món yêu thích theo giới tính</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Món yêu thích theo độ tuổi</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo thành viên</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo địa điểm</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo cửa hàng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Giao dịch theo hạng thẻ</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Tặng lượt/ quà quay số</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Tặng quà tiêu dùng</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#">Danh sách chi tiết</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên gia nhập</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Danh sách giao dịch</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đánh giá giao dịch</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đổi/ tặng quà</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Phát quà đổi thưởng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gửi/ tặng điểm</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Gửi/ tặng voucher</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Quà quay số</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Quà tặng tiêu dùng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên chưa giao dịch</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên giao dịch cao đến thấp</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Thành viên lên hạng</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>

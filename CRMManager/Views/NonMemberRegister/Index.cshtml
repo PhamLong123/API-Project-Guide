@@ -1,0 +1,144 @@
+﻿@model CRMManager.Models.NonMemberRegisterViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <form asp-action="Register">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-light">Thông tin cá nhân</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <label asp-for="Name" class="control-label"></label>
+                                <span class="text-danger">(*)</span>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="CardNo" class="control-label"></label>
+                                <span class="text-danger">(*)</span>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="CardNo" class="form-control">
+                                <span asp-validation-for="CardNo" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="ClassNumber" class="control-label"></label>
+                                <span class="text-danger">(*)</span>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="ClassNumber" class="form-control">
+                                <span asp-validation-for="ClassNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="Mobile" class="control-label"></label>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="Mobile" class="form-control">
+                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="Email" class="control-label"></label>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="Email" class="form-control">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="Genders" class="control-label"></label>
+                            </div>
+                            <div class="col-8">
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.Genders != null)
+                                    {
+                                        @foreach (var item in Model.Genders)
+                                        {
+                                            <option value=@item>@item</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="DOB" class="control-label"></label>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input rows="5" asp-for="DOB" type="date" class="form-control">
+                                <span asp-validation-for="DOB" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-light">Thông tin liên hệ</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <label asp-for="Provinces" class="control-label"></label>
+                            </div>
+                            <div class="col-8">
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.Provinces != null)
+                                    {
+                                        @foreach (var item in Model.Provinces)
+                                        {
+                                            <option value=@item>@item</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="Districts" class="control-label"></label>
+                            </div>
+                            <div class="col-8">
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.Districts != null)
+                                    {
+                                        @foreach (var item in Model.Districts)
+                                        {
+                                            <option value=@item>@item</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="Address" class="control-label"></label>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="Address" class="form-control" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="col-3">
+                                <label asp-for="IDNo" class="control-label"></label>
+                            </div>
+                            <div class="col-8 mb-3">
+                                <input asp-for="IDNo" class="form-control" />
+                                <span asp-validation-for="IDNo" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="crud-button align-end">
+                @*<input type="file" class="btn btn-success" id="customFile" />*@
+                <button class="btn btn-success" type="button">Import Export</button>
+                <button class="btn btn-success" type="submit">Lưu</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,120 @@
+﻿@model CRMManager.Models.MemRangeClassViewModel
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row">
+            <div id="needenableleft" class="col-12 col-md-6">
+                <div class="row">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <a id="ActiveAdd" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+                    </div>
+                </div>
+                <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                    <thead>
+                        <tr style="color: White; background-color: #4267B2;">
+                            <td style="width:25%;"><b>Mã hạng thẻ</b></td>
+                            <td style="width:25%;"><b>Mô tả</b></td>
+                            <td style="width:50%;"><b>Tùy chọn</b></td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.MemRanges)
+                        {
+                            <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @item.ClassNo
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @item.Description
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a asp-area="" asp-controller="MemRangeClass" asp-action="Edit" asp-route-id=@item.ID class="btn btn-success m-1 btnenable"><i class="far fa-edit"></i> Sửa</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <button type="submit" asp-area="" asp-controller="MemRangeClass" asp-action="Delete" asp-route-id= class="btn btn-danger m-1"><i class="far fa-trash-alt"></i> Xóa</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                </table>
+            </div>
+            <div id="needenable" class="col-12 col-md-6 disablefield">
+                <div class="form-group d-none">
+                    <label asp-for="ID" class="control-label"></label>
+                    <input asp-for="ID" class="form-control" />
+                    <span asp-validation-for="ID" class="text-danger"></span>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Mã hạng thẻ</label>
+                            <input asp-for="ClassNo" class="form-control" />
+                            <span asp-validation-for="ClassNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Từ giá trị</label>
+                            <input asp-for="FromVal" class="form-control" />
+                            <span asp-validation-for="FromVal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến giá trị</label>
+                            <input asp-for="ToVal" class="form-control" />
+                            <span asp-validation-for="ToVal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Từ điểm</label>
+                            <input asp-for="FromPoint" class="form-control" />
+                            <span asp-validation-for="FromPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến điểm</label>
+                            <input asp-for="ToPoint" class="form-control" />
+                            <span asp-validation-for="ToPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ giảm giá</label>
+                            <input asp-for="DeductSaleAmt" class="form-control" />
+                            <span asp-validation-for="DeductSaleAmt" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Giảm điểm khi lên hạng</label>
+                            <input asp-for="DeductPoint" class="form-control" />
+                            <span asp-validation-for="DeductPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-2">
+
+                            </div>
+                            <div class="col-10">
+                                <div class="float-right mt-2">
+                                    <button type="submit" id="btnAdd" asp-area="" asp-controller="MemRangeClass" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                    <button type="submit" id="btnEdit" asp-area="" asp-controller="MemRangeClass" asp-action="Edit" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                    <a id="btnCancelAll" asp-area="" asp-controller="MemRangeClass" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right d-none btncancel"><i class="far fa-trash-alt"></i> Hủy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

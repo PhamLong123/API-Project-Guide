@@ -1,0 +1,46 @@
+﻿@model CRMManager.Models.UIMessageViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="FormID" class="control-label"></label><span class="text-danger">(*)</span>
+                <input asp-for="FormID" class="form-control" />
+                <span asp-validation-for="FormID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Keyword" class="control-label"></label><span class="text-danger">(*)</span>
+                <input asp-for="Keyword" class="form-control" />
+                <span asp-validation-for="Keyword" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Translation" class="control-label"></label><span class="text-danger">(*)</span>
+                <textarea rows="3" asp-for="Translation" class="form-control"></textarea>
+                <span asp-validation-for="Translation" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group d-flex justify-content-end crud-button ">
+            <input type="submit" value="Lưu" class="btn btn-success" />
+            <input type="button" value="Hủy" class="btn btn-danger" />
+        </div>
+    </div>
+
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,164 @@
+﻿@model CRMManager.Models.DistributeRedemptionGiftViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row distribute-gift">
+    <form asp-action="DistributeGift">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="RedeemCode" class="control-label"></label>
+                </div>
+                <div class="col-md-3">
+                    <input asp-for="RedeemCode" class="form-control" />
+                    <span asp-validation-for="RedeemCode" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group mt-0">
+                        <input type="submit" class="btn btn-success" value="@(ViewBag.txtsearch ?? "Tìm kiếm")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="col-md-6 border-end">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="FullName" class="control-label"></label>
+                    <input asp-for="FullName" class="form-control" readonly />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="IDNo" class="control-label"></label>
+                    <input asp-for="IDNo" class="form-control" readonly />
+                    <span asp-validation-for="IDNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="DOB" class="control-label"></label>
+                    <input asp-for="DOB" type="date" value=null class="form-control" readonly />
+                    <span asp-validation-for="DOB" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Mobile" class="control-label"></label>
+                    <input asp-for="Mobile" class="form-control" readonly />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <textarea asp-for="Address" class="form-control" readonly></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ItemCode" class="control-label"></label>
+                    <input asp-for="ItemCode" class="form-control" readonly />
+                    <span asp-validation-for="ItemCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ItemName" class="control-label"></label>
+                    <input asp-for="ItemName" class="form-control" readonly />
+                    <span asp-validation-for="ItemName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ItemQty" class="control-label"></label>
+                    <input asp-for="ItemQty" class="form-control" readonly />
+                    <span asp-validation-for="ItemQty" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ItemPrice" class="control-label"></label>
+                    <input asp-for="ItemPrice" class="form-control" readonly />
+                    <span asp-validation-for="ItemPrice" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ItemPoint" class="control-label"></label>
+                    <input asp-for="ItemPoint" class="form-control" readonly />
+                    <span asp-validation-for="ItemPoint" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="EventName" class="control-label"></label>
+                    <input asp-for="EventName" class="form-control" readonly />
+                    <span asp-validation-for="EventName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="RegisterDate" class="control-label"></label>
+                    <input asp-for="RegisterDate" value=null type="date" class="form-control" readonly />
+                    <span asp-validation-for="RegisterDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ExpiredDate" class="control-label"></label>
+                    <input asp-for="ExpiredDate" value=null type="date" class="form-control" readonly />
+                    <span asp-validation-for="ExpiredDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label asp-for="ImagePath" class="control-label"></label>
+                    @*<input asp-for="ImagePath" type="file" class="form-control" />*@
+                    @*<span asp-validation-for="ImagePath" class="text-danger"></span>*@
+                    @if (string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        var imagePath = "Default.png";
+                        <img src="~/img/Gift/@imagePath" width="150" height="150" />
+                    }
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group crud-button align-end">
+                    <input type="submit" value="Phát quà" class="btn btn-success" />
+                    <input type="button" value="Hủy" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .distribute-gift .form-group {
+        padding-bottom: 20px;
+    }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,117 @@
+﻿@*@model CRMManager.Models.AppRoleViewModel
+
+    @{
+        ViewData["Title"] = Model.PageTitle;
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2 class="page-title">@Model.PageTitle</h2>
+    <hr />
+    <div class="row">
+        <div class="col-12">
+            <p style="font-size: 18px;">Tên ứng dụng: <b>@Model.SelectedAppName</b></p>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group d-flex justify-content-end crud-button ">
+                    <button class="btn btn-success" type="submit" asp-action="Edit" asp-route-roleID="@Model.ID">Sửa</button>
+                    <input type="button" value="Xóa" class="btn btn-danger" />
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3 col-4">
+                                    <label asp-for="Number" class="control-label"></label><span class="text-danger"> (*)</span>
+                                </div>
+                                <div class="col-md-9 col-8">
+                                    <input asp-for="Number" class="form-control w-lg-50" readonly />
+                                    <span asp-validation-for="Number" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3 col-4">
+                                    <label asp-for="Name" class="control-label"></label><span class="text-danger"> (*)</span>
+                                </div>
+                                <div class="col-md-9 col-8">
+                                    <input asp-for="Name" class="form-control" readonly />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3 col-4 text-center">
+                                    <label asp-for="Description" class="control-label"></label>
+                                </div>
+                                <div class="col-md-9 col-8">
+                                    <textarea rows="3" asp-for="Description" class="form-control" readonly></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h4 class="pt-2 pb-2">
+                    <label class="control-label">Danh sách đối tượng</label>
+                </h4>
+                <table id="table-data" class="table align-middle mb-0 bg-white">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>App Object</th>
+                            <th>Create</th>
+                            <th>View</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ObjectRights != null)
+                        {
+                            @foreach (var item in Model.ObjectRights)
+                            {
+                                <tr id="controlRow">
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @item.ObjectName
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="@item.CanCreate" type="checkbox" value="Create" id="canCreate" onclick="return false" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="@item.CanView" type="checkbox" value="View" id="canView" onclick="return false" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="@item.CanEdit" type="checkbox" value="Edit" id="canEdit" onclick="return false" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="@item.CanDelete" type="checkbox" value="Delete" id="canDelete" onclick="return false" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+
+        <a asp-action="Index">Back to List</a>
+    </div>*@

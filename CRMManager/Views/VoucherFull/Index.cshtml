@@ -1,0 +1,234 @@
+﻿@model CRMManager.Models.VoucherFullViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form asp-action="Index">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @Html.HiddenFor(m => m.ID)
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-2">
+                <label asp-for="ENoteType" class="control-label"></label>
+            </div>
+            <div class="col-sm-6">
+                <select asp-for="ENoteType" asp-items="@Html.GetEnumSelectList<VoucherFullViewModel.Enote>()" class="form-select bootstrap-select w-50" form-s aria-label="Default select example"></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 border-end">
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8"></div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="Number" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="Number" class="form-control" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="Name" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="Description" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="DayExpiredCount" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="DayExpiredCount" type="number" min="0" class="form-control w-lg-25" />
+                        <span asp-validation-for="DayExpiredCount" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="FromDate" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="FromDate" class="form-control w-lg-50" />
+                        <span asp-validation-for="FromDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="ToDate" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="ToDate" class="form-control w-lg-50" />
+                        <span asp-validation-for="ToDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="Budget" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="Budget" class="form-control w-lg-50" />
+                        <span asp-validation-for="Budget" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="DistributeQuantity" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="DistributeQuantity" type="number" min="1" class="form-control w-lg-50" />
+                        <span asp-validation-for="DistributeQuantity" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="Denomination" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="Denomination" class="form-control w-lg-50" />
+                        <span asp-validation-for="Denomination" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="form-check-label">
+                            @Html.DisplayNameFor(model => model.IsVATIncluded)
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input class="form-check-input" asp-for="IsVATIncluded" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label class="form-check-label" asp-for="IsExternal">
+                            @*@Html.DisplayNameFor(model => model.IsExternal)*@
+                        </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input class="form-check-input" asp-for="IsExternal" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="VATAmount" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="VATAmount" class="form-control w-lg-25" />
+                        <span asp-validation-for="VATAmount" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label asp-for="ActiveData" class="control-label"></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="ActiveData" class="form-control" />
+                        <span asp-validation-for="ActiveData" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @*<div class="row">
+                        <div class="col-sm-4">
+                            <label asp-for="TC" class="control-label"></label>
+                        </div>
+                        <div class="col-sm-8">
+                            <textarea rows="10" asp-for="TC" class="form-control ck-editor__editable ck-editor__editable_inline" id="editor"></textarea>
+                            <span asp-validation-for="TC" class="text-danger"></span>
+                        </div>
+                    </div>*@
+                <label asp-for="TC" class="control-label"></label>
+                <textarea rows="10" asp-for="TC" class="form-control ck-editor__editable ck-editor__editable_inline" id="editor"></textarea>
+                <span asp-validation-for="TC" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label asp-for="LogoImage" class="control-label"></label> <span> (200px*200px)</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="LogoImage" class="form-control" type="file" accept="image/png, image/gif, image/jpeg" />
+                        <span asp-validation-for="LogoImage" class="text-danger"></span>
+                        <img class="mt-2" src="~/img/Avatar/Default.png" width="200" height="200" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label asp-for="CoverImage" class="control-label"></label><span> (400px*600px)</span>
+                    </div>
+                    <div class="col-sm-8">
+                        <input asp-for="CoverImage" class="form-control" type="file" accept="image/png, image/gif, image/jpeg" />
+                        <span asp-validation-for="CoverImage" class="text-danger"></span>
+                        <img class="mt-2" src="~/img/Avatar/Default.png" width="400" height="600" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="crud-button mt-0 align-end">
+        <button class="btn btn-success" type="submit">Lưu</button>
+    </div>
+
+
+
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script src="~/js/CKEditor.js"></script>

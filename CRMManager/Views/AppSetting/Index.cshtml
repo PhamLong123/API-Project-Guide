@@ -1,0 +1,107 @@
+﻿@model CRMManager.Models.SettingViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-4">Group</div>
+                            <div class="col-lg-4 col-sm-8">
+                                <select id="ddlAppList" class="form-select" aria-label="Default select example">
+                                    @if (Model.Group != null)
+                                    {
+                                        @foreach (var item in Model.Group)
+                                        {
+                                            <option value=@item>@item</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="crud-button align-end">
+                        <button id="addRow" type="button" class="btn btn-outline-success">Thêm</button>
+                        <input type="submit" value="Lưu" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4 class="pt-2 pb-2">
+                    <label class="control-label">Danh sách cấu hình</label>
+                </h4>
+                <table id="table-data" class="table table-hover table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th scope="col">Group</th>
+                            <th width="25%" scope="col">Key</th>
+                            <th width="25%" scope="col">Value</th>
+                            <th scope="col">Description</th>
+                            <th width="10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.SettingList != null)
+                        {
+                            @foreach (var item in Model.SettingList)
+                            {
+                                <tr id="controlRow" @*onclick="location.href = '@Url.Action("Details", "AppRole", new { ID=item.ID})'"*@>
+                                    <th scope="row">@item.Group</th>
+                                    <td>@item.Key</td>
+                                    <td>
+                                        @*<div class="form-group">
+                                                <input asp-for="@item.Value" class="form-control" />
+                                                <span asp-validation-for="@item.Value" class="text-danger"></span>
+                                            </div>*@
+                                        @item.Value
+                                    </td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <div class="crud-button align-center mb-3">
+                                            @*<button class="btn btn-success" onclick="location.href = '@Url.Action("Details", "AppRole", new { ID=item.Key})'">Chi tiết</button>*@
+                                            <button class="btn btn-danger">Xóa</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script type="text/javascript">
+    //$(function () {
+    //    var t = $('#table-data').DataTable();
+    //    t.destroy();
+    //    var counter = 1;
+    //    $('#addRow').on('click', function () {
+    //        //t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5']).draw(false);
+    //        t.row.add([
+    //            '<input class="form-control" />',
+    //            '<input class="form-control" />',
+    //            '<input class="form-control" />',
+    //            '<input class="form-control" />',
+    //            '<div class="crud-button align-center mb-3"><button class="btn btn-danger">Xóa</button></div>'
+    //        ]).draw();
+    //        counter++;
+    //    });
+    //});
+
+</script>

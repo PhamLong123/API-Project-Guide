@@ -1,0 +1,81 @@
+﻿@model CRMManager.Models.MemRangeClassViewModel
+<div class="mt-4 justify-content-center">
+    <h2 class="text-center">@Model.PageTitle</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group d-none">
+            <input asp-for="ID" value="@Model.ID" class="control-label" />
+            <input asp-for="CreatedBy" value="@Model.CreatedBy" class="form-control" />
+            <input asp-for="CreatedOn" class="form-control" />
+            <input asp-for="ModifiedBy" value="@Model.ModifiedBy" class="form-control" />
+            <input asp-for="ModifiedOn" class="form-control" />
+            <input asp-for="CLPID" value="@Model.CLPID" class="form-control" />
+            <input asp-for="DurationID" value="@Model.DurationID" class="form-control" />
+            <input asp-for="FromVal" value="@Model.FromVal" class="form-control" />
+            <input asp-for="ToVal" value="@Model.ToVal" class="form-control" />
+            <input asp-for="ExchangePoint" value="@Model.ExchangePoint" class="form-control" />
+            <input asp-for="FormularText" value="@Model.FormularText" class="form-control" />
+            <input asp-for="DeductSaleAmt" value="@Model.DeductSaleAmt" class="form-control" />
+            <input asp-for="DeductPoint" value="@Model.DeductPoint" class="form-control" />
+            <input asp-for="DelStatus" value="@Model.DelStatus" class="form-control" />
+            <input asp-for="UseVal" value="@Model.UseVal" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        @if (!String.IsNullOrEmpty(Model.ErrorMasage))
+        {
+            <div class="form-group @(Model.IsChanged == true ? "success-box" : "error-box")">
+                <div class="error-text">
+                    <label class="control-label"><i class="far @(Model.IsChanged == true ? "fa-check-circle" : "fa-times-circle")"></i> @Model.ErrorMasage</label>
+                </div>
+            </div>
+        }
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Từ điểm <span style="color:red;">(*)</span></label>
+                            <input asp-for="FromPoint" class="form-control" />
+                            <span asp-validation-for="FromPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Đến điểm <span style="color:red;">(*)</span></label>
+                            <input asp-for="ToPoint" class="form-control" />
+                            <span asp-validation-for="ToPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Điểm đổi quà <span style="color:red;">(*)</span></label>
+                            <input asp-for="FromPoint" class="form-control" />
+                            <span asp-validation-for="FromPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label">Điểm xếp hạng <span style="color:red;">(*)</span></label>
+                            <input asp-for="ToPoint" class="form-control" />
+                            <span asp-validation-for="ToPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="Floor" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="Floor" asp-action="SaveData" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

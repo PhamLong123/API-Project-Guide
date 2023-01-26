@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Import Bar Code";
+}
+<h2 class="page-title">Import Bar Code</h2>
+<hr />
+<form method="post" asp-controller="ProdItemBarCode" asp-action="ImportMasterItemBarCode" enctype="multipart/form-data">
+    @*<dl>
+            <dt>
+                <label>Upload Excel:</label>
+            </dt>
+            <dd>
+                <input type="file" name="file" id="FormFile">
+            </dd>
+            <dd>
+                <input class="btn" type="submit" value="Upload" />
+            </dd>
+        </dl>*@
+    <div class="row">
+        <div class="col-8">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Default file input example</label>
+                <input type="file" name="file" id="FormFile">
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="mb-3">
+                <input class="btn" type="submit" value="Upload" />
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="mb-3">
+                <input class="btn" type="button" asp-action="Download" asp-controller="ProdItemBarCode" value="Upload" />
+            </div>
+            <a asp-action="Download">
+                Download
+            </a>
+        </div>
+    </div>
+</form>
+<br />
+<div class="">
+    @Html.Raw(ViewBag.StringBuilder)
+</div>

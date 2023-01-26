@@ -1,0 +1,300 @@
+﻿@model CRMManager.Models.OutletViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">THÊM @Model.PageTitle</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Thông tin</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="vietnam-tab" data-bs-toggle="tab" data-bs-target="#vietnam" type="button" role="tab" aria-controls="vietnam" aria-selected="false">Tiếng Việt</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="english-tab" data-bs-toggle="tab" data-bs-target="#english" type="button" role="tab" aria-controls="english" aria-selected="false">Tiếng Anh</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config" type="button" role="tab" aria-controls="config" aria-selected="false">Hình ảnh</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                        <div class="row mt-2">
+                            <div class="col-sm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Tầng</label>
+                                    <select id="drpEmpList" class="form-select" asp-for="FloorID" asp-items="@(new SelectList(Model.Floors, "ID", "Name"))">
+                                        <option value="">Chọn tầng</option>
+                                    </select>
+                                    <input type="hidden" asp-for="FloorID" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Doanh nghiệp</label>
+                                    <select id="drpEmpList" class="form-select" asp-for="BrandID" asp-items="@(new SelectList(Model.Brands, "ID", "BrandName"))">
+                                        <option value="">Chọn doanh nghiệp</option>
+                                    </select>
+                                    <input type="hidden" asp-for="BrandID" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Ngành hàng</label>
+                                    <select id="drpEmpList" class="form-select" asp-for="CategoryID" asp-items="@(new SelectList(Model.BusinessCategories, "ID", "Name"))">
+                                        <option value="">Chọn ngành hàng</option>
+                                    </select>
+                                    <input type="hidden" asp-for="CategoryID" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Mã</label>
+                                    <input asp-for="Number" class="form-control" />
+                                    <span asp-validation-for="Number" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Giờ mở cửa</label>
+                                    <input asp-for="OpenTime" class="form-control" />
+                                    <span asp-validation-for="OpenTime" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Giờ đóng cửa</label>
+                                    <input asp-for="CloseTime" class="form-control" />
+                                    <span asp-validation-for="CloseTime" class="text-danger"></span>
+                                </div>
+                                @*<div class="form-group d-none">
+                                    <label class="control-label">Mật khẩu cửa hàng</label>
+                                    <input asp-for="PWDCode" class="form-control" rows="4" />
+                                    <span asp-validation-for="PWDCode" class="text-danger"></span>
+                                </div>
+                                <div class="form-group d-none">
+                                    <label class="control-label">Mã phát quà</label>
+                                    <input asp-for="RedeemCode" class="form-control" rows="4" />
+                                    <span asp-validation-for="RedeemCode" class="text-danger"></span>
+                                </div>*@
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Điện thoại cố định</label>
+                                    <input asp-for="Tel" class="form-control" />
+                                    <span asp-validation-for="Tel" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Website</label>
+                                    <input asp-for="Website" class="form-control" />
+                                    <span asp-validation-for="Website" class="text-danger"></span>
+                                </div>
+                                <div class="form-group d-none">
+                                    <label class="control-label">Địa chỉ tầng</label>
+                                    <input asp-for="FloorPosition" class="form-control" />
+                                    <span asp-validation-for="FloorPosition" class="text-danger"></span>
+                                </div>
+                                <div class="form-group d-none">
+                                    <label class="control-label">Mã kích hoạt</label>
+                                    <input asp-for="AccCode" class="form-control" />
+                                    <span asp-validation-for="AccCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="vietnam" role="tabpanel" aria-labelledby="vietnam-tab">
+                        <div class="row mt-2">
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tên</label>
+                                    <input asp-for="OutletName" class="form-control" />
+                                    <span asp-validation-for="OutletName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Địa chỉ</label>
+                                    <input asp-for="Address" class="form-control" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">Mô tả</label>
+                                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="english" role="tabpanel" aria-labelledby="english-tab">
+                        <div class="row mt-2">
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tên</label>
+                                    <input asp-for="OutletName_EN" class="form-control" />
+                                    <span asp-validation-for="OutletName_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Địa chỉ</label>
+                                    <input asp-for="Address_EN" class="form-control" />
+                                    <span asp-validation-for="Address_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="control-label">Mô tả</label>
+                                    <textarea asp-for="Description_EN" class="form-control" rows="4"></textarea>
+                                    <span asp-validation-for="Description_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+                        <div class="row mt-2">
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label" for="ThumbImage">Hình ảnh đại diện </label>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.Image == null)
+                                            {
+                                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Dat'sImages/Outlets/Logo/@Model.Image" class="img-thumbnail" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-8">
+                                            <input type="file" class="form-control" name="logoimgfile" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" asp-area="" asp-controller="Outlet" asp-action="UploadLogoimage" class="btn btn-primary">Upload Ảnh</button>
+                                        </div>
+                                        <span>@ViewData["Message"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label" for="ThumbImage">Vị trí cửa hàng </label>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.FloorImage == null)
+                                            {
+                                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Dat'sImages/Outlets/Map/@Model.FloorImage" class="img-thumbnail" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-8">
+                                            <input type="file" class="form-control" name="mapimgfile" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" asp-area="" asp-controller="Outlet" asp-action="UploadMapimage" class="btn btn-primary">Upload Ảnh</button>
+                                        </div>
+                                        <span>@ViewData["Message"]</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="row mt-4">
+                                                <div class="col-1">
+                                                    <input type="checkbox" class="form-check" asp-for="IsAccPoint" />
+                                                </div>
+                                                <div class="col-11">
+                                                    <label class="control-label">Tích điểm</label>
+                                                </div>
+                                            </div>
+                                            <span asp-validation-for="IsAccPoint" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row mt-4">
+                                                <div class="col-1">
+                                                    <input type="checkbox" class="form-check" asp-for="IsShowMobileApp" />
+                                                </div>
+                                                <div class="col-11">
+                                                    <label class="control-label">Hiển thị trên Mobile</label>
+                                                </div>
+                                            </div>
+                                            <span asp-validation-for="IsShowMobileApp" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label" for="ThumbImage">Hình ảnh chi tiết</label>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.Picture == null)
+                                            {
+                                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Dat'sImages/Outlets/Detail/@Model.Picture" class="img-thumbnail" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-8">
+                                            <input type="file" class="form-control" name="detailimgfile" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" asp-area="" asp-controller="Outlet" asp-action="UploadDetailimage" class="btn btn-primary">Upload Ảnh</button>
+                                        </div>
+                                        <span>@ViewData["Message"]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-sm-12 col-md-8 col-lg-8">
+
+                            </div>
+                            <div class="col-sm-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="Outlet" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="Outlet" asp-action="Edit" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

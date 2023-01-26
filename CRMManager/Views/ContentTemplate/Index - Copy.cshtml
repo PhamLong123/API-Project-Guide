@@ -1,0 +1,119 @@
+﻿@*@model CRMManager.Models.ContentTemplateViewModel
+
+    @{
+        ViewData["Title"] = Model.PageTitle;
+    }
+    <h2 class="page-title">@Model.PageTitle</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 border-end">
+            <div class="form-group mb-3">
+                <label asp-for="Group" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example">
+                    @if (Model.Group != null)
+                    {
+                        @foreach (var item in Model.Group)
+                        {
+                            <option value=@item.ID>@item.Name</option>
+                        }
+                    }
+
+                </select>
+            </div>
+            <table id="table-data" class="table table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Number</th>
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ContentTemplateList != null)
+                    {
+                        @foreach (var item in Model.ContentTemplateList)
+                        {
+                            <tr id="controlRow" onclick="location.href = '@Url.Action("DetailContentTemplate", "System")'">
+                                <td>@item.Number</td>
+                                <td>@item.Name</td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <form asp-action="ContentTemplate">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="EmailNumber" class="control-label"></label>
+                            <input asp-for="EmailNumber" class="form-control" />
+                            <span asp-validation-for="EmailNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailObjectList" class="control-label"></label>
+                            <select class="form-select bootstrap-select" form-s aria-label="Default select example">
+                                @if (Model.EmailObjectList != null)
+                                {
+                                    @foreach (var item in Model.EmailObjectList)
+                                    {
+                                        <option value=@item.ID>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailSubject" class="control-label"></label>
+                            <input asp-for="EmailSubject" class="form-control" />
+                            <span asp-validation-for="EmailSubject" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="EmailName" class="control-label"></label>
+                            <input asp-for="EmailName" class="form-control" />
+                            <span asp-validation-for="EmailName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmailKeyWordList" class="control-label"></label>
+                            <select class="form-select bootstrap-select" form-s aria-label="Default select example">
+                                @if (Model.EmailKeyWordList != null)
+                                {
+                                    @foreach (var item in Model.EmailKeyWordList)
+                                    {
+                                        <option value=@item.ID>@item.Name</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EmailContent" class="control-label"></label>
+                        <textarea rows="10" asp-for="EmailContent" class="form-control"></textarea>
+                        <span asp-validation-for="EmailContent" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="crud-button mb-3 align-end">
+                    <button class="btn btn-success" type="submit">Lưu</button>
+                    <button class="btn btn-danger" type="button">Hủy</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+    <style>
+        #table-data_wrapper .row div {
+            margin-top: 0px !important;
+        }
+
+        #table-data_filter {
+            display: none;
+        }
+    </style>*@

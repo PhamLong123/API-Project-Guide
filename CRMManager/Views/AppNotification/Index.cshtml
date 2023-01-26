@@ -1,0 +1,79 @@
+﻿@model CRMManager.Models.AppNotificationViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 border-end">
+        <table id="table-data" class="table table-hover">
+            <thead class="table-primary d-none">
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AppNotificationList != null)
+                {
+                    @foreach (var item in Model.AppNotificationList)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("", "")'">
+                            <td width="80%">
+                                <a href="#">@item.Name</a>
+                            </td>
+                            <td>
+                                <div class="crud-button">
+                                    <button class="btn btn-success" type="submit">Sửa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8">
+        <form asp-action="AppNotification">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="crud-button mb-3">
+                <button class="btn btn-success" type="submit">Lưu</button>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label asp-for="Subject" class="control-label"></label><span class="text-danger">(*)</span>
+                </div>
+                <div class="col-md-10">
+                    <textarea rows="5" asp-for="Subject" class="form-control w-50"></textarea>
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Content" class="control-label"></label><span class="text-danger">(*)</span>
+                </div>
+                <div class="col-md-10">
+                    <textarea rows="5" asp-for="Content" class="form-control w-75"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+
+    div.dataTables_scrollBody {
+        border-left: none !important;
+    }
+</style>

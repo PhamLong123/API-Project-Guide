@@ -1,0 +1,253 @@
+﻿@*@model CRMManager.Models.MemberClassViewModel*@
+<!--<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Thông tin</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config" type="button" role="tab" aria-controls="config" aria-selected="false">Tích lũy</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="rank-tab" data-bs-toggle="tab" data-bs-target="#rank" type="button" role="tab" aria-controls="rank" aria-selected="false">Phân hạng</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="policy-tab" data-bs-toggle="tab" data-bs-target="#policy" type="button" role="tab" aria-controls="policy" aria-selected="false">Chính sách</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="referrerpolicy-tab" data-bs-toggle="tab" data-bs-target="#referrerpolicy" type="button" role="tab" aria-controls="referrerpolicy" aria-selected="false">Chính sách</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                <div class="row mt-2">
+                    <div class="col-12">-->
+                        @*<div class="form-group">
+                            <label class="control-label">Công ty</label>
+                            <select id="drpEmpList" class="form-control" asp-for="CompanyID" asp-items="@(new SelectList(Model.Companies, "ID", "Name"))">
+                                <option value="">--Select--</option>
+                            </select>
+                            <input type="hidden" asp-for="CompanyID" />
+                        </div>*@
+                        <!--<div class="form-group">
+                            <label class="control-label">Chương trình khách hàng thân thiết</label>
+                            <select id="drpEmpList" class="form-control" asp-for="CLPID" asp-items="@(new SelectList(Model.CLPs, "ID", "ProgName"))">
+                                <option value="">--Select--</option>
+                            </select>
+                            <input type="hidden" asp-for="CLPID" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Chu kỳ xét hạng</label>
+                            <select id="drpEmpList" class="form-control" asp-for="DurationID" asp-items="@(new SelectList(Model.Durations, "ID", "Name"))">
+                                <option value="">--Select--</option>
+                            </select>
+                            <input type="hidden" asp-for="DurationID" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mã hạng thẻ</label>
+                            <input asp-for="CardCode" class="form-control" />
+                            <span asp-validation-for="CardCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên hạng thẻ</label>
+                            <input asp-for="ClassName" class="form-control" />
+                            <span asp-validation-for="ClassName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Hạng thẻ tiếp theo</label>
+                            <input asp-for="NextClassNo" class="form-control" />
+                            <span asp-validation-for="NextClassNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích điểm lên hạng ([đ]/điểm)</label>
+                            <input asp-for="ReviewRate" class="form-control" />
+                            <span asp-validation-for="ReviewRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích điểm đổi thưởng ([đ]/điểm)</label>
+                            <input asp-for="RewardRate" class="form-control" />
+                            <span asp-validation-for="RewardRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích ví (%)</label>
+                            <input asp-for="EwalletRate" class="form-control" />
+                            <span asp-validation-for="EwalletRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ trả trước</label>
+                            <input asp-for="PrepaidRate" class="form-control" />
+                            <span asp-validation-for="PrepaidRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ đổi điểm</label>
+                            <input asp-for="RedempRate" class="form-control" />
+                            <span asp-validation-for="RedempRate" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label" for="ThumbImage">Hình ảnh </label>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.Icon == null)
+                                            {
+                                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Dat'sImages/MemberClasses/@Model.Icon" class="img-thumbnail" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-8">
+                                            <input type="file" class="form-control" name="imgfile" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" asp-area="" asp-controller="MemberClass" asp-action="Uploadimage" class="btn btn-primary">Upload Ảnh</button>
+                                        </div>
+                                        <span>@ViewData["Message"]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="rank" role="tabpanel" aria-labelledby="rank-tab">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Từ giá trị</label>
+                            <input asp-for="FromVal" class="form-control" />
+                            <span asp-validation-for="FromVal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến giá trị</label>
+                            <input asp-for="ToVal" class="form-control" />
+                            <span asp-validation-for="ToVal" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Từ điểm</label>
+                            <input asp-for="FromPoint" class="form-control" />
+                            <span asp-validation-for="FromPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến điểm</label>
+                            <input asp-for="ToPoint" class="form-control" />
+                            <span asp-validation-for="ToPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ giảm giá</label>
+                            <input asp-for="DeductSaleAmt" class="form-control" />
+                            <span asp-validation-for="DeductSaleAmt" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Giảm điểm khi lên hạng</label>
+                            <input asp-for="DeductPoint" class="form-control" />
+                            <span asp-validation-for="DeductPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="policy" role="tabpanel" aria-labelledby="policy-tab">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm lên hạng</label>
+                            <input asp-for="RankingPoint" class="form-control" />
+                            <span asp-validation-for="RankingPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm đổi thưởng</label>
+                            <input asp-for="RewardPoint" class="form-control" />
+                            <span asp-validation-for="RewardPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="referrerpolicy" role="tabpanel" aria-labelledby="referrerpolicy-tab">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm lên hạng cho người giới thiệu</label>
+                            <input asp-for="RefRankingPoint" class="form-control" />
+                            <span asp-validation-for="RefRankingPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm đổi thưởng cho người giới thiệu</label>
+                            <input asp-for="RefRewardPoint" class="form-control" />
+                            <span asp-validation-for="RefRewardPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm lên hạng cho người được giới thiệu</label>
+                            <input asp-for="SharedRankingPoint" class="form-control" />
+                            <span asp-validation-for="SharedRankingPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm đổi thưởng cho người được giới thiệu</label>
+                            <input asp-for="SharedRewardPoint" class="form-control" />
+                            <span asp-validation-for="SharedRewardPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích điểm lên hạng lần đầu ([đ]/điểm)</label>
+                            <input asp-for="FirstRefRankPointRate" class="form-control" />
+                            <span asp-validation-for="FirstRefRankPointRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích điểm đổi thưởng lần đầu ([đ]/điểm)</label>
+                            <input asp-for="FirstRefRewardPointRate" class="form-control" />
+                            <span asp-validation-for="FirstRefRewardPointRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích điểm lên hạng ([đ]/điểm)</label>
+                            <input asp-for="RefRankPointRate" class="form-control" />
+                            <span asp-validation-for="RefRankPointRate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tỉ lệ tích điểm đổi thưởng ([đ]/điểm)</label>
+                            <input asp-for="RefRewardPointRate" class="form-control" />
+                            <span asp-validation-for="RefRewardPointRate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="MemberClass" asp-action="AddNew" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="MemberClass" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>-->

@@ -1,0 +1,54 @@
+﻿@model CRMManager.Models.RedeemItemAdjustsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<h4>RedeemItemAdjustsViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Search" class="control-label"></label>
+                <input asp-for="Search" class="form-control" />
+                <span asp-validation-for="Search" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PageTitle" class="control-label"></label>
+                <input asp-for="PageTitle" class="form-control" />
+                <span asp-validation-for="PageTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direction" class="control-label"></label>
+                <input asp-for="Direction" class="form-control" />
+                <span asp-validation-for="Direction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserLogin" class="control-label"></label>
+                <input asp-for="UserLogin" class="form-control" />
+                <span asp-validation-for="UserLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppObject" class="control-label"></label>
+                <input asp-for="AppObject" class="form-control" />
+                <span asp-validation-for="AppObject" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

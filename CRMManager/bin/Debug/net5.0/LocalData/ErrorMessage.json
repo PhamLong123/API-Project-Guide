@@ -1,0 +1,153 @@
+﻿//EAPIErrorCode
+{
+  "ErrorDatas": [
+    {
+      "ErrorCode": "Update_Data_Fail",
+      "EN": "Update Data fail",
+      "VN": "Cập nhật dữ liệu lỗi"
+    },
+    {
+      "ErrorCode": "Data_Not_Found",
+      "EN": "Data is not found",
+      "VN": "Không tìm thấy dữ liệu"
+    },
+    {
+      "ErrorCode": "Member_Not_Found",
+      "EN": "Member is not found",
+      "VN": "Không tìm thấy thành viên"
+    },
+    {
+      "ErrorCode": "Invalid_OTP",
+      "EN": "Invalid OTP code",
+      "VN": "Sai mã OTP"
+    },
+    {
+      "ErrorCode": "Invalid_Pwd",
+      "EN": "Password is invalid",
+      "VN": "Mật khẩu không hợp lệ"
+    },
+    {
+      "ErrorCode": "Logout_Fail",
+      "EN": "Logout failed",
+      "VN": "Đăng xuất thất bại"
+    },
+    {
+      "ErrorCode": "Invalid_Para",
+      "EN": "Parameter is invalid",
+      "VN": "Thông số không hợp lệ"
+    },
+    {
+      "ErrorCode": "Process_Sucess",
+      "EN": "Process successfully",
+      "VN": "Xử lý thành công"
+    },
+    {
+      "ErrorCode": "Process_Failed",
+      "EN": "Process failed",
+      "VN": "Xử lý không thành công"
+    },
+    {
+      "ErrorCode": "Send_OTP_Failed",
+      "EN": "Send OTP failed",
+      "VN": "Gửi mã OTP không thành công"
+    },
+    {
+      "ErrorCode": "Send_OTP_Success",
+      "EN": "Send OTP successfully",
+      "VN": "Gửi mã OTP thành công"
+    },
+    {
+      "ErrorCode": "OTP_Code_Success_Message",
+      "EN": "Code is sent successfully message",
+      "VN": "Gửi mã  thành công"
+    },
+    {
+      "ErrorCode": "OTP_Code_Fail_Message",
+      "EN": "Code sent failed",
+      "VN": "Gửi  mã không thành công"
+    },
+    {
+      "ErrorCode": "Login_Success",
+      "EN": "Login successfully",
+      "VN": "Đăng nhập thành công"
+    },
+    {
+      "ErrorCode": "Register_Success",
+      "EN": "Register successfully ",
+      "VN": "Đăng ký thành công"
+    },
+    {
+      "ErrorCode": "Register_Failed",
+      "EN": "Register failed",
+      "VN": "Đăng ký không thành công"
+    },
+    {
+      "ErrorCode": "UpdateProfile_OK",
+      "EN": "Update successfully ",
+      "VN": "Update thành công"
+    },
+    {
+      "ErrorCode": "Member_Not_Login",
+      "EN": "Member is not login yet",
+      "VN": "Thành viên chưa đăng nhập"
+    },
+    {
+      "ErrorCode": "Member_Is_Exist",
+      "EN": "Member is exist",
+      "VN": "Thành viên đã đăng ký"
+    },
+    {
+      "ErrorCode": "OTP_Over_Send_Limit",
+      "EN": "OTP over send limit",
+      "VN": "Số lượt gửi OTP vượt quá giới hạn"
+    },
+    {
+      "ErrorCode": "Password_Not_Match",
+      "EN": "Password is not match",
+      "VN": "Mật khẩu không trùng"
+    },
+    {
+      "ErrorCode": "Cancel_Request_Success",
+      "EN": "Cancel request successfully",
+      "VN": "Hủy yêu cầu đăng ký thành công"
+    },
+    {
+      "ErrorCode": "Cancel_Request_Failed",
+      "EN": "Cancel request failed",
+      "VN": "Hủy yêu cầu đăng ký thành công"
+    },
+
+    {
+      "ErrorCode": "Invalid_Mobile_No",
+      "EN": "Invalid Mobile Number",
+      "VN": "Số di động không hợp lệ"
+    },
+    {
+      "ErrorCode": "Invalid_OTPCode",
+      "EN": "Invalid OTPCode",
+      "VN": "Mã OTP không hợp lệ"
+    },
+    {
+      "ErrorCode": "Miss_Required_Fields",
+      "EN": "Miss Required Fields",
+      "VN": "Thiếu các trường bắt buộc"
+    },
+    {
+      "ErrorCode": "Password_Does_Not_Match",
+      "EN": "Password does not Identity",
+      "VN": "Mật khẩu không khớp"
+    },
+    {
+      "ErrorCode": "Register_Sucessfully",
+      "EN": "Register sucessfully",
+      "VN": "Đăng ký thành công"
+    },
+    {
+      "ErrorCode": "Login_Not_Success",
+      "EN": "Login not success",
+      "VN": "Dăng nhập thất bại"
+    }
+
+    
+  ]
+}

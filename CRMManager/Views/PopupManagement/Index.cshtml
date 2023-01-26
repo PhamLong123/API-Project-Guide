@@ -1,0 +1,151 @@
+﻿@model CRMManager.Models.PopupContentViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-4 border-end">
+        <table id="table-data" class="table table-hover">
+            <thead class="table-primary d-none">
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.PopupList != null)
+                {
+                    @foreach (var item in Model.PopupList)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("", "")'">
+                            <td width="80%">
+                                <a href="#">@item.Name</a>
+                            </td>
+                            <td>
+                                <div class="crud-button">
+                                    <button class="btn btn-success" type="submit">Sửa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-8">
+        <div class="row">
+            <form asp-action="SavePopup" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="crud-button mb-3">
+                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("AddNew", "PopupManagement")'">Thêm</button>
+                    <button type="button" class="btn btn-success">Sửa</button>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#deletePopupModal">Xóa</button>
+                </div>
+                <!-- Modal delete popup-->
+                <div class="modal fade" id="deletePopupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa nội dung</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn xóa không?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-danger">Đồng ý</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <span class="text-danger"> (*)</span>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Subject" class="control-label"></label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LinkAddress" class="control-label"></label>
+                    <input asp-for="LinkAddress" class="form-control" />
+                    <span asp-validation-for="LinkAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Priority" class="control-label"></label>
+                    <input asp-for="Priority" class="form-control" />
+                    <span asp-validation-for="Priority" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FromDate" class="control-label"></label>
+                    <input asp-for="FromDate" class="form-control" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ToDate" class="control-label"></label>
+                    <input asp-for="ToDate" class="form-control" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsActive" type="checkbox" id="flexCheckDefault">
+                    <label class="form-check-label" asp-for="IsActive" for="flexCheckDefault"></label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThumbImage" class="form-label"></label>
+                    <span class="text-danger"> (*)</span>
+                    <input type="file" value="@Model.ThumbImage" asp-for="ThumbImage" class="form-control" accept="image/png, image/gif, image/jpeg" />
+                    <span asp-validation-for="ThumbImage" class="text-danger"></span>
+                    <img src="~/img/News/@Model.ThumbImage" />
+                </div>
+                <div class="form-group">
+                    <label for="formFile" asp-for="DetailImage" class="form-label"></label>
+                    <input type="file" value="@Model.DetailImage" asp-for="DetailImage" class="form-control" accept="image/png, image/gif, image/jpeg" />
+                    <span asp-validation-for="DetailImage" class="text-danger"></span>
+                    <img src="~/img/News/@Model.DetailImage" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="NewsContent" class="control-label"></label>
+                    <textarea rows="10" asp-for="NewsContent" class="form-control"></textarea>
+                    <span asp-validation-for="NewsContent" class="text-danger"></span>
+                </div>
+                <p class="text-danger">(*): Kích thước không được để quá 30px</p>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+                <br />
+                <br />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+
+    div.dataTables_scrollBody {
+        border-left: none !important;
+    }
+</style>

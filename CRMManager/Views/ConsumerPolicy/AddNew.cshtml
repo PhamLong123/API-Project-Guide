@@ -1,0 +1,62 @@
+﻿@model CRMManager.Models.ConsumerPolicyViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">THÊM CHÍNH SÁCH TIÊU DÙNG</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Tên hạng thẻ</label>
+                                    <select id="drpEmpList" class="form-select">
+                                        <option value="">--Select--</option>
+                                    </select>
+                                    <input type="hidden" />
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Tỷ lệ tích điểm lên hạng</label>
+                                    <input asp-for="RankRate" class="form-control" />
+                                    <span asp-validation-for="RankRate" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Tỷ lệ tích điểm đổi quà</label>
+                                    <textarea asp-for="RewardRate" class="form-control" rows="4"></textarea>
+                                    <span asp-validation-for="RewardRate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="ConsumerPolicy" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="ConsumerPolicy" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

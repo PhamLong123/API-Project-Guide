@@ -1,0 +1,271 @@
+﻿@model CRMManager.Models.MKTCampaignBillViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 border-end">
+        <div class="crud-button mb-3">
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("CreateAppList", "System")'">Thêm</button>
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("EditAppList", "System")'">Sửa</button>
+            <button class="btn btn-danger">Xóa</button>
+        </div>
+
+        <table id="table-data2" class="table table-bordered display">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col" width="30%">Mã</th>
+                    <th scope="col" width="70%">Tên</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Promotions != null)
+                {
+                    @foreach (var item in Model.Promotions)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("", "")'">
+                            <th scope="row">@item.Number</th>
+                            <td>@item.Name</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-8">
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Tabs navs -->
+            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active"
+                       id="ex1-tab-1"
+                       data-mdb-toggle="tab"
+                       href="#ex1-tabs-1"
+                       role="tab"
+                       aria-controls="ex1-tabs-1"
+                       aria-selected="true">Thông tin</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link"
+                       id="ex1-tab-2"
+                       data-mdb-toggle="tab"
+                       href="#ex1-tabs-2"
+                       role="tab"
+                       aria-controls="ex1-tabs-2"
+                       aria-selected="false">Chọn quà</a>
+                </li>
+            </ul>
+            <!-- Tabs navs -->
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex1-content">
+                <div class="tab-pane fade show active"
+                     id="ex1-tabs-1"
+                     role="tabpanel"
+                     aria-labelledby="ex1-tab-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Promotions" class="control-label"></label>
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.Promotions != null)
+                                    {
+                                        @foreach (var item in Model.Promotions)
+                                        {
+                                            <option value=@item.ID>@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PromotionNews" class="control-label"></label>
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.Promotions != null)
+                                    {
+                                        @foreach (var item in Model.Promotions)
+                                        {
+                                            <option value=@item.ID>@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Number" class="control-label"></label>
+                                <input asp-for="Number" class="form-control" />
+                                <span asp-validation-for="Number" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FromDate" class="control-label"></label>
+                                <input asp-for="FromDate" class="form-control" />
+                                <span asp-validation-for="FromDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ToDate" class="control-label"></label>
+                                <input asp-for="ToDate" class="form-control" />
+                                <span asp-validation-for="ToDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="BillValueFrom" class="control-label"></label>
+                                <input asp-for="BillValueFrom" class="form-control" />
+                                <span asp-validation-for="BillValueFrom" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="BillValueTo" class="control-label"></label>
+                                <input asp-for="BillValueTo" class="form-control" />
+                                <span asp-validation-for="BillValueTo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Scopes" class="control-label"></label>
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.Scopes != null)
+                                    {
+                                        @foreach (var item in Model.Scopes)
+                                        {
+                                            <option value=@item.ID>@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="RewardPoint" class="control-label"></label>
+                                <input asp-for="RewardPoint" class="form-control" />
+                                <span asp-validation-for="RewardPoint" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="RankingPoint" class="control-label"></label>
+                                <input asp-for="RankingPoint" class="form-control" />
+                                <span asp-validation-for="RankingPoint" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-1">
+                                    <input type="checkbox" class="form-check" asp-for="IsActive" />
+                                </div>
+                                <div class="col-11">
+                                    <label class="control-label">Kích hoạt</label>
+                                </div>
+                            </div>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PromotionGroups" class="control-label"></label>
+                                <select class="form-select" aria-label="Default select example">
+                                    @if (Model.PromotionGroups != null)
+                                    {
+                                        @foreach (var item in Model.PromotionGroups)
+                                        {
+                                            <option value=@item.ID>@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    <table id="table-data2" class="table table-bordered mt-3 display">
+                        <thead class="table-primary">
+                            <tr>
+                                <th scope="col" width="20%">Mã quà</th>
+                                <th scope="col" width="40%">Tên quà</th>
+                                <th scope="col" width="20%">Số lượng</th>
+                                <th scope="col" width="20%">Chọn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.PromotionGifts != null)
+                            {
+                                @foreach (var item in Model.PromotionGifts)
+                                {
+                                    <tr id="controlRow" @*onclick="location.href = '@Url.Action("", "")'"*@>
+                                        <th scope="row">@item.ItemCode</th>
+                                        <td>@item.ItemName</td>
+                                        <td>
+                                            <input type="number" name="@item.TotalQuantity" value="" />
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                                @*<label class="form-check-label" for="flexCheckDefault">Default checkbox</label>*@
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Tabs content -->
+            <div class="form-group d-flex justify-content-end crud-button ">
+                <input type="submit" value="Lưu" asp-action="SaveAppList" class="btn btn-success" />
+                <input type="button" value="Hủy" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter, .dataTables_filter {
+        display: none;
+    }*/
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('table.display').DataTable();
+    });
+</script>

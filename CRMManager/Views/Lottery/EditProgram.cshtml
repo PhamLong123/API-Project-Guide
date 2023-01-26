@@ -1,0 +1,237 @@
+﻿@model CRMManager.Models.LotteryProgramViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">SỬA CHƯƠNG TRÌNH QUAY SỐ</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        @*<div class="form-group mb-2">
+                <label class="control-label">Cửa hàng</label>
+                <select id="drpEmpList" class="form-select" asp-for="Type" asp-items="@Html.GetEnumSelectList<LotteryProgramViewModel.ProgramType>()">
+                    <option value="">--Select--</option>
+                </select>
+            </div>*@
+                        <div class="form-group">
+                            <label class="control-label">Mã </label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Từ ngày</label>
+                            <input asp-for="FromDate" class="form-control" />
+                            <span asp-validation-for="FromDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Gia nhập từ ngày</label>
+                            <input asp-for="JoinFrom" class="form-control" />
+                            <span asp-validation-for="JoinFrom" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số ngày mở rộng thời hạn</label>
+                            <input asp-for="ExtendExpiredDay" class="form-control" />
+                            <span asp-validation-for="ExtendExpiredDay" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm lên hạng</label>
+                            <input asp-for="RankPoint" class="form-control" />
+                            <span asp-validation-for="RankPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm đổi thưởng</label>
+                            <input asp-for="RewardPoint" class="form-control" />
+                            <span asp-validation-for="RewardPoint" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Điểm hạng thẻ 1</label>
+                            <input asp-for="RedeemPointClass1" class="form-control" />
+                            <span asp-validation-for="RedeemPointClass1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Điểm hạng thẻ 3</label>
+                            <input asp-for="RedeemPointClass3" class="form-control" />
+                            <span asp-validation-for="RedeemPointClass3" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Giá trị đổi quà</label>
+                            <input asp-for="RedeemValue" class="form-control" />
+                            <span asp-validation-for="RedeemValue" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng được đổi tối đa mỗi thành viên</label>
+                            <input asp-for="MemberRedeemCount" class="form-control" />
+                            <span asp-validation-for="MemberRedeemCount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng được đổi tối đa mỗi ngày</label>
+                            <input asp-for="RedeemCountByDay" class="form-control" />
+                            <span asp-validation-for="RedeemCountByDay" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng được đổi tối đa mỗi thành viên mỗi ngày</label>
+                            <input asp-for="MemberRedeemCountByDay" class="form-control" />
+                            <span asp-validation-for="MemberRedeemCountByDay" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tặng mỗi ngày</label>
+                            <input asp-for="MaxLotteryCountByDay" class="form-control" />
+                            <span asp-validation-for="MaxLotteryCountByDay" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Tên </label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến ngày</label>
+                            <input asp-for="ToDate" class="form-control" />
+                            <span asp-validation-for="ToDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Gia nhập đến ngày</label>
+                            <input asp-for="JoinTo" class="form-control" />
+                            <span asp-validation-for="JoinTo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số ngày hết hạn nhận quà</label>
+                            <input asp-for="TakeExpiredDay" class="form-control" />
+                            <span asp-validation-for="TakeExpiredDay" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm đổi thưởng</label>
+                            <input asp-for="RewardPoint" class="form-control" />
+                            <span asp-validation-for="RewardPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tặng điểm đổi quà</label>
+                            <input asp-for="RedeemPoint" class="form-control" />
+                            <span asp-validation-for="RedeemPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Điểm hạng thẻ 2</label>
+                            <input asp-for="RedeemPointClass2" class="form-control" />
+                            <span asp-validation-for="RedeemPointClass2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng được đổi tối đa</label>
+                            <input asp-for="RedeemCount" class="form-control" />
+                            <span asp-validation-for="RedeemCount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Giá trị giao dịch tối thiểu</label>
+                            <input asp-for="MinBillValue" class="form-control" />
+                            <span asp-validation-for="MinBillValue" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tặng tối đa mỗi thành viên</label>
+                            <input asp-for="MaxLotteryCount" class="form-control" />
+                            <span asp-validation-for="MaxLotteryCount" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tặng mỗi thành viên mỗi ngày</label>
+                            <input asp-for="MaxLotteryMemberCountByDay" class="form-control" />
+                            <span asp-validation-for="MaxLotteryMemberCountByDay" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tặng tối đa mỗi thành viên</label>
+                            <input asp-for="MaxLotteryCount" class="form-control" />
+                            <span asp-validation-for="MaxLotteryCount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Nội dung</label>
+                            <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label" for="ThumbImage">Biểu tượng </label>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.Image == null)
+                                            {
+                                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Dat'sImages/Lottery/Program/@Model.Image" class="img-thumbnail" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-8">
+                                            <input type="file" class="form-control" name="imgfile" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" asp-area="" asp-controller="Lottery" asp-action="UploadiconProgram" class="btn btn-primary">Upload Ảnh</button>
+                                        </div>
+                                        <span>@ViewData["Message"]</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label class="form-label" for="ThumbImage">Hình ảnh </label>
+                                        </div>
+                                        <div class="col-12">
+                                            @if (Model.ImageDetail == null)
+                                            {
+                                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Dat'sImages/Lottery/Program/@Model.ImageDetail" class="img-thumbnail" />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-8">
+                                            <input type="file" class="form-control" name="imgfile" />
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" asp-area="" asp-controller="Lottery" asp-action="UploadimageProgram" class="btn btn-primary">Upload Ảnh</button>
+                                        </div>
+                                        <span>@ViewData["Message"]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="Lottery" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="Lottery" asp-action="EditProgram" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>

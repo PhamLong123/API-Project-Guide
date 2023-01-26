@@ -1,0 +1,157 @@
+﻿@model CRMManager.Models.OutletsViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">@Model.PageTitle</h2>
+    <input type="hidden" asp-for="PageTitle" />
+</div>
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="form-inline">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row mb-2">
+                                <div class="col-sm-12 col-sm-12 col-md-2 col-lg-2"></div>
+                                <div class="col-sm-12 col-sm-12 col-md-8 col-lg-8">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Doanh nghiệp</label>
+                                                        <select id="drpEmpList" class="form-select" asp-for="SelectedBrandID" asp-items="@(new SelectList(Model.BrandList, "Value", "Text"))">
+                                                            <option value="-1">@Model.SelectedDefaultBrand</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Ngành hàng</label>
+                                                        <select id="drpEmpList" class="form-select" asp-for="SelectedBussinessID" asp-items="@(new SelectList(Model.BussinessList, "Value", "Text"))">
+                                                            <option value="-1">@Model.SelectedDefaultBussiness</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Tầng</label>
+                                                        <select id="drpEmpList" class="form-select" asp-for="SelectedFloorID" asp-items="@(new SelectList(Model.FloorList, "Value", "Text"))">
+                                                            <option value="-1">@Model.SelectedDefaultFloor</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                                    <button class="btn btn-primary my-2 my-sm-0 w-100" type="submit" style="margin-top:28px!important" asp-controller="OutLet" asp-action="Index" asp-route-id="@Model"><i class="fas fa-filter"></i> Lọc</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="col-12 col-sm-12 col-md-2 col-lg-2" style="position:relative">
+                            <button style="position:absolute; bottom: 15px;" type="submit" class="btn btn-primary" asp-controller="OutLet" asp-action="Index" asp-route-id="@Model"><i class="fas fa-filter"></i>Lọc</button>
+                        </div>*@
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-sm-12 col-md-2 col-lg-2"></div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 d-none">
+                            <div class="row mb-2">
+                                <div class="col-sm-12 col-sm-12 col-md-2 col-lg-2"></div>
+                                <div class="col-sm-12 col-sm-12 col-md-8 col-lg-8">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-9 col-lg-9">
+                                            <input asp-for="KeySearch" class="form-control mr-sm-2" type="search" placeholder="Từ khóa tìm kiếm" aria-label="Search">
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-3 col-lg-3">
+                                            <button class="btn btn-primary my-2 my-sm-0 w-100" type="submit" asp-controller="OutLet" asp-action="Index" asp-route-id="@Model"><i class="fas fa-search"></i> Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-sm-12 col-md-2 col-lg-2"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="button" asp-area="" asp-controller="Outlet" asp-action="ImportToExcel" asp-route-id=@Model class="btn btn-excel m-1 float-right d-none"><i class="far fa-file-excel"></i> Nhập dữ liệu từ Excel</button>
+                            <a asp-area="" asp-controller="Outlet" asp-action="AddNew" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+            <thead>
+                <tr class="bg-primary" style="color: White;">
+                    <td style="width:20%;"><b>Mã</b></td>
+                    <td style="width:20%;"><b>Tên</b></td>
+                    <td style="width:45%;"><b>Mô tả</b></td>
+                    <td style="width:15%;"><b>Tùy chọn</b></td>
+                </tr>
+            </thead>
+            @foreach (var item in Model.BaseOutlets)
+            {
+                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.Number
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.OutletName
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.Description
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 text-center">
+                                <a asp-area="" asp-controller="Outlet" asp-action="Edit" asp-route-number=@item.Number class="btn btn-primary m-1"><i class="far fa-edit"></i> Sửa</a>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 text-center d-none">
+                                <button type="button" class="btn btn-danger m-1 d-none" data-bs-toggle="modal" data-bs-target="#myModal-@item.ID"><i class="far fa-trash-alt"></i> Xóa</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <div class="modal fade" id="myModal-@item.ID">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Xóa cửa hàng</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="mt-4 justify-content-center">
+                                    <p class="text-center">Bạn có muốn xóa cửa hàng @item.OutletName không ?</p>
+                                </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" asp-area="" asp-controller="Outlet" asp-action="Delete" asp-route-id= class="btn btn-success" data-bs-dismiss="modal">Đồng ý</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Từ chối</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </table>
+        @*<div class="col-12">
+            <div class="row">
+                <div class="col-4">
+
+                </div>
+                <div class="col-8">
+                    <div class="float-right mt-2">
+                        <button type="submit" asp-area="" asp-controller="Outlet" asp-action="ExportToExcel" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-file-excel"></i> Export</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</form>

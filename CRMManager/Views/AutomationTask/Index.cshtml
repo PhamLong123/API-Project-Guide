@@ -1,0 +1,295 @@
+﻿@model CRMManager.Models.MKTAutomationViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 border-end">
+        <div class="crud-button mb-3">
+            <button class="btn btn-success">Thêm</button>
+            <button class="btn btn-success">Sửa</button>
+            <button class="btn btn-danger">Xóa</button>
+        </div>
+
+        <table id="table-data" class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Kích hoạt</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.TaskList != null)
+                {
+                    @foreach (var item in Model.TaskList)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("DetailAutomationTask", "MarketingOperation")'">
+                            <th scope="row">@item.Name</th>
+                            <td>@item.IsActive</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="AutomationTask">
+            <ul class="nav nav-tabs mb-3" id="myTabContent" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active"
+                            id="config-tab"
+                            data-mdb-toggle="tab"
+                            data-mdb-target="#config"
+                            type="button"
+                            role="tab"
+                            aria-controls="home"
+                            aria-selected="true">
+                        Cấu hình
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link"
+                            id="content-tab0"
+                            data-mdb-toggle="tab"
+                            data-mdb-target="#content"
+                            type="button"
+                            role="tab"
+                            aria-controls="content"
+                            aria-selected="false">
+                        Nội dung
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active"
+                     id="config"
+                     role="tabpanel"
+                     aria-labelledby="config-tab">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TaskName" class="control-label"></label>
+                        <input asp-for="TaskName" class="form-control" />
+                        <span asp-validation-for="TaskName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FilterTaskList" class="control-label"></label>
+                        <select class="form-select bootstrap-select" form-s aria-label="Default select example">
+                            @if (Model.FilterTaskList != null)
+                            {
+                                @foreach (var item in Model.FilterTaskList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TaskScheduleList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.TaskScheduleList != null)
+                            {
+                                @foreach (var item in Model.TaskScheduleList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VoucherList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.VoucherList != null)
+                            {
+                                @foreach (var item in Model.VoucherList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VoucherQty" class="control-label"></label>
+                        <input asp-for="VoucherQty" class="form-control" />
+                        <span asp-validation-for="VoucherQty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VoucherExpiredDateQty" class="control-label"></label>
+                        <input asp-for="VoucherExpiredDateQty" class="form-control" />
+                        <span asp-validation-for="VoucherExpiredDateQty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VoucherExpiredMonthQty" class="control-label"></label>
+                        <input asp-for="VoucherExpiredMonthQty" class="form-control" />
+                        <span asp-validation-for="VoucherExpiredMonthQty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GiftList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.GiftList != null)
+                            {
+                                @foreach (var item in Model.GiftList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GiftQty" class="control-label"></label>
+                        <input asp-for="GiftQty" class="form-control" />
+                        <span asp-validation-for="GiftQty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GiftExpiredDateQty" class="control-label"></label>
+                        <input asp-for="GiftExpiredDateQty" class="form-control" />
+                        <span asp-validation-for="GiftExpiredDateQty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GiftExpiredMonthQty" class="control-label"></label>
+                        <input asp-for="GiftExpiredMonthQty" class="form-control" />
+                        <span asp-validation-for="GiftExpiredMonthQty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RankPoint" class="control-label"></label>
+                        <input asp-for="RankPoint" class="form-control" />
+                        <span asp-validation-for="RankPoint" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RewardPoint" class="control-label"></label>
+                        <input asp-for="RewardPoint" class="form-control" />
+                        <span asp-validation-for="RewardPoint" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                        </label>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="content" role="tabpanel" aria-labelledby="content-tab">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Email" id="isEmail" /> @Html.DisplayNameFor(model => model.Email)
+                        </label>
+                    </div>
+                    <div class="card border border-light shadow-0 mb-3" id="emailContent">
+                        <div class="card-header bg-light border-light">Gửi email</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="EmailSubject" class="control-label"></label>
+                                <input asp-for="EmailSubject" class="form-control" />
+                                <span asp-validation-for="EmailSubject" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EmailContent" class="control-label"></label>
+                                <textarea asp-for="EmailContent" rows="5" class="form-control"></textarea>
+                                <span asp-validation-for="EmailContent" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Notification" id="isNoti" /> @Html.DisplayNameFor(model => model.Notification)
+                        </label>
+                    </div>
+                    <div class="card border border-light shadow-0 mb-3" id="notiContent">
+                        <div class="card-header bg-light border-light">Gửi thông báo đến ứng dụng mobile</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="NotiSubject" class="control-label"></label>
+                                <input asp-for="NotiSubject" class="form-control" />
+                                <span asp-validation-for="NotiSubject" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="NotiContent" class="control-label"></label>
+                                <textarea asp-for="NotiContent" rows="5" class="form-control"></textarea>
+                                <span asp-validation-for="NotiContent" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="SMS" id="isSMS" /> @Html.DisplayNameFor(model => model.SMS)
+                        </label>
+                    </div>
+                    <div class="card border border-light shadow-0 mb-3" id="smsContent">
+                        <div class="card-header bg-light border-light">Email</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="SMSContent" class="control-label"></label>
+                                <textarea asp-for="SMSContent" rows="5" class="form-control"></textarea>
+                                <span asp-validation-for="SMSContent" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+
+    </div>
+</div>
+<style>
+    #emailContent, #notiContent, #smsContent {
+        display: none;
+    }
+</style>
+
+@*de tam*@
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+</style>
+<script>
+    $(document).ready(function () {
+        if ($('input#isEmail').is(':checked')) { $('#emailContent').show(); }
+        if ($('input#isNoti').is(':checked')) { $('#notiContent').show(); }
+        if ($('input#isSMS').is(':checked')) { $('#smsContent').show(); }
+
+
+        $('input#isEmail').click(function () {
+            if ($(this).prop("checked") == true) {
+                $('#emailContent').show();
+            }
+            else if ($(this).prop("checked") == false) {
+                $('#emailContent').hide();
+            }
+        });
+        $('input#isNoti').click(function () {
+            if ($(this).prop("checked") == true) {
+                $('#notiContent').show();
+            }
+            else if ($(this).prop("checked") == false) {
+                $('#notiContent').hide();
+            }
+        });
+        $('input#isSMS').click(function () {
+            if ($(this).prop("checked") == true) {
+                $('#smsContent').show();
+            }
+            else if ($(this).prop("checked") == false) {
+                $('#smsContent').hide();
+            }
+        });
+    });
+
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

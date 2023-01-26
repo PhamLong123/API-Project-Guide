@@ -1,0 +1,172 @@
+﻿@model CRMManager.Models.InvTransViewModel
+<script type="text/javascript">
+    function AddItem(btn) {
+        var table = document.getElementById('table-data');
+        var rows = table.getElementsByTagName('tr');
+        var rowOuterHtml = rows[rows.length - 1].outerHTML;
+
+        var lastrowIdx = document.getElementById('hdnLastIndex').value;
+        var nextrowIdx = eval(lastrowIdx) + 1;
+        document.getElementById('hdnLastIndex').value = nextrowIdx;
+
+        rowOuterHtml = rowOuterHtml.replaceAll('_' + lastrowIdx + '_', '_' + nextrowIdx + '_');
+        rowOuterHtml = rowOuterHtml.replaceAll('[' + lastrowIdx + ']', '[' + nextrowIdx + ']');
+        rowOuterHtml = rowOuterHtml.replaceAll('-' + lastrowIdx, '-' + nextrowIdx);
+
+        var newRow = table.insertRow();
+        newRow.innerHTML = rowOuterHtml;
+
+        var btnAddID = btn.id;
+        var btnDeleteID = btnAddID.replaceAll('btnAdd', 'btnRemove');
+
+        var delbtn = document.getElementById(btnDeleteID);
+        //delbtn.classList.add("visible");
+        //delbtn.classList.remove("invisible");
+        delbtn.classList.remove("d-none");
+
+        var addbtn = document.getElementById(btnAddID);
+        //addbtn.classList.remove("visible");
+        //addbtn.classList.add("invisible");
+        addbtn.classList.add("d-none");
+        /*rows.classList.add("odd");*/
+    };
+
+    function DeleteItem(btn) {
+        $(btn).closest('tr').remove();
+    }
+</script>
+<style>
+    .dataTables_empty {
+        display: none!important;
+    }
+</style>
+<form method="post">
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <h4 class="m-0 text-center"></h4>
+        </div>
+    </div>
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row">
+            <div class="col-12 col-md-12 mt-5">
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group d-none">
+                            <label asp-for="ID" class="control-label"></label>
+                            <input asp-for="ID" class="form-control"  type="text" name="TransID" id="txtTransID"/>
+                            <span asp-validation-for="ID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">DocNo: </label>
+                            <input asp-for="DocNo" class="form-control" />
+                            <span asp-validation-for="DocNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tcode: </label>
+                            <input asp-for="TCode" class="form-control" />
+                            <span asp-validation-for="TCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">User: </label>
+                            <input asp-for="UserID" class="form-control" />
+                            <span asp-validation-for="UserID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">TransDate: </label>
+                            <input asp-for="TransDate" class="form-control" />
+                            <span asp-validation-for="TransDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">WHCode: </label>
+                            <input asp-for="WHCode" class="form-control" />
+                            <span asp-validation-for="WHCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">ShelfCode: </label>
+                            <input asp-for="ShelfCode" class="form-control" />
+                            <span asp-validation-for="ShelfCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Name: </label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Number: </label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Description: </label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                            <thead>
+                                <tr style="color: White; background-color: #4267B2;">
+                                    <td style="width:25%;"><b>Number</b></td>
+                                    <td style="width:25%;"><b>BarCode</b></td>
+                                    <td style="width:25%;"><b>Quantity</b></td>
+                                    <td style="width:15%;"><b>Unit</b></td>
+                                    <td style="width:10%;"><b>Option</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(int i=0; i < Model.InvTransDetails.Count; i++)
+                                { 
+                                    <tr>
+                                        <td>
+                                            <input asp-for="@Model.InvTransDetails[i].ID" class="form-control d-none" value="" />
+                                            <input asp-for="@Model.InvTransDetails[i].Number" class="form-control" />
+                                            <input asp-for="@Model.InvTransDetails[i].TransID" class="form-control d-none" value="@Model.ID" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="@Model.InvTransDetails[i].CreatedBy" class="form-control d-none" value="msa" />
+                                            <input asp-for="@Model.InvTransDetails[i].BarCode" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="@Model.InvTransDetails[i].CreatedOn" class="form-control d-none" />
+                                            <input asp-for="@Model.InvTransDetails[i].ModifiedOn" class="form-control  d-none" />
+                                            @*<input asp-for="@Model.InvTransDetails[i].CreatedOn" class="form-control d-none" value="@DateTime.Now" />
+                                            <input asp-for="@Model.InvTransDetails[i].ModifiedOn" class="form-control d-none" value="@DateTime.Now" />*@
+                                            <input asp-for="@Model.InvTransDetails[i].Quantity" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="@Model.InvTransDetails[i].DataState" class="form-control d-none" value="New" />
+                                            <input asp-for="@Model.InvTransDetails[i].Unit" class="form-control" />
+                                        </td>
+                                        <td>
+                                            <button id="btnAdd-@i" type="button" class="btn btn-success" onclick="AddItem(this)">Add</button>
+                                            <button id="btnRemove-@i" type="button" class="btn btn-danger d-none" onclick="DeleteItem(this)">Remove</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <input type="hidden" id="hdnLastIndex" value="0"/>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-8">
+                                <div class="float-right mt-2">
+                                    @*<input type="button" value="Save Data" name="SaveData" id="btnSaveData" />*@
+                                    <button type="submit" asp-area="" asp-controller="InvTrans" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

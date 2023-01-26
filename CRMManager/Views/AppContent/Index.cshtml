@@ -1,0 +1,113 @@
+﻿@model CRMManager.Models.AppContentViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4 border-end">
+        <div class="form-group">
+            <label asp-for="AppLists" class="control-label"></label>
+            <select class="form-select" aria-label="Default select example">
+                @if (Model.AppLists != null)
+                {
+                    @foreach (var item in Model.AppLists)
+                    {
+                        <option value=@item.Number>@item.Name</option>
+                    }
+                }
+
+            </select>
+        </div>
+        <table id="table-data" class="table table-hover">
+            <thead class="table-primary d-none">
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AppLists != null)
+                {
+                    @foreach (var item in Model.AppLists)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("", "")'">
+                            <td width="80%">
+                                <a href="#">@item.Number</a>
+                            </td>
+                            <td>
+                                <div class="crud-button">
+                                    <button class="btn btn-success" type="submit">Sửa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-8">
+        <form asp-action="AppContent">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="crud-button mb-3">
+                <button class="btn btn-success" type="submit">Lưu</button>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label><span class="text-danger">(*)</span>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label><span class="text-danger">(*)</span>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Fromdate" class="control-label"></label>
+                        <input asp-for="Fromdate" type="date" class="form-control">
+                        <span asp-validation-for="Fromdate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ToDate" class="control-label"></label>
+                        <input asp-for="ToDate" type="date" class="form-control" />
+                        <span asp-validation-for="ToDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label asp-for="Content" class="control-label"></label>
+                        <textarea rows="5" asp-for="Content" class="form-control"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+
+    div.dataTables_scrollBody {
+        border-left: none !important;
+    }
+</style>

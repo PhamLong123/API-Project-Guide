@@ -1,0 +1,89 @@
+﻿@model CRMManager.Models.FloorViewModel
+<div class="mt-4 justify-content-center">
+    <h2 class="text-center">@ViewBag.PageTitle</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        @*<div class="form-group">
+                            <label class="control-label">Trung Tâm thương mại</label>
+                            <select id="drpEmpList" class="form-select" asp-for="BranchID" asp-items="@(new SelectList(Model.Branches, "ID", "Name"))">
+                                <option value="">--Select--</option>
+                            </select>
+                            <input type="hidden" asp-for="BranchID" />
+                        </div>*@
+                        <div class="form-group">
+                            <label class="control-label">Mã</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tên</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Vị trí ưu tiên</label>
+                            <input asp-for="Priority" class="form-control" />
+                            <span asp-validation-for="Priority" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label" for="ThumbImage">Hình ảnh </label>
+                                </div>
+                                <div class="col-12">
+                                    @if (Model.MapImageName == null)
+                                    {
+                                        <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Dat'sImages/Floors/@Model.MapImageName" class="img-thumbnail" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-8">
+                                    <input type="file" class="form-control" name="imgfile" />
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" asp-area="" asp-controller="Floor" asp-action="Uploadimage" class="btn btn-primary">Upload Ảnh</button>
+                                </div>
+                                <span>@ViewData["Message"]</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="Floor" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="Floor" asp-action="Addnew" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

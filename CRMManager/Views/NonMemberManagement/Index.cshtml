@@ -1,0 +1,355 @@
+﻿@model CRMManager.Models.NonMembersViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <p>
+        <a class="btn btn-primary" style="width: fit-content" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <i class="fa-solid fa-filter-circle-xmark mr-5"></i> Bộ lọc dữ liệu
+        </a>
+        <div class="w-auto position-absolute" style="right: 5%">
+            <a class="btn btn-outline-success" style="margin-right:10px" role="button">
+                <i class="fa-solid fa-upload"></i> Import Excel
+            </a>
+            <a class="btn btn-outline-success" role="button">
+                <i class="fa-solid fa-download"></i> Export Excel
+            </a>
+        </div>
+
+    </p>
+
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <div class="col-12">
+                <ul class="nav nav-tabs mb-3" id="myTab0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active"
+                                id="profile-tab"
+                                data-mdb-toggle="tab"
+                                data-mdb-target="#profile"
+                                type="button"
+                                role="tab"
+                                aria-controls="home"
+                                aria-selected="true">
+                            <i class="fa-solid fa-address-card"></i>
+                            Hồ sơ
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link"
+                                id="trans-tab"
+                                data-mdb-toggle="tab"
+                                data-mdb-target="#trans"
+                                type="button"
+                                role="tab"
+                                aria-controls="contact"
+                                aria-selected="false">
+                            <i class="fa-solid fa-money-check-dollar"></i>
+                            Giao dịch
+                        </button>
+                    </li>
+                </ul>
+                <form asp-action="Search">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="tab-content" id="contentTemplateTab">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="Genders" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <select asp-for="Genders" asp-items="@Html.GetEnumSelectList<CustomersViewModel.EGender>()" class="form-select bootstrap-select w-50" form-s aria-label="Default select example">
+                                                    @*@if (Model.Genders != null)
+                                                        {
+                                                            @foreach (var item in Model.Genders)
+                                                            {
+                                                                <option value=@item>@item</option>
+                                                            }
+                                                        }*@
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="MemID" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="MemID" class="form-control w-50" />
+                                                <span asp-validation-for="MemID" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="FullName" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="FullName" class="form-control w-75" />
+                                                <span asp-validation-for="FullName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="Email" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="email" asp-for="Email" class="form-control w-75" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="Mobile" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="Mobile" class="form-control w-75" />
+                                                <span asp-validation-for="Mobile" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="JoinFromDate" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="date" asp-for="JoinFromDate" class="form-control w-50" />
+                                                <span asp-validation-for="JoinFromDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="JoinToDate" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="date" asp-for="JoinToDate" class="form-control w-50" />
+                                                <span asp-validation-for="JoinToDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="trans" role="tabpanel" aria-labelledby="trans-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="BusinessCategories" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <select class="form-select bootstrap-select w-50" form-s aria-label="Default select example">
+                                                    @if (Model.BusinessCategories != null)
+                                                    {
+                                                        @foreach (var item in Model.BusinessCategories)
+                                                        {
+                                                            <option value=@item>@item</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="Outlets" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <select class="form-select bootstrap-select w-50" form-s aria-label="Default select example">
+                                                    @if (Model.Outlets != null)
+                                                    {
+                                                        @foreach (var item in Model.Outlets)
+                                                        {
+                                                            <option value=@item>@item</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="TransCountFrom" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="TransCountFrom" class="form-control w-50" />
+                                                <span asp-validation-for="TransCountFrom" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="TransCountTo" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="TransCountTo" class="form-control w-50" />
+                                                <span asp-validation-for="TransCountTo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="TransBillTotalFrom" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="TransBillTotalFrom" class="form-control w-50" />
+                                                <span asp-validation-for="TransBillTotalFrom" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="TransBillTotalTo" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input asp-for="TransBillTotalTo" class="form-control w-50" />
+                                                <span asp-validation-for="TransBillTotalTo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="TransFromDate" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="date" asp-for="TransFromDate" class="form-control w-50" />
+                                                <span asp-validation-for="TransFromDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <label asp-for="TransToDate" class="control-label"></label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <input type="date" asp-for="TransToDate" class="form-control w-50" />
+                                                <span asp-validation-for="TransToDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="crud-button mb-3 align-end">
+                        <button class="btn btn-success" type="submit">Lưu</button>
+                        <button class="btn btn-danger" type="button">Hủy</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <table id="table-data" class="table table-hover table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Mã thành viên</th>
+                <th scope="col">Họ tên</th>
+                <th scope="col">Giới tính</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Sử dụng mobile</th>
+                <th scope="col">Số lần giao dịch</th>
+                <th scope="col">Tổng tiền giao dịch</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @*@if (Model.Customers != null)
+                {
+                    @foreach (var item in Model.Customers)
+                    {
+                        <tr id="controlRow">
+                            <th scope="row">@item.MemID</th>
+                            <th>@item.FullName</th>
+                            <td>@item.Gender</td>
+                            <td>@item.Email</td>
+                            <td>@item.Mobile</td>
+                            <td>@item.DOB</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <div class="crud-button align-center mb-3">
+                                    <button class="btn btn-success" onclick="location.href = '@Url.Action("Details", "NonMemberManagement", new { memID=item.MemID})'">Chi tiết</button>
+                                    <button class="btn btn-danger">Xóa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }*@
+
+            <tr id="controlRow" @*onclick="location.href = '@Url.Action("Details", "AppRole", new { ID=item.ID})'"*@>
+                <th scope="row">MemID</th>
+                <td>FullName</td>
+                <td>Gender</td>
+                <td>Email</td>
+                <td>Mobile</td>
+                <td>DOB</td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="crud-button align-center mb-3">
+                        <button class="btn btn-success" onclick="location.href = '@Url.Action("Details", "NonMemberManagement", new { memID=1})'">Chi tiết</button>
+                        <button class="btn btn-danger">Xóa</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,199 @@
+﻿@*@model IList<CRMManager.Models.PromotionGroupDetailViewModel>*@
+@model IEnumerable<CRMManager.Models.PromotionGroupDetailViewModel>
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row mt-5">
+            <div class="col-12 col-md-12">
+                @*<table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                        <thead>
+                            <tr style="color: White; background-color: #4267B2;">
+                                <td style="width:10%;"><b>Mã nhóm quà</b></td>
+                                <td style="width:50%;"><b>Tên quà</b></td>
+                                <td style="width:30%;"><b>Số lượng tặng</b></td>
+                                <td style="width:10%;"><b>Chọn quà</b></td>
+                            </tr>
+                        </thead>
+                        @foreach (var item in ViewBag.RedeemItemMall)
+                        {
+                            <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @item.ItemCode
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @item.ItemName
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        <input class="form-control" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+
+                                        <input type="checkbox" class="form-check" />
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>*@
+                <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                    <thead>
+                        <tr style="color: White; background-color: #4267B2;">
+                            <td style="width:10%;"><b>Mã nhóm quà</b></td>
+                            <td style="width:20%;"><b>Tên quà</b></td>
+                            <td style="width:30%;"><b>Tên nhóm quà</b></td>
+                            <td style="width:30%;"><b>Số lượng tặng</b></td>
+                            <td style="width:10%;"><b>Chọn quà</b></td>
+                        </tr>
+                    </thead>
+                    @*@for (var i = 0; i < Model.Count(); i++)
+        {
+            foreach (var item in ViewBag.RedeemItemMall)
+            {
+                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @ViewBag.GroupID
+                            <input asp-for="@Model[i].GroupID" class="form-control " value="@ViewBag.GroupID" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.ItemName
+                            <input asp-for="@Model[i].ItemID" class="form-control " value="@item.ID" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @foreach (var item3 in ViewBag.PromotionGroup)
+                            {
+                                if (item3.ID == ViewBag.GroupID)
+                                {
+                                    @item3.Number
+                                    <input asp-for="@Model[i].ItemNumber" class="form-control " value="@item3.Number" />
+                                }
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            <input asp-for="@Model[i].Qty" class="form-control" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            <input type="checkbox" class="form-check" asp-for="@Model[i].IsActive" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        }*@
+                    @*@foreach (var item2 in Model)
+        {
+            foreach (var item in ViewBag.RedeemItemMall)
+            {
+                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @ViewBag.GroupID
+                            <input asp-for="@item2.GroupID" class="form-control " value="@ViewBag.GroupID" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.ItemName
+                            <input asp-for="@item2.ItemID" class="form-control " value="@item.ID" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @foreach (var item3 in ViewBag.PromotionGroup)
+                            {
+                                if (item3.ID == ViewBag.GroupID)
+                                {
+                                    @item3.Number
+                                    <input asp-for="@item2.ItemNumber" class="form-control " value="@item3.Number" />
+                                }
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            <input asp-for="@item2.Qty" class="form-control" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            <input type="checkbox" class="form-check" asp-for="@item2.IsActive" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        }*@
+                    @foreach (var item in ViewBag.RedeemItemMall)
+                    {
+                        foreach (var item2 in Model)
+                        {
+                            <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @ViewBag.GroupID
+                                        <input asp-for="@item2.GroupID" class="form-control " value="@ViewBag.GroupID" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @item.ItemName
+                                        <input asp-for="@item2.ItemID" class="form-control " value="@item.ID" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        @foreach (var item3 in ViewBag.PromotionGroup)
+                                        {
+                                            if (item3.ID == ViewBag.GroupID)
+                                            {
+                                                @item3.Number
+                                                <input asp-for="@item2.ItemNumber" class="form-control " value="@item3.Number" />
+                                            }
+                                        }
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        <input asp-for="@item2.Qty" class="form-control" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                        <input type="checkbox" class="form-check" asp-for="@item2.IsActive" />
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 col-md-12">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="AddGiftToPromotionGroupDetail" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

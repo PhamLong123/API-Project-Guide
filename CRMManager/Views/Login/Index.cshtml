@@ -1,0 +1,220 @@
+﻿@model CRMManager.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="row login">
+    <!--<div class="d-flex justify-content-center">
+        <div class="card text-center" style="width: 40%">
+            <div class="card-header mb-2">GIẢI PHÁP KHÁCH HÀNG THÂN THIẾT</div>
+            <div class="card-body">
+                <form asp-action="Index" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mt-3">
+                        <input asp-for="UserName" class="form-control" placeholder="Tên đăng nhập" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input asp-for="Pwd" type="password" class="form-control" placeholder="Mật khẩu" />
+                        <span asp-validation-for="Pwd" class="text-danger"></span>
+                    </div>-->
+    @*<div class="form-group mt-3">
+            <label asp-for="Branches" class="control-label float-start"></label>
+            <select class="form-select" aria-label="Default select example">
+                @if (Model.Branches != null)
+                {
+                    @foreach (var item in Model.Branches)
+                    {
+                        <option value=@item.ID>@item.Name</option>
+                    }
+                }
+            </select>
+        </div>*@
+    <!--<div class="form-group mt-3">
+                        <input type="submit" value="Đăng nhập" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>-->
+
+
+
+    <div class="col-lg-6 left">
+        @*<img src="~/img/Logo/customer-relationship-management.png" />*@
+    </div>
+    <div class="col-lg-6 right">
+        <div class="card">
+            <div class="card-header mb-2">
+                <div class="round-logo">
+                    <img src="~/img/Logo/WhiteLogoWoName.png" />
+                </div>
+                <h5 class="title text-center">GIẢI PHÁP KHÁCH HÀNG THÂN THIẾT</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group right-inner-addon">
+                        @Html.ValidationMessage("DisplayError", new { @class = "text-danger text-start" })
+                    </div>
+                    <div class="form-group right-inner-addon mt-3">
+                        <i class="fa-solid fa-user"></i>
+                        <input asp-for="UserName" class="form-control" placeholder="Tên đăng nhập" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group right-inner-addon mt-3">
+                        <i class="fa-solid fa-lock"></i>
+                        <input asp-for="Pwd" type="password" class="form-control" placeholder="Mật khẩu" />
+                        <span asp-validation-for="Pwd" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group mt-3">
+                            <label asp-for="Branches" class="control-label float-start"></label>
+                            <select class="form-select" aria-label="Default select example">
+                                @if (Model.Branches != null)
+                                {
+                                    @foreach (var item in Model.Branches)
+                                    {
+                                        <option value=@item.ID>@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>*@
+                    <div class="form-group mt-3 text-center">
+                        <button type="submit" class="btn btn-login">Đăng nhập</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    .login {
+        border-radius: 50%;
+    }
+
+        .login .title {
+            font-family: 'Mulish', sans-serif;
+        }
+
+    .round-logo {
+        width: 100px;
+        height: 100px;
+        margin: 10px auto;
+    }
+
+        .round-logo img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+    .login {
+        height: 100vh;
+    }
+
+        .login .left {
+            background-color: #3F72AF;
+            padding: 0px;
+            height: 100vh;
+            background-image: url('./img/Logo/crm.jpg');
+            /*background-image: url('./img/Logo/customer-relationship-management.png');*/
+            /*background-image: url('./img/Logo/customer_loyalty_set_2.jpg');*/
+            background-size: 500px 400px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .login .right {
+            background-color: #F9F7F7;
+            padding: 0px;
+            height: 100vh;
+            display: flex;
+        }
+
+            .login .right .card {
+                height: 400px;
+                width: 35vw;
+                margin: auto;
+            }
+
+    .card-body .form-group {
+        width: 75%;
+        margin: auto;
+    }
+
+        .card-body .form-group input {
+            color: #999B84;
+            border-color: #d7d3d3 !important;
+            border: solid 2px;
+        }
+
+            .card-body .form-group input::placeholder {
+                color: #999B84;
+            }
+
+    .right-inner-addon {
+        position: relative;
+    }
+
+        .right-inner-addon input {
+            padding-right: 30px;
+        }
+
+        .right-inner-addon i {
+            position: absolute;
+            right: 0px;
+            padding: 10px 12px;
+            pointer-events: none;
+            color: #999B84;
+        }
+
+    .btn-login {
+        background-color: #DBE2EF;
+        color: #3F72AF;
+    }
+
+    /*`sm` applies to x-small devices (portrait phones, less than 576px)*/
+    @@media (max-width: 575.98px) {
+    }
+
+    /*`md` applies to small devices (landscape phones, less than 768px)*/
+    @@media (max-width: 767.98px) {
+        .card-body .form-group {
+            width: 100%;
+        }
+    }
+
+    /*`lg` applies to medium devices (tablets, less than 992px)*/
+    @@media (max-width: 991.98px) {
+        .login .left {
+            display: none;
+        }
+
+        .login .right .card {
+            width: 80%;
+        }
+
+        .card-body .form-group {
+            width: 80%;
+        }
+    }
+
+    /*`xl` applies to large devices (desktops, less than 1200px)*/
+    @@media (max-width: 1199.98px) {
+    }
+
+    /*`xxl` applies to x-large devices (large desktops, less than 1400px)*/
+    @@media (max-width: 1399.98px) {
+    }
+</style>

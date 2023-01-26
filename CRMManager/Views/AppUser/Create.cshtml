@@ -1,0 +1,174 @@
+﻿@model CRMManager.Models.AppUserViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<style>
+    .dataTables_length {
+        display: none !important;
+    }
+
+    .dataTables_filter {
+        display: none !important;
+    }
+</style>
+<div class="row">
+    <div class="col-12">
+        @*<p style="font-size: 18px;">Tên ứng dụng: <b>@Model.SelectedAppName</b></p>
+            <p style="font-size: 18px;">Tên vai trò: <b>@Model.SelectedRoleName</b></p>*@
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (!String.IsNullOrEmpty(Model.ErrorMassage))
+            {
+                <div class="form-group @(Model.IsChanged == true ? "success-box" : "error-box")">
+                    <div class="error-text">
+                        <label class="control-label"><i class="far @(Model.IsChanged == true ? "fa-check-circle" : "fa-times-circle")"></i> @Model.ErrorMassage</label>
+                    </div>
+                </div>
+            }
+            @Html.HiddenFor(m => m.ID)
+            @Html.HiddenFor(m => m.AppRoleID)
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.CreatedOn)
+            @Html.HiddenFor(m => m.ModifiedBy)
+            @Html.HiddenFor(m => m.ModifiedOn)
+            @Html.HiddenFor(m => m.DataState)
+            @Html.HiddenFor(m => m.AppID)
+            @Html.HiddenFor(m => m.PageTitle)
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+                                        <label asp-for="UserID" class="control-label"></label> <span class="text-danger">(*)</span>
+                                    </div>
+                                    <div class="col-md-12 col-12">
+                                        <input asp-for="UserID" class="form-control" />
+                                        <span asp-validation-for="UserID" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+                                        <label asp-for="Name" class="control-label"></label>
+                                    </div>
+                                    <div class="col-md-12 col-12">
+                                        <input asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+                                        <label asp-for="Pwd" class="control-label"></label>
+                                    </div>
+                                    <div class="col-md-12 col-12">
+                                        <input asp-for="Pwd" type="password" class="form-control" value="@Model.Pwd" />
+                                        <span asp-validation-for="Pwd" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+                                        <label asp-for="Description" class="control-label"></label>
+                                    </div>
+                                    <div class="col-md-12 col-12">
+                                        <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="pt-2 pb-2">
+                        @*<label asp-for="AppRoles" class="control-label"></label>*@
+                    </h4>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-7">
+
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-5  float-end">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-8">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label asp-for="AppRoles" class="control-label"></label>
+                                            <select id="drpEmpList" class="form-select" asp-for="SelectedRoleID" asp-items="@Model.AppRoles">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-4">
+                                    <button type="submit" asp-controller="AppUser" asp-action="AddRoleToCreate" asp-route-appID="@Model.AppID" asp-route-SelectedRoleID="@Model.SelectedRoleID" class="btn btn-success" style="margin-top: 28px; width:100%" id="filter-btn"><i class="fas fa-plus"></i> Thêm quyền</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="table-data" class="table table-hover table-bordered">
+                        <thead class="bg-primary" style="color:white">
+                            <tr>
+                                <th width="30%">Role</th>
+                                <th width="50%">Description</th>
+                                <th width="20%">Chọn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Roles.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @Model.Roles[i].Name
+                                            <input type="hidden" asp-for="@Model.Roles[i].ID" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].Number" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].Name" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].Description" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].CreatedBy" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].CreatedOn" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].ModifiedBy" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].ModifiedOn" />
+                                            <input type="hidden" asp-for="@Model.Roles[i].AppID" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            @Model.Roles[i].Description
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="submit" asp-controller="AppUser" asp-action="DeleteRoleFromCreate" asp-route-appID="@Model.AppID" asp-route-roleID="@Model.Roles[i].ID" class="btn btn-danger"><i class="far fa-trash-alt"></i> Xóa</button>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                    <div class="form-group d-flex justify-content-end crud-button ">
+                        <button class="btn btn-success" type="submit" asp-controller="AppUser" asp-action="SaveData"><i class="far fa-save"></i> Lưu</button>
+                        <a class="btn btn-primary" asp-controller="AppUser" asp-action="Index"><i class="fas fa-arrow-left"></i> Trở về</a>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</div>

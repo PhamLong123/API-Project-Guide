@@ -1,0 +1,95 @@
+﻿@model CRMManager.Models.MemberClassByBillValueViewModel
+<div class="container">
+    <form method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="control-label">Chọn nhóm khách hàng</label>
+                    <select id="drpEmpList" class="form-control" asp-for="MemberClassID" asp-items="@(new SelectList(ViewBag.MemberClass, "ID", "ClassName"))">
+                        <option value="">--Select--</option>
+                    </select>
+                    <input type="hidden" asp-for="MemberClassID" />
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="control-label">Tên</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Từ ngày</label>
+                    <input asp-for="FromDate" class="form-control" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Gia nhập từ</label>
+                    <input asp-for="JoinFrom" class="form-control" />
+                    <span asp-validation-for="JoinFrom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Giao dịch từ</label>
+                    <input asp-for="FromValue" class="form-control" />
+                    <span asp-validation-for="FromValue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tỷ lệ tích điểm lên hạng([đ]/điểm)</label>
+                    <input asp-for="ReviewRate" class="form-control" />
+                    <span asp-validation-for="ReviewRate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-1">
+                            <input type ="checkbox" class="form-check-input" asp-for="Status"/>
+                        </div>
+                        <div class="col-11">
+                            <label class="control-label">Hoạt động</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Đến ngày</label>
+                    <input asp-for="ToDate" class="form-control" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Gia nhập đến</label>
+                    <input asp-for="JoinTo" class="form-control" />
+                    <span asp-validation-for="JoinTo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Giao dịch đến</label>
+                    <input asp-for="ToValue" class="form-control" />
+                    <span asp-validation-for="ToValue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tỷ lệ tích điểm đổi thưởng([đ]/điểm)</label>
+                    <input asp-for="RewardRate" class="form-control" />
+                    <span asp-validation-for="RewardRate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="MemberClass" asp-action="AddNewMCByBV" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="MemberClass" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

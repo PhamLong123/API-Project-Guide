@@ -1,0 +1,147 @@
+﻿@model CRMManager.Models.AppRolesViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form method="post">
+
+    <div class="filter-box">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4 text-vertical-center">
+                            <label class="control-label fw-bold">Chọn Ứng Dụng</label>
+                        </div>
+                        <div class="col-8">
+                            <select name="SelectedAppID"
+                                    asp-for="SelectedAppID"
+                                    asp-items="@ViewBag.AppList"
+                                    class="custom-dropdown" `
+                                    style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-lg-3 col-md-4 col-6">
+                <div class="crud-button mt-0">-->
+            @*<button class="btn btn-primary" type="button" asp-action="Create" asp-route-newsCat="@Model.SelectedNewsCat">Soạn tin</button>*@
+            <!--<a class="btn btn-outline-primary" id="btn-filter">Lọc</a>
+                </div>
+            </div>-->
+
+        </div>
+
+    </div>
+
+    <div class="crud-button text-end">
+        @*<button class="btn btn-primary" type="button" asp-action="Create" asp-controller="AppRole">Thêm vai trò</button>*@
+        <a class="btn btn-primary" id="btn-create" asp-action="Create" asp-controller="AppRole">Thêm vai trò</a>
+    </div>
+</form>
+
+
+<div class="content-box">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="pt-2 pb-2">
+                <label class="control-label fw-bold">Danh sách vai trò</label>
+            </h4>
+            @if (Model.AppRoles != null && Model.AppRoles.Count > 0)
+            {
+                <table class="w-100 table table-striped">
+                    <thead class="table">
+                        <tr>
+                            <th scope="col">Mã</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Mô tả</th>
+                            <th width="20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach (var item in Model.AppRoles)
+                        {
+                            <tr id="controlRow"
+                                @*onclick="location.href = '@Url.Action("Details", "AppRole", new { ID=item.ID})'"*@>
+                                <th scope="row">@item.Number</th>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    <div class="crud-button align-center mb-3">
+                                        <button class="btn btn-success" type="button" onclick="location.href = '@Url.Action("Edit", "AppRole", new { roleID=item.ID,selectedAppID=item.AppID})'">Edit</button>
+
+                                        <button class="btn btn-danger">Xóa</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div id="paging">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+
+                            @{
+                                if (Model.PageInfo != null)
+                                {
+                                    string pageActive = "";
+                                    @for (int i = 1; i <= Model.PageInfo.TotalPages; i++)
+                                    {
+
+                                        if (i == Model.PageIndex)
+                                        {
+                                            pageActive = "page-active";
+                                        }
+                                        else
+                                        {
+                                            pageActive = "";
+                                        }
+                                        <li class="page-item">
+                                            <a class="page-link change-paging @pageActive" href="javascript:void(0)">@i</a>
+                                            @*
+                                                <input class="page-link" type="submit" asp-for="PageInfo.PageIndex" asp-action="Filter" value="@i" />*@
+
+                                        </li>
+                                    }
+                                }
+
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            }
+            else
+            {
+                <p>Không có dữ liệu</p>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/AppRole.js"></script>
+}
+
+<script>
+    $('#btn-filter').click(function () {
+        var baseUrl = '@Url.Action("Index", "AppRole")';
+        location.href = baseUrl + '/?selectedAppID=' + $('#SelectedAppID').val();
+    })
+
+    $('#btn-create').click(function () {
+        var baseUrl = '@Url.Action("Create", "AppRole")';
+        location.href = baseUrl + '/?selectedAppID=' + $('#SelectedAppID').val();
+    })
+</script>
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+</style>

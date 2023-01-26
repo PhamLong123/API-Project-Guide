@@ -1,0 +1,131 @@
+﻿.float-right {
+    float: right;
+}
+
+.menu-fixed {
+    position: fixed !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    top: 0px !important;
+}
+
+.mb-10 {
+    margin-bottom: 100px;
+}
+
+.dataTables_scrollBody {
+    overflow: overlay !important;
+}
+
+#table-data_wrapper .row div {
+    margin-top: 0px !important;
+}
+
+#table-data-modal_wrapper .row div {
+    margin-top: 0px !important;
+}
+
+#table-datasaledetail-modal_wrapper .row div {
+    margin-top: 0px !important;
+}
+
+div .dataTables_scrollHeadInner {
+    width: 100% !important;
+}
+
+.dataTables_scrollHead{
+    display:none!important;
+}
+
+.bg-primary {
+    height: 50px!important;
+}
+
+.dataTables_sizing{
+    height:50px!important;
+    padding-top:15px;
+}
+
+#col-sale-1 {
+    width: 30% !important
+}
+
+#col-sale-2 {
+    width: 10% !important
+}
+
+#col-sale-3 {
+    width: 10% !important
+}
+
+#col-sale-4 {
+    width: 20% !important
+}
+
+#col-sale-5 {
+    width: 30% !important
+}
+
+#col-saledetail-1 {
+    width: 30% !important
+}
+
+#col-saledetail-2 {
+    width: 25% !important
+}
+
+#col-saledetail-3 {
+    width: 25% !important
+}
+
+#col-saledetail-4 {
+    width: 20% !important
+}
+
+.btn-excel {
+    background-color: #206e42!important;
+    color: white!important;
+}
+
+/*#table-data_filter {
+    display:none!important
+}
+
+#table-data_length {
+    display: none !important
+}*/
+
+.header-size {
+    font-size:16px;
+}
+
+.shadow-effect {
+    box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)!important
+}
+
+.text-menu {
+    color:white!important;
+}
+
+.error-box {
+    background-color: lightpink;
+    border-radius: 15px;
+}
+
+.success-box {
+    background-color: #69c990;
+    border-radius: 15px;
+}
+
+.error-text {
+    color: white;
+    left: 22px;
+    position: relative;
+}
+
+@media (min-width: 1200px) {
+    .modal-xl {
+        max-width: 90% !important;
+        max-height: 70% !important;
+    }
+}

@@ -1,0 +1,55 @@
+﻿<div class="justify-content-center">
+    <h2 class="text-center">GỬI KHUYẾN MÃI</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label class="control-label"></label>
+            <input class="form-control" />
+            <span class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Nhóm quà</label>
+                                    <select id="drpEmpList" class="form-select">
+                                        <option value="">---</option>
+                                    </select>
+                                    <input type="hidden" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Hình thức gửi</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Người nhận</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Nội dung gửi</label>
+                            <textarea class="form-control" rows="6"></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" asp-area="" asp-controller="PromotionCode" asp-action="SendCode" class="btn btn-success float-right m-1"><i class="fas fa-paper-plane"></i> Gửi mã</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

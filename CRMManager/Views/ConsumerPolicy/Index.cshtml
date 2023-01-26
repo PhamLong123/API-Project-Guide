@@ -1,0 +1,84 @@
+﻿@model CRMManager.Models.ConsumerPoliciesViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">@Model.PageTitle</h2>
+</div>
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="form-inline">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row mb-2">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <input class="form-control mr-sm-2" type="search" placeholder="Từ khóa tìm kiếm" aria-label="Search">
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="btn btn-primary my-2 my-sm-0 w-100" type="submit"><i class="fas fa-search"></i> Tìm kiếm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="button" asp-area="" asp-controller="ConsumerPolicy" asp-action="ImportToExcel" asp-route-id=@Model class="btn btn-excel m-1 float-right"><i class="far fa-file-excel"></i> Nhập dữ liệu từ Excel</button>
+                            <a asp-area="" asp-controller="ConsumerPolicy" asp-action="AddNew" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+            <thead>
+                <tr class="bg-primary" style="color: White;">
+                    <td style="width:20%;"><b>Hạng thẻ</b></td>
+                    <td style="width:30%;"><b>Tỷ lệ tích điểm lên hạng</b></td>
+                    <td style="width:30%;"><b>Tỷ lệ tích điểm đổi quà</b></td>
+                    <td style="width:20%;"><b>Tùy chọn</b></td>
+                </tr>
+            </thead>
+            @foreach (var item in Model.ConsumerPolicies)
+            {
+                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @if (item.MemberClassID == 1)
+                            {
+                                <p>SILVER</p>
+                            }
+                            else if (item.MemberClassID == 2)
+                            {
+                                <p>GOLD</p>
+                            }
+                            else if (item.MemberClassID == 3)
+                            {
+                                <p>DIAMOND</p>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.RankRate
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.RewardRate
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <a asp-area="" asp-controller="ConsumerPolicy" asp-action="Edit" asp-route-id=@item.ID class="btn btn-primary m-1 btnenable"><i class="far fa-edit"></i> Sửa</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</form>

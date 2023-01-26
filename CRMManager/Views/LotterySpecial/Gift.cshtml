@@ -1,0 +1,97 @@
+﻿@model CRMManager.Models.LotterySpecialGiftsViewModel
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Cửa hàng</label>
+                    <select id="drpEmpList" class="form-select" asp-for="ProgramID" asp-items="@(new SelectList(Model.LotterySpecialPrograms, "ID", "Name"))">
+                        <option value="">--Select--</option>
+                    </select>
+                    <input type="hidden" asp-for="ProgramID" />
+                </div>
+                <div class="row mt-4">
+                    <div class="col-1">
+                        <input type="checkbox" class="form-check" />
+                    </div>
+                    <div class="col-11">
+                        <label class="control-label">Hoạt động</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <a asp-area="" asp-controller="LotterySpecial" asp-action="AddNewGift" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+            </div>
+        </div>
+        <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+            <thead>
+                <tr style="color: White; background-color: #4267B2;">
+                    <td style="width:10%;"><b>STT</b></td>
+                    <td style="width:10%;"><b>Mã</b></td>
+                    <td style="width:15%;"><b>Tên quà</b></td>
+                    <td style="width:10%;"><b>Điểm lên hạng</b></td>
+                    <td style="width:10%;"><b>Điểm đổi thưởng</b></td>
+                    <td style="width:10%;"><b>Số lượng</b></td>
+                    <td style="width:10%;"><b>Số lượt quay</b></td>
+                    <td style="width:10%;"><b>Số lượt nhận</b></td>
+                    <td style="width:15%;"><b>Tùy chọn</b></td>
+                </tr>
+            </thead>
+            @foreach (var item in Model.LotterySpecialGifts)
+            {
+                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.Order
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.Number
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.Name
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.RankPoint
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.RewardPoint
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.Quantity
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.DialQty
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                            @item.TakeQty
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-6">
+                                <a asp-area="" asp-controller="LotterySpecial" asp-action="EditGift" asp-route-id=@item.ID class="btn btn-success m-1"><i class="far fa-edit"></i> Sửa</a>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" asp-area="" asp-controller="LotterySpecial" asp-action="DeleteGift" asp-route-id= class="btn btn-danger m-1"><i class="far fa-trash-alt"></i> Xóa</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</form>

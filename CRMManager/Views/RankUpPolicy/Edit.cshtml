@@ -1,0 +1,77 @@
+﻿@model CRMManager.Models.RankUpPolicyViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">SỬA THÔNG TIN CHÍNH SÁCH LÊN HẠNG</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group mt-2">
+                                            <label class="control-label">Mã</label>
+                                            <input asp-for="Number" class="form-control" />
+                                            <span asp-validation-for="Number" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Từ hạng</label>
+                                    <select id="drpEmpList" class="form-select">
+                                        <option value="">--Select--</option>
+                                    </select>
+                                    <input type="hidden" />
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Điểm xếp hạng</label>
+                                    <input asp-for="RankPoint" class="form-control" />
+                                    <span asp-validation-for="RankPoint" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Đến hạng</label>
+                                    <select id="drpEmpList" class="form-select">
+                                        <option value="">--Select--</option>
+                                    </select>
+                                    <input type="hidden" />
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label class="control-label">Điểm đổi quà</label>
+                                    <input asp-for="RedempPoint" class="form-control" />
+                                    <span asp-validation-for="RedempPoint" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="RankUpPolicy" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="RankUpPolicy" asp-action="Edit" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

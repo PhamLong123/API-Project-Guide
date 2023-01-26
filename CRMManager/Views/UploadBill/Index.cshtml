@@ -1,0 +1,88 @@
+﻿@model CRMManager.Models.UploadBillViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form method="post">
+    <div class="row">
+        <div class="col-md-6 border-end ">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-3">
+                    <label asp-for="Mobile" class="control-label"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Mobile" class="form-control" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+                <div class="col-3">
+                    <div class="form-group mt-0">
+                        <button class="btn btn-success" type="submit" asp-action="SearchBillByMobile">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" readonly />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IDNo" class="control-label"></label>
+                <input asp-for="IDNo" class="form-control" readonly />
+                <span asp-validation-for="IDNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageAvatarPath" class="control-label"></label>
+                @*<input type="file" asp-for="ImagePath" class="form-control" accept="image/png, image/gif, image/jpeg" />*@
+                <span asp-validation-for="ImageAvatarPath" class="text-danger"></span>
+                <br />
+                @{
+                    var imageUrl = Model.ImageAvatarPath;
+                    if (String.IsNullOrEmpty(imageUrl))
+                    {
+                        imageUrl = "Default.png";
+                    }
+                    <img src="~/img/Avatar/@imageUrl" width="150" height="150" />
+                }
+
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ImageUploadPath" class="control-label"></label>
+                <input id="imgInput" type="file" asp-for="ImageUploadPath" class="form-control" accept="image/png, image/gif, image/jpeg" />
+                <span asp-validation-for="ImageUploadPath" class="text-danger"></span>
+                <img id="imgPreview" src="#" width="600" height="400" />
+            </div>
+            <div class="form-group crud-button align-end">
+                <input type="submit" value="Lưu file" class="btn btn-success" asp-action="SaveUploadBill" />
+                <input type="button" value="Hủy" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@*<script>
+        imgInput.onchange = evt => {
+            const [file] = imgInput.files
+            if (file) {
+                imgPreview.src = URL.createObjectURL(file)
+            }
+        }
+
+    </script>*@
+<script src="~/js/general.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

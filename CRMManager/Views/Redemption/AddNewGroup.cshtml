@@ -1,0 +1,73 @@
+﻿@model CRMManager.Models.RedemptionGroupsViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">Thêm @Model.PageTitle</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="RedemptionGroup.ID" class="control-label"></label>
+            <input asp-for="RedemptionGroup.ID" class="form-control" />
+            <span asp-validation-for="RedemptionGroup.ID" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Mã</label>
+                    <input asp-for="RedemptionGroup.Number" class="form-control" />
+                    <span asp-validation-for="RedemptionGroup.Number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tên</label>
+                    <input asp-for="RedemptionGroup.Name" class="form-control" />
+                    <span asp-validation-for="RedemptionGroup.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mô tả</label>
+                    <textarea asp-for="RedemptionGroup.Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="RedemptionGroup.Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="ThumbImage">Hình ảnh </label>
+                        </div>
+                        <div class="col-12">
+                            @if (Model.RedemptionGroup.Icon == null)
+                            {
+                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Dat'sImages/Redemption/Group/@Model.RedemptionGroup.Icon" class="img-thumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-8">
+                            <input type="file" class="form-control" name="imgfile" />
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="UploadimageGroup" class="btn btn-primary">Upload Ảnh</button>
+                        </div>
+                        <span>@ViewData["Message"]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="AddNewGroup" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="Redemption" asp-action="Group" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,190 @@
+﻿@model CRMManager.Models.AppRoleViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group d-flex justify-content-end crud-button ">
+        @*<input type="submit" value="Lưu" class="btn btn-success" />
+            <input type="button" value="Hủy" class="btn btn-danger" />*@
+
+        <button class="btn btn-success" type="submit" asp-action="Save" asp-controller="AppRole">Lưu</button>
+        <button class="btn btn-danger" asp-action="Cancel" asp-controller="AppRole">Hủy</button>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p style="font-size: 18px;">Tên ứng dụng: <b>@Model.SelectedAppName</b></p>
+            <div asp-validation-summary="ModelOnly" class="text-danger">CRMWebManager</div>
+
+        </div>
+    </div>
+
+    <div class="content-box border-img-none" style="min-height:800px;">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        @Html.ValidationMessage("DisplayError", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.ID)
+        @Html.HiddenFor(m => m.DataState)
+        @Html.HiddenFor(m => m.CreatedOn)
+        @Html.HiddenFor(m => m.CreatedBy)
+        @Html.HiddenFor(m => m.ModifiedOn)
+        @Html.HiddenFor(m => m.ModifiedBy)
+        @Html.HiddenFor(m => m.AppID)
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3 col-4">
+                            <label asp-for="Number" class="control-label"></label><span class="text-danger"> (*)</span>
+                        </div>
+                        <div class="col-md-9 col-8">
+                            <input asp-for="Number" class="form-control w-lg-50" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3 col-4">
+                            <label asp-for="Name" class="control-label"></label><span class="text-danger"> (*)</span>
+                        </div>
+                        <div class="col-md-9 col-8">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3 col-4 text-center">
+                            <label asp-for="Description" class="control-label"></label>
+                        </div>
+                        <div class="col-md-9 col-8">
+                            <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h4 class="pt-2 pb-2">
+            <label class="control-label fw-bold">Danh sách chức năng</label>
+        </h4>
+        <table @*id="table-data"*@ class="table align-middle mb-0 bg-white w-100">
+            <thead class="bg-light">
+                <tr>
+                    <th scope="col" width="60%">App Object</th>
+                    <th scope="col" width="10%">Create</th>
+                    <th scope="col" width="10%">View</th>
+                    <th scope="col" width="10%">Edit</th>
+                    <th scope="col" width="10%">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@if (Model.ObjectRights != null)
+                {
+                    @foreach (var item in Model.ObjectRights)
+                    {
+                        <tr id="controlRow">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @item.ObjectName
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="@item.CanCreate" type="checkbox" name="CanCreate" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="@item.CanView" type="checkbox" name="CanView" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="@item.CanEdit" type="checkbox" name="CanEdit" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for="@item.CanDelete" type="checkbox" name="CanDelete" />
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }*@
+
+
+
+                @if (Model.ObjectRights != null)
+                {
+                    @for (int i = 0; i < Model.ObjectRights.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    @Model.ObjectRights[i].ObjectName
+                                    <input type="hidden" asp-for="@Model.ObjectRights[i].ID" />
+                                    <input type="hidden" asp-for="@Model.ObjectRights[i].RoleID" />
+                                    @*<input type="hidden" asp-for="@Model.ObjectRights[i].ACL" />*@
+                                    <input type="hidden" asp-for="@Model.ObjectRights[i].ObjectID" />
+                                    <input type="hidden" asp-for="@Model.ObjectRights[i].ObjectName" />
+                                    <input type="hidden" asp-for="@Model.ObjectRights[i].ObjectCode" />
+                                </div>
+                            </td>
+                            <td>
+                                <input class="form-check" asp-for="@Model.ObjectRights[i].CanCreate" type="checkbox" />
+                                <!--<div class="form-check">
+                                <input class="form-check-input" asp-for="@Model.ObjectRights[i].CanCreate" type="checkbox" />-->
+                                @*@Html.CheckBoxFor(m => m.ObjectRights[i].CanCreate, new { @class = "form-check-input" })*@
+                                <!--</div>-->
+                            </td>
+                            <td>
+                                <input class="form-check" asp-for="@Model.ObjectRights[i].CanRead" type="checkbox" />
+                                <!--<div class="form-check">
+                                <input class="form-check-input" asp-for="@Model.ObjectRights[i].CanRead" type="checkbox" />-->
+                                @*@Html.CheckBoxFor(m => m.ObjectRights[i].CanView, new { @class = "form-check-input" })*@
+
+                                <!--</div>-->
+                            </td>
+                            <td>
+                                <input class="form-check" asp-for="@Model.ObjectRights[i].CanUpdate" type="checkbox" />
+                                <!--<div class="form-check">
+                                <input class="form-check-input" asp-for="@Model.ObjectRights[i].CanUpdate" type="checkbox" />-->
+                                @*@Html.CheckBoxFor(m => m.ObjectRights[i].CanEdit, new { @class = "form-check-input" })*@
+
+                                <!--</div>-->
+                            </td>
+                            <td>
+                                <input class="form-check" asp-for="@Model.ObjectRights[i].CanDelete" type="checkbox" />
+                                <!--<div class="form-check">
+                                <input class="form-check-input" asp-for="@Model.ObjectRights[i].CanDelete" type="checkbox" />-->
+                                @*@Html.CheckBoxFor(m => m.ObjectRights[i].CanDelete, new { @class = "form-check-input" })*@
+
+                                <!--</div>-->
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,162 @@
+﻿@model CRMManager.Models.RedemptionPromotionViewModel
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Thông tin</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config" type="button" role="tab" aria-controls="config" aria-selected="false">Chọn quà</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Loại quà</label>
+                            <select id="drpEmpList" class="form-select" asp-for="ItemTypeID" asp-items="@(new SelectList(Model.ItemTypes, "ID", "Name"))">
+                                <option value="">--Select--</option>
+                            </select>
+                            <input type="hidden" asp-for="ItemTypeID" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mã</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tổng số lượt cho thành viên</label>
+                            <input asp-for="MaxMemberQty" class="form-control" />
+                            <span asp-validation-for="MaxMemberQty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Gia nhập từ ngày</label>
+                            <input asp-for="JoinFromDate" class="form-control" />
+                            <span asp-validation-for="JoinFromDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Từ ngày</label>
+                            <input asp-for="FromDate" class="form-control" rows="4" />
+                            <span asp-validation-for="FromDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Điểm sử dụng đổi quà</label>
+                            <input asp-for="RedeemPoint" class="form-control" rows="4" />
+                            <span asp-validation-for="RedeemPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Chọn ngành hàng</label>
+                            <select id="drpEmpList" class="form-select" asp-for="PromotionTypeID" asp-items="@(new SelectList(Model.PromotionTypes, "ID", "Name"))">
+                                <option value="">--Select--</option>
+                            </select>
+                            <input type="hidden" asp-for="PromotionTypeID" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng</label>
+                            <input asp-for="Qty" class="form-control" />
+                            <span asp-validation-for="Qty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tổng số lượng</label>
+                            <input asp-for="TotalQty" class="form-control" />
+                            <span asp-validation-for="TotalQty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Gia nhập đến ngày</label>
+                            <input asp-for="JoinToDate" class="form-control" />
+                            <span asp-validation-for="JoinToDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến ngày</label>
+                            <input asp-for="ToDate" class="form-control" />
+                            <span asp-validation-for="ToDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <div class="row mt-4">
+                                <div class="col-1">
+                                    <input type="checkbox" class="form-check" asp-for="IsActive" />
+                                </div>
+                                <div class="col-11">
+                                    <label class="control-label">Kích hoạt</label>
+                                </div>
+                            </div>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <table  class="table table-bordered table-hover table-apptech mt-4" border="1">
+                            <thead>
+                                <tr style="color: White; background-color: #4267B2;">
+                                    <td style="width:15%;"><b>Mã</b></td>
+                                    <td style="width:30%;"><b>Tên quà</b></td>
+                                    <td style="width:30%;"><b>Số lượng</b></td>
+                                    <td style="width:25%;"><b>Chọn</b></td>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.RedeemItemMalls)
+                            {
+                                <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                            @item.ItemCode
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                            @item.ItemName
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                            <input type="text" class="form-control" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                            <input type="checkbox" class="form-check" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="AddNewRedemptionPromotion" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="Redemption" asp-action="RedemptionPromotion" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,25 @@
++ Paypal: Dự án Demo, Trang /Paypal
+	Đăng ký tài khoản tại: https://www.paypal.com/
+        Tích hợp môi trường test khi demo: https://www.sandbox.paypal.com
+	Tài khoản test: https://developer.paypal.com/dashboard/accounts
+        Cấu hình chuyển môi trường test về môi trường thật khi bàn giao hoặc triển khai
+        Hướng dẫn tích hợp và kiểm thử: https://developer.paypal.com/
+	Tài liệu về tham số tích hợp: https://developer.paypal.com/docs/api/orders/v2/#definition-purchase_unit_request
+	Trang Demo: 
++ Phân quyền: Tham khảo chức năng login của các bài đã thực hành
+	Lưu user vào session kèm với role (Xem lại các bài thực hành với login)
+	Kiểm tra role khi user truy cập để hiển thị view dữ liệu hoặc view không có quyền (Kiểm tra if-else để trả về 2 view khác nhau)
+		1. View dữ liệu chức năng (Danh sách)
+		2. View thông báo không có quyền
++ Gửi mail: Dự án Demo, Trang /SendMail
+	Tạo free mail sử dụng gửi mail (Google, Hotmail)
+	Tạo view gửi mail
+	Tạo model, liên kết các thành phần dữ liệu với hàm SendMail
++ Resize hình, upload hình: Dự Án DemoUploadImage 
+	Có các kịch bản sử dụng như sau
+		+ Upload trực tiếp lên web app (DemoUploadImage)
+		+ Upload lên API .NET (DemoUploadImage -> ResourceServiceNETAPI)
+		+ Upload lên API .NET Core (DemoUploadImage -> ResourceServiceAPI)
++ Report: Dự án Demo, Trang /Home
+	Chèn mẫu HTML report
+	Get dữ liệu từ code javascript đến api hoặc action trong controller để đọc dữ liệu và ghi lên view report

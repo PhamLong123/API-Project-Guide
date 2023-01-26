@@ -1,0 +1,201 @@
+﻿<!--model CRMManager.Models.RedeemItemMallsViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">SỬA THÔNG TIN Model.PageTitle</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="RedeemItemMall.ID" class="control-label"></label>
+            <input asp-for="RedeemItemMall.ID" class="form-control" />
+            <span asp-validation-for="RedeemItemMall.ID" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-6">-->
+@*<div class="form-group">
+        <label class="control-label">Cửa hàng</label>
+        <select id="drpEmpList" class="form-select" asp-for="OutletID" asp-items="@(new SelectList(Model.Outlets, "ID", "OutletName"))">
+            <option value="">--Select--</option>
+        </select>
+        <input type="hidden" asp-for="OutletID" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Nhóm quà</label>
+        <select id="drpEmpList" class="form-select" asp-for="GroupID" asp-items="@(new SelectList(Model.RedemptionGroups, "ID", "Name"))">
+            <option value="">--Select--</option>
+        </select>
+        <input type="hidden" asp-for="GroupID" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Nhóm quà đại diện</label>
+        <select id="drpEmpList" class="form-select" asp-for="GroupRefID" asp-items="@(new SelectList(Model.RedemptionGroupRefs, "ID", "Name"))">
+            <option value="">--Select--</option>
+        </select>
+        <input type="hidden" asp-for="GroupRefID" />
+    </div>*@
+<!--<div class="form-group">
+                    <label class="control-label">Mã quà</label>
+                    <input asp-for="RedeemItemMall.ItemCode" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.ItemCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tên quà</label>
+                    <input asp-for="RedeemItemMall.ItemName" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.ItemName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mã đổi quà</label>
+                    <input asp-for="RedeemItemMall.RedeemCode" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.RedeemCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng</label>
+                    <input asp-for="RedeemItemMall.TotalQuantity" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.TotalQuantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng điều chỉnh</label>
+                    <input asp-for="RedeemItemMall.BalanceQty" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.BalanceQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng đổi</label>
+                    <input asp-for="RedeemItemMall.TotalRedeemQty" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.TotalRedeemQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng đã nhận</label>
+                    <input asp-for="RedeemItemMall.TotalReceivedQty" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.TotalReceivedQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng hết hạn</label>
+                    <input asp-for="RedeemItemMall.TotalExpired" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.TotalExpired" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng còn lại</label>
+                    <input asp-for="RedeemItemMall.AvailableQty" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.AvailableQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Số lượng tối đa mỗi thành viên</label>
+                    <input asp-for="RedeemItemMall.AvailableQty" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.AvailableQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Điểm</label>
+                    <input asp-for="RedeemItemMall.Points" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.Points" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Điểm hạng thẻ 1</label>
+                    <input asp-for="RedeemItemMall.PointsClass1" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.PointsClass1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Điểm hạng thẻ 2</label>
+                    <input asp-for="RedeemItemMall.PointsClass2" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.PointsClass2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Điểm hạng thẻ 3</label>
+                    <input asp-for="RedeemItemMall.PointsClass3" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.PointsClass3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Giá</label>
+                    <input asp-for="RedeemItemMall.Price" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tiêu đề</label>
+                    <input asp-for="RedeemItemMall.Subject" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Vị trí ưu tiên</label>
+                    <input asp-for="RedeemItemMall.Priority" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.Priority" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Từ ngày</label>
+                    <input asp-for="RedeemItemMall.FromDate" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.FromDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Đến ngày</label>
+                    <input asp-for="RedeemItemMall.ToDate" class="form-control" />
+                    <span asp-validation-for="RedeemItemMall.ToDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="ThumbImage">Biểu tượng </label>
+                        </div>
+                        <div class="col-12">
+                            @if (Model.RedeemItemMall.Icon == null)
+                            {
+                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Dat'sImages/Redemption/RedeemItemMall/@Model.RedeemItemMall.Icon" class="img-thumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-8">
+                            <input type="file" class="form-control" name="imgfile" />
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="UploadiconRedeemItemMall" class="btn btn-primary">Upload Ảnh</button>
+                        </div>
+                        <span>ViewData["Message"]</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="ThumbImage">Hình ảnh </label>
+                        </div>
+                        <div class="col-12">
+                            if (Model.RedeemItemMall.Image == null)
+                            {
+                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Dat'sImages/Redemption/RedeemItemMall/RedeemItemMall.Image" class="img-thumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-8">
+                            <input type="file" class="form-control" name="imgfile" />
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="UploadimageRedeemItemMall" class="btn btn-primary">Upload Ảnh</button>
+                        </div>
+                        <span>ViewData["Message"]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="EditRedeemItemMall" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="Redemption" asp-action="RedeemItemMall" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>-->

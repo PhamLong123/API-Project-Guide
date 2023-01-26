@@ -1,0 +1,54 @@
+﻿@*@model CRMManager.Models.MemberClassesViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">THÊM NHÓM THÀNH VIÊN</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="MemberClass.ID" class="control-label"></label>
+            <input asp-for="MemberClass.ID" class="form-control" />
+            <span asp-validation-for="MemberClass.ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Mã hạng thẻ</label>
+                            <input asp-for="MemberClass.ClassNo" class="form-control" />
+                            <span asp-validation-for="MemberClass.ClassNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Tên hạng thẻ</label>
+                            <input asp-for="MemberClass.ClassName" class="form-control" />
+                            <span asp-validation-for="MemberClass.ClassName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="MemberClass.Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="MemberClass.Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="MemberClassManager" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="MemberClassManager" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>*@

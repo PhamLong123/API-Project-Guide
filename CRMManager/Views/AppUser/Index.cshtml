@@ -1,0 +1,176 @@
+﻿@model CRMManager.Models.AppUsersViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<style>
+    .dataTables_length{
+        display:none!important;
+    }
+    .dataTables_filter{
+        display:none!important;
+    }
+</style>
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form method="post">
+    <div class="row mb-3">
+        <div class="col-12 col-sm-12 col-md-3">
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 mb-3">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-10">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label asp-for="SelectListApp" class="control-label"></label>
+                            <select id="drpEmpList" class="form-select" asp-for="SelectedAppID" asp-items="@Model.SelectListApp">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-2">
+                    <button type="submit" asp-controller="AppUser" asp-action="GetUserByAppID" asp-route-selectedAppID="@Model.SelectedAppID" class="btn btn-primary" style="margin-top: 28px; width:100%" id="filter-btn"><i class="fas fa-check"></i>Chọn</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-3">
+
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-2">
+                        @*<label asp-for="AppRoleList" class="control-label"></label>*@
+                    </div>
+                    <div class="col-3">
+                        @*<select id="ddlAppRoleList" class="form-select" aria-label="Default select example">
+                            @if (Model.AppRoleList != null)
+                            {
+                                @foreach (var item in Model.AppRoleList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+                        </select>*@
+                        @* <select id="ddlAppRoleList" class="form-select" asp-items="Model.SelectListAppRole"></select>*@
+                        @* @Html.DropDownListFor(m => m.SelectedRoleID, Model.SelectListAppRole, new { @id = "ddlAppRoleList", @class = "form-select" })*@
+                        @*   @Html.ValidationMessageFor(m => m.SelectedRoleID, "", new { @class = "text-danger" })*@
+                    </div>
+                    <div class="col-7">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="crud-button mt-0 align-end">
+                <a class="btn btn-success" asp-controller="AppUser" asp-action="Create" asp-route-appID="@Model.SelectedAppID"><i class="fa-regular fa-square-plus"></i>Thêm</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @*<h4 class="pt-2 pb-2">
+            <label asp-for="AppUserList" class="control-label"></label>
+        </h4>*@
+        <table id="table-data" class="table table-hover table-bordered">
+            <thead class="bg-primary" style="color:white">
+                <tr>
+                    <th scope="col" width="20%">Mã</th>
+                    <th scope="col" width="20%">Tên</th>
+                    <th scope="col" width="45%">Mô tả</th>
+                    <th width="15%">Tùy chọn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AppUserList != null)
+                {
+                    @foreach (var item in Model.AppUserList)
+                    {
+                        <tr id="controlRow" @*onclick="location.href = '@Url.Action("Details", "AppRole", new { ID=item.ID})'"*@>
+                            <th scope="row">@item.Number</th>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td>
+                                <div class="crud-button align-center mb-3">
+                                    <a class="btn btn-primary" asp-controller="AppUser" asp-action="Details" asp-route-ID="@item.ID"><i class="far fa-edit"></i> Sửa</a>
+                                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i> Xóa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<!--<script>
+    $(function () {
+        $("#filter-btn").click(function () {
+            //$.getJSON("/AppUser/Index", { selectedAppID: $("#ddlAppList").val(), selectedRoleID: $("#ddlAppRoleList").val() }, function (d) {
+            //})
+             $.ajax({
+            type: "GET",
+            url: '/AppUser/GetAppUserList',
+                 data: { selectedAppID: $("#ddlAppList").val(), selectedRoleID: $("#ddlAppRoleList").val(), appName: $("#ddlAppList option:selected").text()},
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var table = $('#table-data').DataTable();
+                table.clear();
+                table.destroy();
+                $('#table-data').DataTable({
+                    data: data,
+                    columns: [
+                        { data: 'number' },
+                        { data: 'name' },
+                        { data: 'description' },
+                        {
+                            data: null,
+                            render: function (data, type, row) { return '<div class="crud-button align-center mb-3"><button class="btn btn-success" type="button" id="detail-btn" onclick="location.href= \'/AppUser/Details?ID=' + row.id + '\'">Chi tiết</button><button class="btn btn-danger" id="delete-btn">Xóa</button></div>' }
+                        }
+                    ],-->
+                    @*columnDefs: [{
+                        "defaultContent": '<div class="crud-button align-center mb-3"><button class="btn btn-success" id="detail-btn" onclick="location.href= ' + '\'@Url.Action("Details", "AppUser", new {ID= 1 })\'">Chi tiết</button><button class="btn btn-danger" id="delete-btn">Xóa</button></div>',
+                        "targets": -1
+                    }],*@
+                <!--});
+            },
+            error: function () {
+                alert("Error while inserting data");
+            }
+        });
+        return false;
+        })
+
+
+        $("#ddlAppList").change(function () {
+            $.getJSON("/AppUser/GetAppRoleList", { appID: $("#ddlAppList").val() }, function (data) {
+                $("#ddlAppRoleList").empty();
+                $.each(data, function (index, row) {
+                    console.log("row: " + row.id);
+                    $("#ddlAppRoleList").append("<option value='" + row.id + "'>" + row.name + "</option>")
+                })
+            })
+        })
+    })
+
+
+
+
+
+</script>-->
+
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+</style>

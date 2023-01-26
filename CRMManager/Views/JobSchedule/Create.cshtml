@@ -1,0 +1,106 @@
+﻿@model CRMManager.Models.JobScheduleViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="AppRole" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="TaskName" class="control-label"></label>
+                        <input asp-for="TaskName" class="form-control" />
+                        <span asp-validation-for="TaskName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SchedulerTypes" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.SchedulerTypes != null)
+                            {
+                                @foreach (var item in Model.SchedulerTypes)
+                                {
+                                    <option value=@item>@item</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <input asp-for="StartDate" type="date" class="form-control" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="StartTime" class="control-label"></label>
+                        <input asp-for="StartTime" type="time" class="form-control">
+                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ExpiredDate" class="control-label"></label>
+                        <input asp-for="ExpiredDate" type="date" class="form-control" />
+                        <span asp-validation-for="ExpiredDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Interval" class="control-label"></label>
+                        <input rows="3" asp-for="Interval" class="form-control" />
+                        <span asp-validation-for="Interval" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" asp-for="IsActive" />
+                        <label class="form-check-label" asp-for="IsActive"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-end crud-button ">
+                <input type="submit" value="Lưu" asp-action="Save" class="btn btn-success" />
+                <input type="button" value="Hủy" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    /*`sm` applies to x-small devices (portrait phones, less than 576px)*/
+    @@media (max-width: 575.98px) {
+    }
+
+    /*`md` applies to small devices (landscape phones, less than 768px)*/
+    @@media (max-width: 767.98px) {
+    }
+
+    /*`lg` applies to medium devices (tablets, less than 992px)*/
+    @@media (max-width: 991.98px) {
+    }
+
+    /*`xl` applies to large devices (desktops, less than 1200px)*/
+    @@media (max-width: 1199.98px) {
+    }
+
+    /*`xxl` applies to x-large devices (large desktops, less than 1400px)*/
+    @@media (max-width: 1399.98px) {
+    }
+</style>

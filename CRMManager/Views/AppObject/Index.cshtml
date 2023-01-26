@@ -1,0 +1,130 @@
+﻿@model CRMManager.Models.AppObjectViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6 border-end">
+        <div class="crud-button mb-3">
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("CreateAppList", "System")'">Thêm</button>
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("EditAppList", "System")'">Sửa</button>
+            <button class="btn btn-danger">Xóa</button>
+        </div>
+
+        <table id="table-data" class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Mô tả</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.AppObjectList != null)
+                {
+                    @foreach (var item in Model.AppObjectList)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("Detail", "AppObject")'">
+                            <th scope="row">@item.ID</th>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ProgramList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.ProgramList != null)
+                            {
+                                @foreach (var item in Model.ProgramList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ParentObjectList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.ParentObjectList != null)
+                            {
+                                @foreach (var item in Model.ParentObjectList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ObjectTypeList" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example">
+                            @if (Model.ObjectTypeList != null)
+                            {
+                                @foreach (var item in Model.ObjectTypeList)
+                                {
+                                    <option value=@item.ID>@item.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ID" class="control-label"></label> <span class="text-danger">(*)</span>
+                        <input asp-for="ID" class="form-control" />
+                        <span asp-validation-for="ID" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-end crud-button ">
+                <input type="submit" value="Lưu" asp-action="Save" class="btn btn-success" />
+                <input type="button" value="Hủy" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+</style>

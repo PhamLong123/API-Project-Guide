@@ -1,0 +1,106 @@
+﻿@model CRMManager.Models.PromotionGroupViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">THÊM CHƯƠNG TRÌNH KHUYẾN MÃI</h2>
+</div>
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="card w-100">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Mã</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Từ ngày</label>
+                            <input asp-for="FromDate" class="form-control" />
+                            <span asp-validation-for="FromDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Số lượng</label>
+                            <input asp-for="Qty" class="form-control" />
+                            <span asp-validation-for="Qty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Tổng số lượng theo ngày</label>
+                            <input asp-for="MaxQtyByDate" class="form-control" />
+                            <span asp-validation-for="MaxQtyByDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Điểm xếp hạng</label>
+                            <input asp-for="RankPoint" class="form-control" />
+                            <span asp-validation-for="RankPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Tên</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Đến ngày</label>
+                            <input asp-for="ToDate" class="form-control" />
+                            <span asp-validation-for="ToDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Số ngày hết hạn</label>
+                            <input asp-for="ExpiredDate" class="form-control" />
+                            <span asp-validation-for="ExpiredDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Tổng số lượng theo chương trình</label>
+                            <input asp-for="MaxQtyByProgram" class="form-control" />
+                            <span asp-validation-for="MaxQtyByProgram" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label class="control-label">Điểm đổi quà</label>
+                            <input asp-for="RedempPoint" class="form-control" />
+                            <span asp-validation-for="RedempPoint" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mt-2">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12  col-md-6">
+                        <div class="row mt-2">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="IsActive" type="checkbox">
+                                        <label class="form-check-label" asp-for="IsActive">Kích hoạt</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4">
+                                <div class="float-right mt-2">
+                                    <a asp-area="" asp-controller="PromotionGroup" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="fas fa-times"></i> Hủy</a>
+                                    <button type="submit" asp-area="" asp-controller="PromotionGroup" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

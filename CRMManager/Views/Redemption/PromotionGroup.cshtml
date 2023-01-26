@@ -1,0 +1,198 @@
+﻿@model CRMManager.Models.RedemptionPromotionViewModel
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        @*<div id="loader" class="center"></div>*@
+        <div class="row">
+            <div id="needenableleft" class="col-12 col-md-6">
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+                        @*<a id="ActiveAdd" asp-area="" asp-controller="Redemption" asp-action="ActiveAddNewPromotionGroup" asp-route-id=@Model class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>*@
+                        <a id="ActiveAdd" href="#" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+                    </div>
+                </div>
+                <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                    <thead>
+                        <tr style="color: White; background-color: #4267B2;">
+                            <td style="width:15%;"><b>Mã</b></td>
+                            <td style="width:30%;"><b>Loại quà</b></td>
+                            <td style="width:30%;"><b>Loại khuyến mãi</b></td>
+                            <td style="width:25%;"><b>Tùy chọn</b></td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.PromotionGroup)
+                    {
+                        <tr id="controlRow" runat="server" class="apptech-pull-up">
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.Number
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.ItemType
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.PromotionType
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a asp-area="" asp-controller="Redemption" asp-action="EditPromotionGroup" asp-route-id=@item.ID class="btn btn-success m-1 btnenable"><i class="far fa-edit"></i> Sửa</a>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" asp-area="" asp-controller="Redemption" asp-action="DeleteRedemptionPromotion" asp-route-id= class="btn btn-danger m-1"><i class="far fa-trash-alt"></i> Xóa</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div id="needenable" class="col-12 col-md-6 disablefield">
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="control-label">Chọn ngành hàng</label>
+                                    <select id="ddlPromoType" class="form-select" onchange="ddlPromoTypeList();" asp-items="Html.GetEnumSelectList<PromtionType>()">
+                                        <option value="">--Select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group d-none">
+                            <label asp-for="ID" class="control-label"></label>
+                            <input asp-for="ID" class="form-control" />
+                            <span asp-validation-for="ID" class="text-danger"></span>
+                        </div>
+                        @*<div class="form-group">
+            <label class="control-label">Loại quà</label>
+            <select id="drpEmpList" class="form-select" asp-for="ItemTypeID" asp-items="@(new SelectList(Model.ItemTypes, "ID", "Name"))">
+                <option value="">--Select--</option>
+            </select>
+            <input type="hidden" asp-for="ItemTypeID" />
+        </div>*@
+                        <div class="form-group">
+                            <label class="control-label">Loại quà</label>
+                            <input asp-for="ItemType" class="form-control" />
+                            <span asp-validation-for="ItemType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mã Promotion</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mã nhóm quà</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Từ ngày</label>
+                            <input asp-for="FromDate" class="form-control" rows="4" />
+                            <span asp-validation-for="FromDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số ngày hết hạn</label>
+                            <input asp-for="MaxMemberQty" class="form-control" rows="4" />
+                            <span asp-validation-for="MaxMemberQty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tối đa được tặng</label>
+                            <input asp-for="MaxMemberQty" class="form-control" rows="4" />
+                            <span asp-validation-for="MaxMemberQty" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        @*<div class="form-group">
+            <label class="control-label">Chọn ngành hàng</label>
+            <select id="drpEmpList" class="form-select" asp-for="PromotionTypeID" asp-items="@(new SelectList(Model.PromotionTypes, "ID", "Name"))">
+                <option value="">--Select--</option>
+            </select>
+            <input type="hidden" asp-for="PromotionTypeID" />
+        </div>*@
+                        <div class="form-group">
+                            <label class="control-label">Chọn ngành hàng</label>
+                            <input id="txtPromoType" asp-for="PromotionType" class="form-control" />
+                            <span asp-validation-for="PromotionType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Điểm sử dụng đổi quà</label>
+                            <input asp-for="RedeemPoint" class="form-control" rows="4" />
+                            <span asp-validation-for="RedeemPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Điểm lên hạng</label>
+                            <input asp-for="RankingPoint" class="form-control" rows="4" />
+                            <span asp-validation-for="RankingPoint" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Đến ngày</label>
+                            <input asp-for="ToDate" class="form-control" />
+                            <span asp-validation-for="ToDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tối đa được tặng theo ngày</label>
+                            <input asp-for="MaxMemberQty" class="form-control" rows="4" />
+                            <span asp-validation-for="MaxMemberQty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Số lượng tối đa được tặng theo chương trình</label>
+                            <input asp-for="MaxMemberQty" class="form-control" rows="4" />
+                            <span asp-validation-for="MaxMemberQty" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="control-label">Mô tả</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <div class="row mt-4">
+                                <div class="col-1">
+                                    <input type="checkbox" class="form-check" asp-for="IsActive" />
+                                </div>
+                                <div class="col-11">
+                                    <label class="control-label">Kích hoạt</label>
+                                </div>
+                            </div>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-4">
+
+                                </div>
+                                <div class="col-8">
+                                    <div class="float-right mt-2">
+                                        <button type="submit" id="btnAdd" asp-area="" asp-controller="Redemption" asp-action="AddNewPromotionGroup" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                        <a id="btnView" asp-area="" asp-controller="Redemption" asp-action="PromotionGroupDetail" asp-route-id=@Model.ID class="btn btn-primary m-1 float-right d-none btncancel"><i class="far fa-eye"></i> Xem chi tiết</a>
+                                        <button type="submit" id="btnEdit" asp-area="" asp-controller="Redemption" asp-action="EditPromotionGroup" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                        <a id="btnCancelAll" asp-area="" asp-controller="Redemption" asp-action="PromotionGroup" asp-route-id= class="btn btn-danger m-1 float-right d-none btncancel"><i class="far fa-trash-alt"></i> Hủy</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

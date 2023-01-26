@@ -1,0 +1,102 @@
+﻿@model CRMManager.Models.DataMessagesViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="LanguageList" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example">
+                    @if (Model.LanguageList != null)
+                    {
+                        @foreach (var item in Model.LanguageList)
+                        {
+                            <option value=@item.ID>@item.Name</option>
+                        }
+                    }
+
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="AppLists" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example">
+                    @if (Model.AppLists != null)
+                    {
+                        @foreach (var item in Model.AppLists)
+                        {
+                            <option value=@item.Number>@item.Name</option>
+                        }
+                    }
+
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="AppObjectList" class="control-label"></label>
+                <select class="form-select" aria-label="Default select example">
+                    @if (Model.AppObjectList != null)
+                    {
+                        @foreach (var item in Model.AppObjectList)
+                        {
+                            <option value=@item.ID>@item.Name</option>
+                        }
+                    }
+
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="SearchKeyword" class="control-label"></label>
+                <input asp-for="SearchKeyword" class="form-control" />
+                <span asp-validation-for="SearchKeyword" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group d-flex justify-content-end crud-button mt-3">
+            <button class="btn btn-outline-success">Lọc</button>
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("Create", "DataMessage")'">Thêm</button>
+
+        </div>
+    </div>
+    <table id="table-data" class="table table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Từ khóa dịch</th>
+                <th scope="col">Văn bản dịch</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.DataMessageList != null)
+            {
+                @foreach (var item in Model.DataMessageList)
+                {
+                    <tr id="controlRow" onclick="location.href = '@Url.Action("Details", "DataMessage", new {ID=item.ID })'">
+                        <th scope="row">@item.Keyword</th>
+                        <td>@item.Translation</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+</style>

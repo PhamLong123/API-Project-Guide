@@ -1,0 +1,91 @@
+﻿@model CRMManager.Models.JobSchedulesViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row mb-3">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6">
+        <div class="crud-button mt-0 align-end">
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("Create", "JobSchedule")'">Thêm</button>
+        </div>
+    </div>
+
+
+    <div class="col-12">
+        <table id="table-data" class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">Tên công việc</th>
+                    <th scope="col">Kiểu lặp</th>
+                    <th width="20%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.TaskScheduleList != null)
+                {
+                    @foreach (var item in Model.TaskScheduleList)
+                    {
+                        <tr id="controlRow">
+                            <td>@item.TaskName</td>
+                            <td>@item.SchedulerTypes.ToString()</td>
+                            <td>
+                                <div class="crud-button align-center mb-3">
+                                    <button class="btn btn-success" onclick="location.href='@Url.Action("Details", "JobSchedule" , new { ID=item.ID})'">Chi tiết</button>
+                                    <button class="btn btn-danger">Xóa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                <tr id="controlRow">
+                    <td>TaskName</td>
+                    <td>SchedulerTypes</td>
+                    <td>
+                        <div class="crud-button align-center mb-3">
+                            <button class="btn btn-success" onclick="location.href='@Url.Action("Details", "JobSchedule" , new { ID=1})'">Chi tiết</button>
+                            <button class="btn btn-danger">Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+
+    /*`sm` applies to x-small devices (portrait phones, less than 576px)*/
+    @@media (max-width: 575.98px) {
+    }
+
+    /*`md` applies to small devices (landscape phones, less than 768px)*/
+    @@media (max-width: 767.98px) {
+    }
+
+    /*`lg` applies to medium devices (tablets, less than 992px)*/
+    @@media (max-width: 991.98px) {
+    }
+
+    /*`xl` applies to large devices (desktops, less than 1200px)*/
+    @@media (max-width: 1199.98px) {
+    }
+
+    /*`xxl` applies to x-large devices (large desktops, less than 1400px)*/
+    @@media (max-width: 1399.98px) {
+    }
+</style>

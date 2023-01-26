@@ -1,0 +1,162 @@
+﻿.general-report .card-header {
+    font-weight: 700;
+    color: white;
+}
+
+.dropdown-menu li {
+    position: relative;
+}
+
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+
+.dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+
+.dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}
+
+.crud-button {
+    margin-top: 10px;
+}
+
+    .crud-button :not(:last-child) {
+        margin-right: 10px;
+    }
+
+button i {
+    margin-right: 5px !important;
+}
+
+/*.row div {
+    margin-top: 10px;
+}*/
+
+.align-end {
+    display: flex;
+    justify-content: end;
+}
+
+.align-center {
+    display: flex;
+    justify-content: center;
+}
+
+.page-title {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.card-body {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+
+.disablefield {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+#loader {
+    border: 12px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 12px solid #444444;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: contents;
+    }
+
+select {
+    border: 0.1em solid #c6c6c6 !important;
+    border-radius: 7px !important;
+}
+
+/*ckeditor*/
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
+
+
+
+
+/*`sm` applies to x-small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+}
+
+/*`md` applies to small devices (landscape phones, less than 768px)*/
+@media (max-width: 767.98px) {
+}
+
+/*`lg` applies to medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+    .w-lg-50 {
+        width: 50%;
+    }
+}
+
+/*`xl` applies to large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+}
+
+/*`xxl` applies to x-large devices (large desktops, less than 1400px)*/
+@media (max-width: 1399.98px) {
+}
+
+
+
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    .w-lg-100 {
+        width: 100% !important;
+    }
+
+    .w-lg-75 {
+        width: 75% !important;
+    }
+
+    .w-lg-50 {
+        width: 50% !important;
+    }
+
+    .w-lg-25 {
+        width: 25% !important;
+    }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+}

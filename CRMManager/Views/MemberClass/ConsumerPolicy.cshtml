@@ -1,0 +1,215 @@
+﻿<!--
+<div class="justify-content-center">
+    <h2 class="text-center">Chính sách tiêu dùng</h2>
+</div>
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row">
+            <div id="needenableleft" class="col-12 col-md-6">
+                <div class="row">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <a id="ActiveAdd" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+                    </div>
+                </div>
+                <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                    <thead>
+                        <tr style="color: White; background-color: #4267B2;">
+                            <td style="width:25%;"><b>Mã hạng thẻ</b></td>
+                            <td style="width:25%;"><b>Tên hạng thẻ</b></td>
+                            <td style="width:50%;"><b>Tùy chọn</b></td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.MemberClasses)
+                    {
+                        <tr id="controlRow" runat="server" class="apptech-pull-up">
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.ClassNo
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.ClassName
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a asp-area="" asp-controller="MemberClass" asp-action="ConsumerPolicy" asp-route-id=@item.ID class="btn btn-success m-1 btnenable"><i class="far fa-edit"></i> Sửa</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" asp-area="" asp-controller="MemberClass" asp-action="Delete" asp-route-id= class="btn btn-danger m-1"><i class="far fa-trash-alt"></i> Xóa</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div id="needenable" class="col-12 col-md-6 disablefield">
+                <div class="form-group d-none">
+                    <label asp-for="MemberClass.ID" class="control-label"></label>
+                    <input asp-for="MemberClass.ID" class="form-control" />
+                    <span asp-validation-for="MemberClass.ID" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-5 d-none">
+                    <label class="control-label">Mã hạng thẻ</label>
+                    <input asp-for="MemberClass.ClassNo" class="form-control" />
+                    <span asp-validation-for="MemberClass.ClassNo" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label class="control-label">Tên hạng thẻ</label>
+                    <input asp-for="MemberClass.ClassName" class="form-control" />
+                    <span asp-validation-for="MemberClass.ClassName" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label class="control-label">Mô tả</label>
+                    <textarea asp-for="MemberClass.Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="MemberClass.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label class="control-label">Hạng thẻ gia nhập</label>
+                    <input class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label class="control-label">Điểm xếp hạng</label>
+                    <input class="form-control" asp-for="MemberClass.RankingPoint" />
+                    <span class="text-danger" asp-validation-for="MemberClass.RankingPoint"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label class="control-label">Điểm đổi quà</label>
+                    <input class="form-control" asp-for="MemberClass.RewardPoint" />
+                    <span class="text-danger" asp-validation-for="MemberClass.RewardPoint"></span>
+                </div>
+                <div class="row d-none">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label class="control-label">SILVER - GOLD</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input class="form-control" />
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" />
+                                </div>
+                            </div>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">GOLD - DIAMOND</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input class="form-control" />
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" />
+                                </div>
+                            </div>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label class="control-label">Điểm xếp hạng cộng thêm</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label class="control-label">Điểm đổi quà cộng thêm</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Hạng thẻ</label>
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>-->
+                        @*<div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>*@
+                    <!--</div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Tỷ lệ tích điểm đổi quà(/1 điểm)</label>
+                            <input class="form-control" asp-for="MemberClass.RewardRate"/>
+                            <span class="text-danger" asp-validation-for="MemberClass.RewardRate"></span>
+                        </div>-->
+                        @*<div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>*@
+                    <!--</div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Tỷ lệ tích điểm lên hạng(/1 điểm)</label>
+                            <input class="form-control" asp-for="MemberClass.ReviewRate"/>
+                            <span class="text-danger" asp-validation-for="MemberClass.ReviewRate"></span>
+                        </div>-->
+                        @*<div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>*@
+                    <!--</div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">Tỷ lệ đổi điểm</label>
+                            <input class="form-control" asp-for="MemberClass.RedempRate"/>
+                            <span class="text-danger" asp-validation-for="MemberClass.RedempRate"></span>
+                        </div>-->
+                        @*<div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4">
+                            <input class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>*@
+                    <!--</div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="float-right">
+                            <div class="row" style="margin-top:0px!important">
+                                <div class="col-12">
+                                    <button type="submit" id="btnAdd" asp-area="" asp-controller="MemberClass" asp-action="AddNewRP" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                    <button type="submit" id="btnEdit" asp-area="" asp-controller="MemberClass" asp-action="EditRP" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                    <a id="btnCancelAll" asp-area="" asp-controller="MemberClass" asp-action="ConsumerPolicy" asp-route-id= class="btn btn-danger m-1 float-right d-none btncancel"><i class="far fa-trash-alt"></i> Hủy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>-->

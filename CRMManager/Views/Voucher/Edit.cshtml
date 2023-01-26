@@ -1,0 +1,123 @@
+﻿@model CRMManager.Models.VoucherViewModel
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Mã voucher</label>
+                    <input asp-for="Number" class="form-control" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tên voucher</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Giá</label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tiêu đề</label>
+                    <input asp-for="Subject" class="form-control" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Vị trí ưu tiên</label>
+                    <input asp-for="Priority" class="form-control" />
+                    <span asp-validation-for="Priority" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Từ ngày</label>
+                    <input asp-for="FromDate" class="form-control" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Đến ngày</label>
+                    <input asp-for="ToDate" class="form-control" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="ThumbImage">Hình ảnh </label>
+                        </div>
+                        <div class="col-12">
+                            @if (Model.Icon == null)
+                            {
+                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Dat'sImages/Voucher/@Model.Icon" class="img-thumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-8">
+                            <input type="file" class="form-control" name="imgfile" />
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="Uploadicon" class="btn btn-primary">Upload Ảnh</button>
+                        </div>
+                        <span>@ViewData["Message"]</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="ThumbImage">Hình ảnh chi tiết </label>
+                        </div>
+                        <div class="col-12">
+                            @if (Model.Image == null)
+                            {
+                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Dat'sImages/Voucher/@Model.Image" class="img-thumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-8">
+                            <input type="file" class="form-control" name="imgfile" />
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" asp-area="" asp-controller="Redemption" asp-action="Uploadimage" class="btn btn-primary">Upload Ảnh</button>
+                        </div>
+                        <span>@ViewData["Message"]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="control-label">Điều khoản sử dụng</label>
+                    <textarea asp-for="Detail" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Detail" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="Voucher" asp-action="Edit" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="Voucher" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

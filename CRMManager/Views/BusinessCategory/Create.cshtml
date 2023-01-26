@@ -1,0 +1,100 @@
+﻿@model CRMManager.Models.BusinessCategoryViewModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mt-4 justify-content-center">
+    <h2 class="text-center">@Model.PageTitle</h2>
+</div>
+<div class="container mt-4">
+    <div class="row">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6 mt-2">
+                                    <input asp-for="ID" class="form-control" />
+                                    <div class="form-group">
+                                        <label asp-for="Number" class="control-label"></label>
+                                        <input asp-for="Number" class="form-control" />
+                                        <span asp-validation-for="Number" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Name" class="control-label"></label>
+                                        <input asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="control-label"></label>
+                                        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-2">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" asp-for="IsShowMobileApp" type="checkbox" id="flexCheckDefault" onclick="return false">
+                                            <label class="form-check-label" asp-for="IsShowMobileApp" for="flexCheckDefault"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="control-label" for="ThumbImage">Hình ảnh </label>
+                                    </div>
+                                    <div class="col-12">
+                                        @if (Model.Icon == null)
+                                        {
+                                            <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" style="height: 223px;"/>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Dat'sImages/Branches/@Model.Icon" class="img-thumbnail" style="height: 223px;"/>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col-8">
+                                        <input type="file" class="form-control" name="imgfile" />
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="submit" asp-area="" asp-controller="Branch" asp-action="Uploadimage" class="btn btn-primary">Upload Ảnh</button>
+                                    </div>
+                                    <span>@ViewData["Message"]</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-8">
+
+                                </div>
+                                <div class="col-4">
+                                    <div class="float-right mt-2">
+                                        <button class="btn btn-danger float-right ms-2" asp-action="Delete" type="submit"><i class="fas fa-times"></i> Hủy</button>
+                                        <button class="btn btn-success float-right" type="submit" asp-controller="BusinessCategory" asp-action="AddNew" asp-route-id="@Model"><i class="far fa-save"></i> Lưu</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/js/general.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

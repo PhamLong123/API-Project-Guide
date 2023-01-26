@@ -1,0 +1,89 @@
+﻿@model CRMManager.Models.ErrorMessagesViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="ErrorCatList" class="control-label"></label>
+            <select class="form-select bootstrap-select" form-s aria-label="Default select example">
+                @if (Model.ErrorCatList != null)
+                {
+                    @foreach (var item in Model.ErrorCatList)
+                    {
+                        <option value=@item.ID>@item.Name</option>
+                    }
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="FilterTypeList" class="control-label"></label>
+            <select class="form-select bootstrap-select" form-s aria-label="Default select example">
+                @if (Model.FilterTypeList != null)
+                {
+                    @foreach (var item in Model.FilterTypeList)
+                    {
+                        <option value=@item.ID>@item.Name</option>
+                    }
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="SearchKeyword" class="control-label"></label>
+            <input asp-for="SearchKeyword" class="form-control" />
+            <span asp-validation-for="SearchKeyword" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="crud-button align-end">
+            <button class="btn btn-outline-success">Lọc</button>
+            <button class="btn btn-success" onclick="location.href = '@Url.Action("Create", "ErrorMessage")'">Thêm</button>
+        </div>
+    </div>
+</div>
+<table id="table-data" class="table table-bordered table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col" width="40%">Từ khóa dịch</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ErrorMessageList != null)
+        {
+            @foreach (var item in Model.ErrorMessageList)
+            {
+                <tr id="controlRow" onclick="location.href = '@Url.Action("Details", "ErrorMessage", new { ID=item.ID})'">
+                    <td>@item.TextMessage</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+</style>

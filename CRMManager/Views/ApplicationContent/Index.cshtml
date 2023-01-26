@@ -1,0 +1,164 @@
+﻿@model CRMManager.Models.ApplicationContentListViewModel
+@using MSAServices.RetailService
+@using MSAServices.ContentService
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form asp-controller="PromotionNews" method="post">
+    <div class="filter-box">
+
+
+        <div class="row">
+            <!--<div class="col-lg-3 col-md-4 col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+
+                        </div>
+                        <div class="col-9">
+
+                        </div>
+                    </div>
+                    <label class="control-label fw-bold">Chọn nội dung</label>
+                    <select name="SelectedType"
+                            asp-for="SelectedTypeID"
+                            asp-items="@@ViewBag.AppContentTypes"
+                            class="custom-dropdown" `
+                            style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">-->
+            @*<option value="-1">Tất cả </option>*@
+            <!--</select>
+                </div>
+            </div>-->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3">
+
+                        </div>
+                        <div class="col-9">
+
+                        </div>
+
+                    </div>
+                    <label class="control-label fw-bold">Chọn loại</label>
+                    <select name="SelectedCat"
+                            asp-for="SelectedCatID"
+                            asp-items="@Html.GetEnumSelectList<EAppContentCatNumber>()"
+                            class="custom-dropdown"
+                            style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">
+                    </select>
+                </div>
+            </div>
+            @*<div class="col-lg-3 col-md-4 col-6 d-flex align-items-center">
+                    <div class="crud-button mt-0">
+                        <button class="btn btn-outline-primary">Lọc</button>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</form>
+
+<div class="content-box mt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <h4 class="pt-2 pb-2">
+                        <label class="control-label fw-bold">Danh sách nội dung</label>
+                    </h4>
+                </div>
+                <div class="col-8">
+                    <div class="crud-button mt-0 align-end">
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Soạn tin
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Soạn tin</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-2 text-vertical-center">
+                                                <label class="control-label fw-bold">Loại tin</label>
+                                            </div>
+                                            <div class="col-9">
+                                                <select id="newsCatForCreate" asp-items="@Html.GetEnumSelectList<EAppContentCatNumber>()"
+                                                        class="custom-dropdown"
+                                                        style="width: 100%; height: 40px; outline: none ;background-color: transparent; border: none; border-bottom: 1px solid #382F2D; font-family: 'Noto Sans'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 25px;">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Hủy</button>
+                                        <button type="button" class="btn btn-primary" id="create">Đồng ý</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <table class="w-100 table table-striped">
+                <thead class="table">
+                    <tr>
+                        <th scope="col" width="60%">Chủ đề</th>
+                        <th scope="col" width="20%"></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    @if (Model.AppContentList != null && Model.AppContentList.Count > 0)
+                    {
+                        foreach (var item in Model.AppContentList)
+                        {
+                            <tr id="controlRow">
+                                @*<td>@item.Number</td>*@
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    <div class="crud-button align-center mb-3">
+                                        @*<button class="btn btn-success" onclick="location.href = '@Url.Action("Edit", "ApplicationContent", new { id=item.Number})'">Sửa</button>*@
+                                        <a class="btn btn-success" asp-action="Edit" asp-controller="ApplicationContent" asp-route-id="@item.ID">Sửa</a>
+                                        <button class="btn btn-danger">Xóa</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script>
+     $('#create').click(function () {
+        var baseUrl = '@Url.Action("Create", "ApplicationContent")';
+        location.href = baseUrl + '/?SelectedNewsCat=' + $('#newsCatForCreate').val();
+     })
+
+    $('#SelectedCatID').on('change', function () {
+        var baseUrl = '@Url.Action("Index", "ApplicationContent")';
+        location.href = baseUrl + '/?selectedCatID=' + $('#SelectedCatID').val();
+    });
+</script>
+
+
+

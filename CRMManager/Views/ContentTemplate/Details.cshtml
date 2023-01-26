@@ -1,0 +1,106 @@
+﻿@model CRMManager.Models.ContentTemplateViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <label asp-for="Number" class="control-label"></label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input asp-for="Number" class="form-control w-50" readonly />
+                                <span asp-validation-for="Number" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label asp-for="Name" class="control-label"></label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Name" class="form-control" readonly />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <label asp-for="Subject" class="control-label"></label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Subject" class="form-control" readonly />
+                                        <span asp-validation-for="Subject" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <label asp-for="Content" class="control-label"></label>
+                        </div>
+                        <div class="col-sm-11">
+                            <textarea rows="10" asp-for="Content" class="form-control" readonly></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-11">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="IsNoti" type="checkbox" id="flexCheckDefault" onclick="return false" readonly>
+                                        <label class="form-check-label" asp-for="IsNoti" for="flexCheckDefault"></label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="IsSMS" type="checkbox" id="flexCheckDefault" onclick="return false" readonly>
+                                        <label class="form-check-label" asp-for="IsSMS" for="flexCheckDefault"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-end crud-button ">
+                <button class="btn btn-success" type="button" onclick="location.href = '@Url.Action("Edit", "ContentTemplate", new { templateID=Model.ID})'">Sửa</button>
+                <input type="button" value="Xóa" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+<style>
+</style>

@@ -1,0 +1,107 @@
+﻿@model CRMManager.Models.InvTransViewModel
+<form method="post">
+    <div class="row mb-2">
+        <div class="col-sm-12">
+            <h4 class="m-0 text-center"></h4>
+        </div>
+    </div>
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row">
+            <div class="col-12 col-md-12 mt-5">
+                <div class="form-group d-none">
+                    <label asp-for="ID" class="control-label"></label>
+                    <input asp-for="ID" class="form-control" />
+                    <span asp-validation-for="ID" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="control-label">DocNo: </label>
+                            <input asp-for="DocNo" class="form-control" />
+                            <span asp-validation-for="DocNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tcode: </label>
+                            <input asp-for="TCode" class="form-control" />
+                            <span asp-validation-for="TCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">User: </label>
+                            <input asp-for="UserID" class="form-control" />
+                            <span asp-validation-for="UserID" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">TransDate: </label>
+                            <input asp-for="TransDate" class="form-control" />
+                            <span asp-validation-for="TransDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">WHCode: </label>
+                            <input asp-for="WHCode" class="form-control" />
+                            <span asp-validation-for="WHCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">ShelfCode: </label>
+                            <input asp-for="ShelfCode" class="form-control" />
+                            <span asp-validation-for="ShelfCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                            <thead>
+                                <tr style="color: White; background-color: #4267B2;">
+                                    <td style="width:25%;"><b>ID</b></td>
+                                    <td style="width:25%;"><b>BarCode</b></td>
+                                    <td style="width:25%;"><b>Quantity</b></td>
+                                    <td style="width:25%;"><b>Unit</b></td>
+                                </tr>
+                            </thead>
+                            @foreach (var item in ViewBag.Detail)
+                            {
+                                if (item.TransID == Model.ID)
+                                {
+                                    <tr id="controlRow" runat="server" class="apptech-pull-up">
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                                @item.ID
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                                @item.BarCode
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                                @item.Quantity
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                                @item.Unit
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+
+                            </div>
+                            <div class="col-8">
+                                <div class="float-right mt-2">
+                                    <button type="submit" asp-area="" asp-controller="InvTrans" asp-action="ExportToCSV" asp-route-id=@ViewBag.Detail class="btn btn-success m-1 float-right"><i class="far fa-file-excel"></i> Export</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

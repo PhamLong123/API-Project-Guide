@@ -1,0 +1,382 @@
+﻿@model CRMManager.Models.MemberClassViewModel
+<div class="justify-content-center">
+    <h2 class="text-center">@Model.PageTitle</h2>
+</div>
+<div>
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        @if (!String.IsNullOrEmpty(Model.ErrorMasage))
+        {
+            <div class="form-group @(Model.IsChanged == true ? "success-box" : "error-box")">
+                <div class="error-text">
+                    <label class="control-label"><i class="far @(Model.IsChanged == true ? "fa-check-circle" : "fa-times-circle")"></i> @Model.ErrorMasage</label>
+                </div>
+            </div>
+        }
+        <div class="card w-100">
+            <div class="card-body">
+                <div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Thông tin chung</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config" type="button" role="tab" aria-controls="config" aria-selected="false">CS giao dịch</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="rank-tab" data-bs-toggle="tab" data-bs-target="#rank" type="button" role="tab" aria-controls="rank" aria-selected="false">CS gia nhập</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="policy-tab" data-bs-toggle="tab" data-bs-target="#policy" type="button" role="tab" aria-controls="policy" aria-selected="false">CS giới thiệu</button>
+                        </li>
+                        @*<li class="nav-item" role="presentation">
+                            <button class="nav-link" id="referrerpolicy-tab" data-bs-toggle="tab" data-bs-target="#referrerpolicy" type="button" role="tab" aria-controls="referrerpolicy" aria-selected="false">CS lên hạng</button>
+                        </li>*@
+                        @*<li class="nav-item" role="presentation">
+                            <button class="nav-link" id="redemption-tab" data-bs-toggle="tab" data-bs-target="#redemption" type="button" role="tab" aria-controls="redemption" aria-selected="false">CS đổi quà</button>
+                        </li>*@
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <input type="hidden" asp-for="DataState" />
+                                    <input type="hidden" asp-for="PageTitle" />
+                                    <input type="hidden" asp-for="ID" value="@Model.ID" />
+                                    <input type="hidden" asp-for="CLPID" value="@Model.CLPID" />
+                                    <input type="hidden" asp-for="CompanyID" value="@Model.CompanyID" />
+                                    <input type="hidden" asp-for="ClassOrder" value="@Model.ClassOrder" />
+                                    <input type="hidden" asp-for="CardCode" value="@Model.CardCode" />
+                                    <input type="hidden" asp-for="IsMember" value="@Model.IsMember" />
+                                    <input type="hidden" asp-for="IsJoinNeed" value="@Model.IsJoinNeed" />
+                                    <input type="hidden" asp-for="EwalletRate" value="@Model.EwalletRate" />
+                                    <input type="hidden" asp-for="PrepaidRate" value="@Model.PrepaidRate" />
+                                    <input type="hidden" asp-for="DiscountID" value="@Model.DiscountID" />
+                                    <input type="hidden" asp-for="FromDate" value="@Model.FromDate" />
+                                    <input type="hidden" asp-for="ToDate" value="@Model.ToDate" />
+                                    <input type="hidden" asp-for="DurationID" value="@Model.DurationID" />
+                                    <input type="hidden" asp-for="CreatedOn" />
+                                    <input type="hidden" asp-for="CreatedBy" value="@Model.CreatedBy" />
+                                    <input type="hidden" asp-for="ModifiedOn" />
+                                    <input type="hidden" asp-for="ModifiedBy" value="@Model.ModifiedBy" />
+                                    <input type="hidden" asp-for="DelStatus" value="@Model.DelStatus" />
+                                    <input type="hidden" asp-for="Icon" value="@Model.Icon" />
+                                    <input type="hidden" asp-for="FirstRefRankPointRate" value="@Model.FirstRefRankPointRate" />
+                                    <input type="hidden" asp-for="FirstRefRewardPointRate" value="@Model.FirstRefRewardPointRate" />
+                                    <input type="hidden" asp-for="RefRankPointRate" value="@Model.RefRankPointRate" />
+                                    <input type="hidden" asp-for="RefRewardPointRate" value="@Model.RefRewardPointRate" />
+                                    <div class="form-group">
+                                        <label class="control-label">Mã hạng thẻ</label>
+                                        <input asp-for="ClassNo" class="form-control" />
+                                        <span asp-validation-for="ClassNo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Tên hạng thẻ</label>
+                                        <input asp-for="ClassName" class="form-control" />
+                                        <span asp-validation-for="ClassName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Mô tả</label>
+                                        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                                        <span asp-validation-for="Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Hạng thẻ trước</label>
+                                        <input asp-for="PreClassNo" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Hạng thẻ sau</label>
+                                        <input asp-for="NextClassNo" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="config" role="tabpanel" aria-labelledby="config-tab">
+                            <div class="row mt-2">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Tỉ lệ tích điểm xếp hạng ([đ]/điểm)</label>
+                                        <input asp-for="ReviewRate" class="form-control" />
+                                        <span asp-validation-for="ReviewRate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Tỉ lệ tích điểm đổi quà ([đ]/điểm)</label>
+                                        <input asp-for="RewardRate" class="form-control" />
+                                        <span asp-validation-for="RewardRate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Tỉ lệ đổi điểm ([đ]/điểm)</label>
+                                        <input asp-for="RedempRate" class="form-control" />
+                                        <span asp-validation-for="RedempRate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="rank" role="tabpanel" aria-labelledby="rank-tab">
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Hạng thẻ gia nhập</label>
+                                        <input class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm xếp hạng</label>
+                                        <input asp-for="RankingPoint" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm đổi quà</label>
+                                        <input asp-for="RewardPoint" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="policy" role="tabpanel" aria-labelledby="policy-tab">
+                            <div class="row mt-2">
+                                <div class="col-12 col-md-6">
+                                    <h5 class="control-label text-decoration-underline">Người đăng kí</h5>
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm xếp hạng</label>
+                                        <input asp-for="SharedRankingPoint" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm đổi quà</label>
+                                        <input asp-for="SharedRewardPoint" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <h5 class="control-label text-decoration-underline">Người giới thiệu</h5>
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm xếp hạng</label>
+                                        <input asp-for="RefRankingPoint" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm đổi quà</label>
+                                        <input asp-for="RefRewardPoint" class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="tab-pane fade" id="referrerpolicy" role="tabpanel" aria-labelledby="referrerpolicy-tab">
+                            <div class="row mt-2">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm xếp hạng</label>
+                                        <input class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Điểm đổi quà</label>
+                                        <input class="form-control" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        @*<div id="redemption" class="tab-pane fade" role="tabpanel" aria-labelledby="redemption-tab">
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Tỉ lệ đổi điểm ([điểm]/quà)</label>
+                                        <input asp-for="RedempRate" class="form-control" />
+                                        <span asp-validation-for="RedempRate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="float-right">
+                            <div class="row" style="margin-top:0px!important">
+                                <div class="col-12">
+                                    <a id="btnCancelAll" asp-area="" asp-controller="MemberClass" asp-action="Index" class="btn btn-primary m-1 float-right"><i class="fas fa-arrow-left"></i> Trở về</a>
+                                    <button type="submit" id="btnEdit" asp-area="" asp-controller="MemberClass" asp-action="SaveData" asp-route-id=@Model class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                                    <a data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-primary m-1 float-right"><i class="fas fa-arrow-up"></i> Chính sách lên hạng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Chính sách lên hạng</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group d-none">
+                                        <input asp-for="BaseMemRange.ID" value="@Model.BaseMemRange.ID" class="control-label" />
+                                        <input asp-for="BaseMemRange.ClassNo" value="@Model.BaseMemRange.ClassNo" class="control-label" />
+                                        <input asp-for="BaseMemRange.MemberClassID" value="@Model.BaseMemRange.MemberClassID" class="control-label" />
+                                        <input asp-for="BaseMemRange.CreatedBy" value="@Model.BaseMemRange.CreatedBy" class="form-control" />
+                                        <input asp-for="BaseMemRange.CreatedOn" class="form-control" />
+                                        <input asp-for="ModifiedBy" value="@Model.BaseMemRange.ModifiedBy" class="form-control" />
+                                        <input asp-for="BaseMemRange.ModifiedOn" class="form-control" />
+                                        <input asp-for="BaseMemRange.CLPID" value="@Model.BaseMemRange.CLPID" class="form-control" />
+                                        <input asp-for="BaseMemRange.DurationID" value="@Model.BaseMemRange.DurationID" class="form-control" />
+                                        <input asp-for="BaseMemRange.FromVal" value="@Model.BaseMemRange.FromVal" class="form-control" />
+                                        <input asp-for="BaseMemRange.ToVal" value="@Model.BaseMemRange.ToVal" class="form-control" />
+                                        <input asp-for="BaseMemRange.ExchangePoint" value="@Model.BaseMemRange.ExchangePoint" class="form-control" />
+                                        <input asp-for="BaseMemRange.FormularText" value="@Model.BaseMemRange.FormularText" class="form-control" />
+                                        <input asp-for="BaseMemRange.DeductSaleAmt" value="@Model.BaseMemRange.DeductSaleAmt" class="form-control" />
+                                        <input asp-for="BaseMemRange.DeductPoint" value="@Model.BaseMemRange.DeductPoint" class="form-control" />
+                                        <input asp-for="BaseMemRange.DelStatus" value="@Model.BaseMemRange.DelStatus" class="form-control" />
+                                        <input asp-for="BaseMemRange.UseVal" value="@Model.BaseMemRange.UseVal" class="form-control" />
+                                        <span asp-validation-for="BaseMemRange.ID" class="text-danger"></span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Từ điểm</label>
+                                                <input asp-for="BaseMemRange.FromPoint" class="form-control" />
+                                                <span asp-validation-for="BaseMemRange.FromPoint" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Đến điểm</label>
+                                                <input asp-for="BaseMemRange.ToPoint" class="form-control" />
+                                                <span asp-validation-for="BaseMemRange.ToPoint" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Điểm đổi quà</label>
+                                                <input asp-for="BaseMemRange.DeductPoint" class="form-control" />
+                                                <span asp-validation-for="BaseMemRange.DeductPoint" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Điểm xếp hạng</label>
+                                                <input asp-for="BaseMemRange.ExchangePoint" class="form-control" />
+                                                <span asp-validation-for="BaseMemRange.ExchangePoint" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    //function SetImageWidthEditor() {
+    //    let image = $(".ck-content .image.image_resized img");
+    //    image.style.width = "100%!important";
+    //    let figure = $(".ck-content .image");
+    //    figure.style.margin = "0 auto!important";
+
+    //}
+
+    let validateSizeImages = $(".ValidateSizeImage");
+    var validExt = ".png, .gif, .jpeg, .jpg";
+    function fileExtValidate(fdata) {
+        var filePath = fdata.value;
+        var getFileExt = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+        var pos = validExt.indexOf(getFileExt);
+        if (pos < 0) {
+            alert("This file is not allowed, please upload image file.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function ValidateSizeImage(input) {
+        let elementID = $(input).attr("data-id");
+        let imageSize = elementID.split('-')[1];
+        let file = input.files[0];
+        let fileUp = input;
+
+        if (fileExtValidate(fileUp)) {
+            var reader = new FileReader();
+            console.log(reader);
+            reader.onload = function (e) {
+                var image = new Image();
+                image.src = reader.result;
+                image.onload = function () {
+                    let width = parseFloat(imageSize.split('x')[0]);
+                    let height = parseFloat(imageSize.split('x')[1]);
+                    let from = (width / height) - 0.1;
+                    let to = (width / height) + 0.1;
+                    let rate = this.width / this.height;
+                    if (rate >= from && rate <= to && this.width >= (width - width * 0.1)) {
+                        $("#img-" + imageSize).attr('src', e.target.result);
+                    }
+                    else {
+                        alert('Invalid Image size: ' + imageSize);
+                        input.value = "";
+                        $("#img-" + imageSize).removeAttr('src');
+                    }
+                }
+
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+        }
+        else {
+            preview.src = "";
+            txtUploadFile.value = "";
+        }
+    }
+
+    validateSizeImages.each(function () {
+        $(this).change(function () {
+            ValidateSizeImage(this)
+        })
+    })
+
+    //$('#ThumbImage_120_120').change(function () {
+    //    alert("120");
+    //    ValidateSizeImage(this)
+    //})
+</script>

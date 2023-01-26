@@ -1,0 +1,296 @@
+﻿@model CRMManager.Models.RemindViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<div class="row">
+    <div class="col-md-3 border-end">
+        <table id="table-data" class="table table-hover">
+            <thead class="table-primary d-none">
+                <tr>
+                    <th scope="col">Mã</th>
+                    <th scope="col">Tên</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.RemindList != null)
+                {
+                    @foreach (var item in Model.RemindList)
+                    {
+                        <tr id="controlRow" onclick="location.href = '@Url.Action("", "")'">
+                            <td width="80%">
+                                <a href="#">@item.Name</a>
+                            </td>
+                            <td>
+                                <div class="crud-button">
+                                    <button class="btn btn-success" type="submit">Sửa</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-9">
+        <form asp-action="AppNotification">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="crud-button mb-3">
+                <button class="btn btn-success" type="submit">Lưu</button>
+            </div>
+            <div class="card">
+                <div class="card-header bg-light">Gửi tin nhắn</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label asp-for="SMSContent" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <textarea rows="5" asp-for="SMSContent" class="form-control"></textarea>
+                                    <span asp-validation-for="SMSContent" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="SMSRemindParameters" class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @if (Model.SMSRemindParameters != null)
+                                        {
+                                            @foreach (var item in Model.SMSRemindParameters)
+                                            {
+                                                <option value=@item>@item</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <button class="btn btn-danger"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label asp-for="SMSExpiredDateCount" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <input rows="5" asp-for="SMSExpiredDateCount" class="form-control">
+                                    <span asp-validation-for="SMSExpiredDateCount" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="SMSJobScheduleList" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @if (Model.SMSJobScheduleList != null)
+                                        {
+                                            @foreach (var item in Model.SMSJobScheduleList)
+                                            {
+                                                <option value=@item.TaskName>@item.TaskName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="SMSIsActive" class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" asp-for="SMSIsActive" />
+                                        <label class="form-check-label" asp-for="SMSIsActive"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header bg-light">Gửi thông báo đến ứng dụng mobile</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label asp-for="NotificationSubject" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <textarea rows="5" asp-for="NotificationSubject" class="form-control"></textarea>
+                                    <span asp-validation-for="NotificationSubject" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="NotificationExpiredDateCount" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <input rows="5" asp-for="NotificationExpiredDateCount" class="form-control">
+                                    <span asp-validation-for="NotificationExpiredDateCount" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="NotificationRemindParameters" class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @if (Model.NotificationRemindParameters != null)
+                                        {
+                                            @foreach (var item in Model.NotificationRemindParameters)
+                                            {
+                                                <option value=@item>@item</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <button class="btn btn-danger"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label asp-for="NotificationContent" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <textarea rows="5" asp-for="NotificationContent" class="form-control"></textarea>
+                                    <span asp-validation-for="NotificationContent" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-4">
+                                    <label asp-for="NotificationJobScheduleList" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @if (Model.NotificationJobScheduleList != null)
+                                        {
+                                            @foreach (var item in Model.NotificationJobScheduleList)
+                                            {
+                                                <option value=@item.TaskName>@item.TaskName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="NotificationIsActive" class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" asp-for="NotificationIsActive" />
+                                        <label class="form-check-label" asp-for="NotificationIsActive"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header bg-light">Gửi email</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label asp-for="EmailSubject" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <textarea rows="5" asp-for="EmailSubject" class="form-control"></textarea>
+                                    <span asp-validation-for="EmailSubject" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="EmailExpiredDateCount" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <input rows="5" asp-for="EmailExpiredDateCount" class="form-control">
+                                    <span asp-validation-for="EmailExpiredDateCount" class="text-danger"></span>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="EmailRemindParameters" class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @if (Model.EmailRemindParameters != null)
+                                        {
+                                            @foreach (var item in Model.EmailRemindParameters)
+                                            {
+                                                <option value=@item>@item</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <button class="btn btn-danger"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label asp-for="EmailContent" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <textarea rows="5" asp-for="EmailContent" class="form-control"></textarea>
+                                    <span asp-validation-for="EmailContent" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-4">
+                                    <label asp-for="EmailJobScheduleList" class="control-label"></label>
+                                </div>
+                                <div class="col-8 mb-3">
+                                    <select class="form-select" aria-label="Default select example">
+                                        @if (Model.EmailJobScheduleList != null)
+                                        {
+                                            @foreach (var item in Model.EmailJobScheduleList)
+                                            {
+                                                <option value=@item.TaskName>@item.TaskName</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label asp-for="EmailIsActive" class="control-label"></label>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" asp-for="EmailIsActive" />
+                                        <label class="form-check-label" asp-for="EmailIsActive"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<style>
+    #table-data_wrapper .row div {
+        margin-top: 0px !important;
+    }
+
+    /*#table-data_filter {
+        display: none;
+    }*/
+
+    div.dataTables_scrollBody {
+        border-left: none !important;
+    }
+</style>

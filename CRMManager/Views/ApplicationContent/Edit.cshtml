@@ -1,0 +1,408 @@
+﻿@model CRMManager.Models.ApplicationContentViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+<style>
+    /* .img-box {
+        width: 100%;
+        height: 300px;
+    }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+        }*/
+
+
+    .thumbImg img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .detailImg img {
+        width: 362px;
+        height: 120px;
+    }
+
+    .img1-3 img {
+        width: 266px;
+        height: 200px;
+    }
+
+    .img1 img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .img2 img {
+        width: 400px;
+        height: 200px;
+    }
+
+    .img1-6 img {
+        width: 333px;
+        height: 200px;
+    }
+
+    .img0-6 img {
+        width: 133px;
+        height: 200px;
+    }
+
+    .img3 img {
+        width: 600px;
+        height: 200px;
+    }
+
+    .img1-5 img {
+        width: 300px;
+        height: 200px;
+    }
+
+    .border-img-none img {
+        display: none;
+        margin-top: 10px;
+    }
+
+
+        .border-img-none img[src] {
+            display: block;
+        }
+
+    /* On screens that are 992px or less, set the background color to blue */
+    @@media screen and (max-width: 992px) {
+    }
+
+    /* On screens that are 600px or less, set the background color to olive */
+    @@media screen and (max-width: 600px) {
+    }
+</style>
+<h2 class="page-title">@Model.PageTitle</h2>
+<hr />
+<form asp-controller="PromotionNews" enctype="multipart/form-data" method="post">
+    <div class="crud-button align-end">
+        @*<button onclick="SelectUtility()" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Xem trước tin
+            </button>*@
+        <button type="submit" class="btn btn-primary" asp-action="Edit">Lưu</button>
+
+    </div>
+    <div class="content-box border-img-none" style="min-height:800px;">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-content" data-bs-toggle="pill" data-bs-target="#pills-content" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Tiếng Việt</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-content-en" data-bs-toggle="pill" data-bs-target="#pills-content-en" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Tiếng Anh</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-home-image" data-bs-toggle="pill" data-bs-target="#pills-image" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Hình ảnh</button>
+            </li>
+        </ul>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div><div class="tab-content" id="pills-tabContent">
+            @Html.ValidationMessage("DisplayError", new { @class = "text-danger" })
+            @* <input type="hidden" name="SelectedNewsCat" asp-for="SelectedNewsCat" />*@
+            @Html.HiddenFor(m => m.DataState)
+            @Html.HiddenFor(m => m.CreatedOn)
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.ModifiedOn)
+            @Html.HiddenFor(m => m.ModifiedBy)
+            @Html.HiddenFor(m => m.Number)
+            @*@Html.HiddenFor(m => m.Approved)*@
+            @Html.HiddenFor(m => m.Name)
+            @Html.HiddenFor(m => m.SelectedCatID)
+
+
+            <div class="tab-pane fade show active" id="pills-content" role="tabpanel" aria-labelledby="pills-home-content" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-md-4 col-4">
+                                    <label asp-for="@Model.Subject" class="control-label fw-bold">Chủ đề <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-xl-10 col-lg-9 col-md-8 col-8">
+                                    <input asp-for="@Model.Subject" class="form-control" />
+                                    <span asp-validation-for="@Model.Subject" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="@Model.Description" class="control-label fw-bold">Mô tả <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <textarea asp-for="@Model.Description" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="ck-edit-newsVN">
+                        <label asp-for="@Model.NewsContent" class="control-label fw-bold">Nội dung <span style="color: #DC2828">*</span></label>
+                        <textarea rows="10" asp-for="@Model.NewsContent" class="form-control ck-editor__editable ck-editor__editable_inline" id="editor"></textarea>
+                        <span asp-validation-for="@Model.NewsContent" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-content-en" role="tabpanel" aria-labelledby="pills-home-content-en" tabindex="0">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="@Model.EnSubject" class="control-label fw-bold">Chủ đề <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <input asp-for="@Model.EnSubject" class="form-control" />
+                                    <span asp-validation-for="@Model.EnSubject" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <label asp-for="@Model.EnDescription" class="control-label fw-bold">Mô tả <span style="color: #DC2828">*</span></label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-8">
+                                    <textarea asp-for="@Model.EnDescription" class="form-control" rows="3"></textarea>
+                                    <span asp-validation-for="@Model.EnDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="ck-edit-newsEN">
+                        <label asp-for="@Model.EnNewsContent" class="control-label fw-bold">Nội dung <span style="color: #DC2828">*</span></label>
+                        <textarea rows="10" asp-for="@Model.EnNewsContent" class="form-control ck-editor__editable ck-editor__editable_inline" id="editor-En"></textarea>
+                        <span asp-validation-for="@Model.EnNewsContent" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-image" role="tabpanel" aria-labelledby="pills-home-image" tabindex="0">
+                <div class="row">
+                    @*<div class="col-sm-6">
+                            <div class="form-group input-group-sm">
+                                <label asp-for="ThumbImage_120_120" class="form-label fw-bold">Hình Thumb (120x120)</label>
+                                <input data-id="input-120x120" type="file" value="@Model.ThumbImage_120_120" asp-for="ThumbImage_120_120" class="form-control ValidateSizeImage" accept="image/png, image/jpg, image/jpeg" />
+                                <span asp-validation-for="ThumbImage_120_120" class="text-danger"></span>
+                                <div class="img-box img1">
+                                    <img id="img-120x120" />
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="col-sm-6">
+
+                        @if (Model.SelectedCatID == 0)
+                        {
+                            <div class="form-group input-group-sm">
+                                <label asp-for="Image1" class="form-label fw-bold">Hình ảnh (1440x700)</label>
+                                <input data-id="input-1440x700" type="file" value="@Model.Image1" asp-for="Image1" class="form-control ValidateSizeImage" accept="image/png, image/jpg, image/jpeg" />
+                                <span asp-validation-for="Image1" class="text-danger"></span>
+                                <div class="img-box img3">
+                                    <img id="img-1440x700" />
+
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group input-group-sm">
+                                <label asp-for="Image1" class="form-label fw-bold">Hình ảnh (1440x300)</label>
+                                <input data-id="input-1440x300" type="file" value="@Model.Image1" asp-for="Image1" class="form-control ValidateSizeImage" accept="image/png, image/jpg, image/jpeg" />
+                                <span asp-validation-for="Image1" class="text-danger"></span>
+                                <div class="img-box img3">
+                                    <img id="img-1440x300" />
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:100%; margin:0;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Xem trước tin</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="content-box" style="min-height:800px;">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-preview-VN" data-bs-toggle="pill" data-bs-target="#pills-previewVN" type="button" role="tab" aria-controls="pills-previewVN" aria-selected="true">Tiếng Việt</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-preview-EN" data-bs-toggle="pill" data-bs-target="#pills-previewEN" type="button" role="tab" aria-controls="pills-previewEN" aria-selected="false">Tiếng Anh</button>
+                        </li>
+                    </ul>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div><div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-previewVN" role="tabpanel" aria-labelledby="pills-preview-VN" tabindex="0">
+                            <div id="preview-newsVN"></div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-previewEN" role="tabpanel" aria-labelledby="pills-preview-EN" tabindex="0">
+                            <div id="preview-newsEN"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/CKEditor.js"></script>
+<script src="~/js/CKEditorEn.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script>
+    let validateSizeImages = $(".ValidateSizeImage");
+    //function SelectUtility() {
+    //    var parentElementVN = document.getElementById("ck-edit-newsVN");
+    //    var contentNewsVN = parentElementVN.querySelector(".ck-content").innerHTML;
+    //    var parentElementEN = document.getElementById("ck-edit-newsEN");
+    //    var contentNewsEN = parentElementEN.querySelector(".ck-content").innerHTML;
+
+
+    //    let txtPreviewVN = document.getElementById("preview-newsVN");
+    //    let txtPreviewEN = document.getElementById("preview-newsEN");
+    //    txtPreviewVN.innerHTML = contentNewsVN;
+    //    txtPreviewEN.innerHTML = contentNewsEN;
+    //}
+
+
+    const imgThumbInput = document.getElementById("img-thumb-input");
+    const imgThumbPreview = document.getElementById("img-thumb-preview");
+
+    //const imgDetailInput = document.getElementById("img-detail-input");
+    //const imgDetailPreview = document.getElementById("img-detail-preview");
+
+    //imgThumbInput.addEventListener("change", (e) => {
+    //    if (e.target.files.length) {
+    //        const src = URL.createObjectURL(e.target.files[0]);
+    //        imgThumbPreview.src = src;
+    //    }
+    //});
+
+    //imgDetailInput.addEventListener("change", (e) => {
+    //    if (e.target.files.length) {
+    //        const src = URL.createObjectURL(e.target.files[0]);
+    //        imgDetailPreview.src = src;
+    //    }
+    //});
+    var validExt = ".png, .gif, .jpeg, .jpg";
+    function fileExtValidate(fdata) {
+        var filePath = fdata.value;
+        var getFileExt = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+        var pos = validExt.indexOf(getFileExt);
+        if (pos < 0) {
+            alert("This file is not allowed, please upload image file.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function ValidateSizeImage(input) {
+        let elementID = $(input).attr("data-id");
+        let imageSize = elementID.split('-')[1];
+        let file = input.files[0];
+        let fileUp = input;
+
+        if (fileExtValidate(fileUp)) {
+            var reader = new FileReader();
+            console.log(reader);
+            reader.onload = function (e) {
+                var image = new Image();
+                image.src = reader.result;
+                image.onload = function () {
+                    let width = parseFloat(imageSize.split('x')[0]);
+                    let height = parseFloat(imageSize.split('x')[1]);
+                    let from = (width / height) - 0.1;
+                    let to = (width / height) + 0.1;
+                    let rate = this.width / this.height;
+                    if (rate >= from && rate <= to && this.width >= (width - width * 0.1)) {
+                        $("#img-" + imageSize).attr('src', e.target.result);
+                    }
+                    else {
+                        alert('Invalid Image size: ' + imageSize);
+                        input.value = "";
+                        //$("#img-" + imageSize).attr('src', '');
+                        $("#img-" + imageSize).removeAttr('src');
+                    }
+                }
+
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "";
+            }
+            //reader.readAsDataURL(input.files[0]);
+        }
+        else {
+            preview.src = "";
+            txtUploadFile.value = "";
+        }
+
+        //var ;
+        //var ;
+        //var;
+        //var txtUploadFile = $('#input-' + imageSize);
+        //if (fileExtValidate(fileUp)) {
+        //    var reader = new FileReader();
+
+        //    reader.onload = function () {
+        //        var image = new Image();
+        //        image.src = reader.result;
+        //        console.log(reader.result);
+        //        image.onload = function () {
+        //
+        //            var from = (width / height) - 0.1;
+        //            var to = (width / height) + 0.1;
+        //            var rate = this.width / this.height;
+        //            if (rate >= from && rate <= to && this.width >= (width - width * 0.1)) {
+        //                preview.src = reader.result;
+
+        //            }
+        //            else {
+        //                alert('Invalid Image size: ' + imageSize);
+        //                txtUploadFile.value = "";
+        //            }
+        //        };
+        //    }
+
+        //    if (file) {
+        //        reader.readAsDataURL(file);
+        //    } else {
+        //        preview.src = "";
+        //    }
+        //}
+        //else {
+        //    preview.src = "";
+        //    txtUploadFile.value = "";
+        //}
+    }
+
+    validateSizeImages.each(function () {
+        $(this).change(function () {
+            ValidateSizeImage(this)
+        })
+    })
+
+    //$('#ThumbImage_120_120').change(function () {
+    //    alert("120");
+    //    ValidateSizeImage(this)
+    //})
+</script>

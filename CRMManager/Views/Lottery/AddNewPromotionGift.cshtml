@@ -1,0 +1,103 @@
+﻿@model CRMManager.Models.PromotionGiftViewModel
+<div class="container">
+    <form enctype="multipart/form-data" method="post" class="m-2">
+        <div class="form-group d-none">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Loại quà</label>
+                    <select id="drpEmpList" class="form-select" asp-for="TypeID" asp-items="@(new SelectList(Model.LotteryGiftTypes, "ID", "Name"))">
+                        <option value="">--Select--</option>
+                    </select>
+                    <input type="hidden" asp-for="TypeID" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mã quà</label>
+                    <input asp-for="ItemCode" class="form-control" />
+                    <span asp-validation-for="ItemCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Tên quà</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mã nhận quà</label>
+                    <input asp-for="PromotionCode" class="form-control" />
+                    <span asp-validation-for="PromotionCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Từ ngày</label>
+                    <input asp-for="FromDate" class="form-control" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Đến ngày</label>
+                    <input asp-for="ToDate" class="form-control" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Mô tả</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="col-6">
+                    <div class="row mt-4">
+                        <div class="col-1">
+                            <input type="checkbox" class="form-check" asp-for="IsEnable" />
+                        </div>
+                        <div class="col-11">
+                            <label class="control-label">Kích hoạt</label>
+                        </div>
+                    </div>
+                    <span asp-validation-for="IsEnable" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label" for="ThumbImage">Biểu tượng </label>
+                        </div>
+                        <div class="col-12">
+                            @if (Model.ImageName == null)
+                            {
+                                <img src="~/Dat'sImages/Default/imagesul.png" class="img-thumbnail" />
+                            }
+                            else
+                            {
+                                <img src="~/Dat'sImages/Lottery/PromotionGift/@Model.ImageName" class="img-thumbnail" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-8">
+                            <input type="file" class="form-control" name="imgfile" />
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" asp-area="" asp-controller="Lottery" asp-action="UploadiconPromotionGift" class="btn btn-primary">Upload Ảnh</button>
+                        </div>
+                        <span>@ViewData["Message"]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-4">
+                        <div class="float-right mt-2">
+                            <button type="submit" asp-area="" asp-controller="Lottery" asp-action="AddNewPromotionGift" asp-route-id= class="btn btn-success m-1 float-right"><i class="far fa-save"></i> Lưu</button>
+                            <a asp-area="" asp-controller="Lottery" asp-action="PromotionGift" asp-route-id= class="btn btn-danger m-1 float-right"><i class="far fa-trash-alt"></i> Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

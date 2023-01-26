@@ -1,0 +1,134 @@
+﻿@model CRMManager.Models.CardListViewModel
+<form method="post">
+    <div class="ml-5 mr-5 mt-4">
+        <div class="row">
+            <div id="needenableleft" class="col-12 col-md-8">
+                <div class="row">
+                    <div class="col-6">
+                    </div>
+                    <div class="col-6">
+                        <a id="ActiveAdd" class="btn btn-success float-right m-1"><i class="far fa-plus-square"></i> Thêm</a>
+                    </div>
+                </div>
+                <table id="table-data" class="table table-bordered table-hover table-apptech mt-4 w-100" border="1">
+                    <thead>
+                        <tr style="color: White; background-color: #4267B2;">
+                            <td style="width:20%;"><b>Mã thẻ nổi</b></td>
+                            <td style="width:20%;"><b>Mã từ trên thẻ</b></td>
+                            <td style="width:15%;"><b>Mã hạng thẻ</b></td>
+                            <td style="width:15%;"><b>Là thành viên</b></td>
+                            <td style="width:10%;"><b>Kích hoạt</b></td>
+                            <td style="width:20%;"><b>Tùy chọn</b></td>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.CardList)
+                    {
+                        <tr id="controlRow" runat="server" class="apptech-pull-up">
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.CardNo
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.NameOnCard
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    @item.AssignedClassNo
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    <input type="checkbox" class="form-check-input" value="@item.IsMemberCard" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-block w-100 h-100 text-decoration-none text-dark p-10px">
+                                    <input type="checkbox" class="form-check-input" value="@item.IsActive" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a asp-area="" asp-controller="CardList" asp-action="Edit" asp-route-id=@item.ID class="btn btn-success m-1 btnenable"><i class="far fa-edit"></i> Sửa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div id="needenable" class="col-12 col-md-4 disablefield">
+                <div class="form-group d-none">
+                    <label asp-for="ID" class="control-label"></label>
+                    <input asp-for="ID" class="form-control" />
+                    <span asp-validation-for="ID" class="text-danger"></span>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        @*<div class="form-group">
+                                <label class="control-label">Công ty</label>
+                                <select id="drpEmpList" class="form-control" asp-for="CompanyID" asp-items="@(new SelectList(Model.Companies, "ID", "Name"))">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <input type="hidden" asp-for="CompanyID" />
+                            </div>*@
+                        @*<div class="form-group">
+                                <label class="control-label">Chương trình khách hàng thân thiết</label>
+                                <select id="drpEmpList" class="form-control" asp-for="CLPID" asp-items="@(new SelectList(Model.CLPs, "ID", "ProgName"))">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <input type="hidden" asp-for="CLPID" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Chu kỳ xét hạng</label>
+                                <select id="drpEmpList" class="form-control" asp-for="DurationID" asp-items="@(new SelectList(Model.Durations, "ID", "Name"))">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <input type="hidden" asp-for="DurationID" />
+                            </div>*@
+                        <div class="form-group">
+                            <label class="control-label">Mã thẻ nổi</label>
+                            <input asp-for="CardNo" class="form-control" />
+                            <span asp-validation-for="CardNo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Mã từ trên thẻ</label>
+                            <input asp-for="NameOnCard" class="form-control" />
+                            <span asp-validation-for="NameOnCard" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-1">
+                                    <input type="checkbox" class="form-check-input" asp-for="IsActive" />
+                                </div>
+                                <div class="col-11">
+                                    <label class="control-label">Hoạt động</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-2">
+
+                            </div>
+                            <div class="col-10">
+                                <div class="float-right mt-2">
+                                    <button type="submit" class="btn btn-success m-1 float-right"><i class="fas fa-file-excel"></i> Xuất File Excel</button>
+                                    <button type="submit" id="btnAdd" asp-area="" asp-controller="CardList" asp-action="AddNew" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                    <button type="submit" id="btnEdit" asp-area="" asp-controller="CardList" asp-action="Edit" asp-route-id=@Model class="btn btn-success m-1 float-right d-none btncancel"><i class="far fa-save"></i> Lưu</button>
+                                    <a id="btnCancelAll" asp-area="" asp-controller="CardList" asp-action="Index" asp-route-id= class="btn btn-danger m-1 float-right d-none btncancel"><i class="far fa-trash-alt"></i> Hủy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
